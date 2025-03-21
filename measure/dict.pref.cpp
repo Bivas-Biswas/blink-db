@@ -8,30 +8,6 @@
 
 #include "../lib/dict.h"
 
-// Hash function for C-style strings
-unsigned int stringHash(const void* key) {
-    const char* str = static_cast<const char*>(key);
-    unsigned int hash = 5381;
-    int c;
-    while ((c = *str++))
-        hash = ((hash << 5) + hash) + c; // hash * 33 + c
-    return hash;
-}
-
-// Key comparison function
-int stringCompare(const void* key1, const void* key2) {
-    return strcmp(static_cast<const char*>(key1), static_cast<const char*>(key2)) == 0;
-}
-
-// Key duplication function
-void* stringDup(const void* key) {
-    return strdup(static_cast<const char*>(key));
-}
-
-// Key/value destructor
-void freeString(void* ptr) {
-    free(ptr);
-}
 
 // Timer class for measuring performance
 class Timer {
@@ -142,7 +118,7 @@ int main() {
     std::cout << "======================================================\n\n";
     
     // Generate a large number of keys for testing
-    const int NUM_ENTRIES = 100000;
+    const int NUM_ENTRIES = 1000000;
     std::vector<std::string> keys;
     keys.reserve(NUM_ENTRIES);
     
