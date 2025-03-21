@@ -17,27 +17,29 @@
 class Client
 {
 public:
-    int buffer_size_;
-    std::string ip_addr_;
-    char *buffer_ = nullptr;
-    int port_ = -1;
+    int buffer_size;   ///< Buffer size for reading responses.
+    std::string ip_addr;  ///< IP address of the Blink server.
+    char *buffer = nullptr; ///< Dynamic buffer for receiving data.
+    int port = -1; ///< Port number of the Blink server.
 
     /**
      * @brief Constructor for Client class.
-     * @param ip_addr IP address of the Blink server.
-     * @param port Port number of the Blink server.
-     * @param buffer_size Size of the buffer for reading responses.
+     * @param _ip_addr IP address of the Blink server.
+     * @param _port Port number of the Blink server.
+     * @param _buffer_size Size of the buffer for reading responses.
      */
-    Client(std::string ip_addr, int port, int buffer_size)
-        : ip_addr_(ip_addr)
+    Client(std::string _ip_addr, int _port, int _buffer_size)
+        : ip_addr(_ip_addr), port(_port), buffer_size(_buffer_size)
     {
-        port_ = port;
-        buffer_size_ = buffer_size;
-        buffer_ = new char[buffer_size_];
+        buffer = new char[buffer_size];
     }
 
-    ~Client(){
-        delete buffer_;
+    /**
+     * @brief Destructor to free allocated memory.
+     */
+    ~Client()
+    {
+        delete[] buffer;
     }
 
     /**
@@ -46,28 +48,28 @@ public:
      */
     int server_init()
     {
-        sock_ = 0;
+        sock = 0;
         struct sockaddr_in serv_addr;
 
         // Create socket
-        if ((sock_ = socket(AF_INET, SOCK_STREAM, 0)) < 0)
+        if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0)
         {
             std::cerr << "Socket creation error" << std::endl;
             return -1;
         }
 
         serv_addr.sin_family = AF_INET;
-        serv_addr.sin_port = htons(port_);
+        serv_addr.sin_port = htons(port);
 
         // Convert IPv4 address from text to binary
-        if (inet_pton(AF_INET, ip_addr_.c_str(), &serv_addr.sin_addr) <= 0)
+        if (inet_pton(AF_INET, ip_addr.c_str(), &serv_addr.sin_addr) <= 0)
         {
             std::cerr << "Invalid address / Address not supported" << std::endl;
             return -1;
         }
 
         // Connect to server
-        if (connect(sock_, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0)
+        if (connect(sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0)
         {
             std::cerr << "Connection failed" << std::endl;
             return -1;
@@ -78,33 +80,33 @@ public:
 
     /**
      * @brief Sends a SET command to store a key-value pair.
-     * @param key The key.
-     * @param value The value.
+     * @param _key The key.
+     * @param _value The value.
      * @return Response from the Blink server.
      */
-    std::string set(const std::string &key, const std::string &value)
+    std::string set(const std::string &_key, const std::string &_value)
     {
-        return decode_resp(send_req(encode_command("SET " + key + " " + value)));
+        return decode_resp(send_req(encode_command("SET " + _key + " " + _value)));
     }
 
     /**
      * @brief Sends a GET command to retrieve the value of a key.
-     * @param key The key.
+     * @param _key The key.
      * @return Response from the Blink server.
      */
-    std::string get(const std::string &key)
+    std::string get(const std::string &_key)
     {
-        return decode_resp(send_req(encode_command("GET " + key)));
+        return decode_resp(send_req(encode_command("GET " + _key)));
     }
 
     /**
      * @brief Sends a DEL command to delete a key.
-     * @param key The key.
+     * @param _key The key.
      * @return Response from the Blink server.
      */
-    std::string del(const std::string &key)
+    std::string del(const std::string &_key)
     {
-        return decode_resp(send_req(encode_command("DEL " + key)));
+        return decode_resp(send_req(encode_command("DEL " + _key)));
     }
 
     /**
@@ -112,48 +114,48 @@ public:
      */
     void close_server()
     {
-        close(sock_);
+        close(sock);
     }
 
 private:
-
-    std::vector<std::string> command_;
-    int sock_;
+    std::vector<std::string> command; ///< Stores parsed command arguments.
+    int sock; ///< Socket descriptor.
 
     /**
      * @brief Sends an encoded command to the Blink server and retrieves the response.
-     * @param encoded Encoded RESP command.
+     * @param _encoded Encoded RESP command.
      * @return Server response as a string.
      */
-    std::string send_req(const std::string &encoded)
+    std::string send_req(const std::string &_encoded)
     {
-        send(sock_, encoded.c_str(), encoded.length(), 0);
+        send(sock, _encoded.c_str(), _encoded.length(), 0);
 
-        int bytes_read = read(sock_, buffer_, buffer_size_);
+        int bytes_read = read(sock, buffer, buffer_size);
         if (bytes_read <= 0)
         {
             return "-1";
         }
-        return std::string(buffer_, bytes_read);
+        return std::string(buffer, bytes_read);
     }
+
     /**
      * @brief Encodes a command into RESP format.
-     * @param input The command string.
+     * @param _input The command string.
      * @return Encoded RESP command.
      */
-    std::string encode_command(const std::string &input)
+    std::string encode_command(const std::string &_input)
     {
-        command_.clear();
-        std::istringstream iss(input);
+        command.clear();
+        std::istringstream iss(_input);
         std::string token;
         while (iss >> token)
         {
-            command_.push_back(token);
+            command.push_back(token);
         }
 
         std::ostringstream result;
-        result << "*" << command_.size() << "\r\n";
-        for (const auto &arg : command_)
+        result << "*" << command.size() << "\r\n";
+        for (const auto &arg : command)
         {
             result << "$" << arg.length() << "\r\n" << arg << "\r\n";
         }
@@ -162,23 +164,23 @@ private:
 
     /**
      * @brief Decodes a RESP response.
-     * @param response The raw RESP response string.
+     * @param _response The raw RESP response string.
      * @return Decoded human-readable response.
      */
-    std::string decode_resp(const std::string &response)
+    std::string decode_resp(const std::string &_response)
     {
-        if (response.empty())
+        if (_response.empty())
         {
             return "Empty response";
         }
 
-        if (response == "-1")
+        if (_response == "-1")
         {
             return "Server disconnected";
         }
 
-        char type = response[0];
-        std::string content = response.substr(1);
+        char type = _response[0];
+        std::string content = _response.substr(1);
 
         switch (type)
         {
@@ -201,7 +203,7 @@ private:
         case '*':
             return "Array response (parsing not implemented)";
         default:
-            return "Unknown response type: " + response;
+            return "Unknown response type: " + _response;
         }
     }
 };
