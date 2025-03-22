@@ -11,7 +11,7 @@
  */
 void command_loop(Client &client)
 {
-    std::cout << "Server is connected at " << client.ip_addr_ << ":" << client.port_ << std::endl;
+    std::cout << "Server is connected at " << client.ip_addr << ":" << client.port << std::endl;
     std::cout << "Enter command (SET key value, GET key, DEL key, or EXIT to quit):" << std::endl;
 
     std::string input, command, key, value;
