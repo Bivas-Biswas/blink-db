@@ -83,7 +83,7 @@ Server::Server(std::string ip, int port, int buffer_size, int max_events, int ma
     : ip_(ip),
       database_(max_mem_bytes)
 {
-    port_ = port; 
+    port_ = port;
     buffer_size_ = buffer_size;
     max_mem_bytes_ = max_mem_bytes;
     max_events_ = max_events;
@@ -142,10 +142,10 @@ void Server::init()
             if (sock_fd == server_fd)
             {
                 int client_fd = accept(server_fd, (struct sockaddr *)&address, &addrlen);
-                
-                char client_ip[INET_ADDRSTRLEN];
-                inet_ntop(AF_INET, &address.sin_addr, client_ip, INET_ADDRSTRLEN);
-                int client_port = ntohs(address.sin_port);
+
+                // char client_ip[INET_ADDRSTRLEN];
+                // inet_ntop(AF_INET, &address.sin_addr, client_ip, INET_ADDRSTRLEN);
+                // int client_port = ntohs(address.sin_port);
 
                 if (client_fd == -1)
                 {
@@ -257,14 +257,28 @@ void Server::handle_command(const std::vector<std::string> &command, std::string
     std::string cmd = command[0];
     std::transform(cmd.begin(), cmd.end(), cmd.begin(), ::toupper);
 
-    if (cmd == "SET" && command.size() >= 3)
+    if (cmd == "SET")
     {
+        if (command.size() < 3)
+        {
+            response = "SET command requires key and value";
+            encode_resp(response, true);
+            return;
+        }
+
         database_.set(command[1], command[2]);
         response = "OK";
         encode_resp(response, false);
     }
-    else if (cmd == "GET" && command.size() >= 2)
+    else if (cmd == "GET")
     {
+        if (command.size() < 2)
+        {
+            response = "GET command requires key";
+            encode_resp(response, true);
+            return;
+        }
+
         std::string value;
         if (database_.get(command[1], value))
         {
@@ -275,6 +289,70 @@ void Server::handle_command(const std::vector<std::string> &command, std::string
             response = "$-1\r\n";
         }
     }
+    else if (cmd == "DEL")
+    {
+        if (command.size() < 2)
+        {
+            response = "DEL command requires key";
+            encode_resp(response, true);
+            return;
+        }
+
+        int count = 0;
+        for (size_t i = 1; i < command.size(); i++)
+        {
+            count += database_.del(command[i]) ? 1 : 0;
+        }
+
+        response = ":" + std::to_string(count) + "\r\n";
+    }
+
+    else if (cmd == "INFO")
+    {
+        // Add INFO command to get memory usage statistics
+        std::string info = "# Memory\r\n";
+        info += "used_memory:" + std::to_string(database_.memory_usage()) + "\r\n";
+        info += "maxmemory:" + std::to_string(database_.max_memory()) + "\r\n";
+        info += "maxmemory_policy:allkeys-lru\r\n";
+        info += "# Stats\r\n";
+        info += "keyspace_hits:" + std::to_string(database_.size()) + "\r\n";
+
+        response = "$" + std::to_string(info.length()) + "\r\n" + info + "\r\n";
+    }
+    else if (cmd == "CONFIG")
+    {
+        // Basic CONFIG command implementation
+        if (command.size() < 2)
+        {
+            response = "CONFIG command requires subcommand";
+            encode_resp(response, true);
+            return;
+        }
+
+        std::string subcmd = command[1];
+        std::transform(subcmd.begin(), subcmd.end(), subcmd.begin(), ::toupper);
+
+        if (subcmd == "GET" && command.size() >= 3)
+        {
+            std::string param = command[2];
+            std::transform(param.begin(), param.end(), param.begin(), ::tolower);
+
+            if (param == "maxmemory")
+            {
+                response = "*2\r\n$9\r\nmaxmemory\r\n$" + std::to_string(std::to_string(database_.max_memory()).length()) +
+                           "\r\n" + std::to_string(database_.max_memory()) + "\r\n";
+                return;
+            }
+            else if (param == "maxmemory-policy")
+            {
+                response = "*2\r\n$16\r\nmaxmemory-policy\r\n$11\r\nallkeys-lru\r\n";
+                return;
+            }
+        }
+        response = "Supported CONFIG commands: GET maxmemory, GET maxmemory-policy";
+        encode_resp(response, false);
+    }
+
     else
     {
         response = "Unknown command";
