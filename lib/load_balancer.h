@@ -161,9 +161,9 @@ void LoadBalancer::server_init(const parsingKeyFuncPtr parse_key)
                 // New client connection
                 int client_fd = accept(lb_sockfd, (struct sockaddr *)&address, (socklen_t *)&addrlen);
 
-                char client_ip[INET_ADDRSTRLEN];
-                inet_ntop(AF_INET, &address.sin_addr, client_ip, INET_ADDRSTRLEN);
-                int client_port = ntohs(address.sin_port);
+                // char client_ip[INET_ADDRSTRLEN];
+                // inet_ntop(AF_INET, &address.sin_addr, client_ip, INET_ADDRSTRLEN);
+                // int client_port = ntohs(address.sin_port);
 
                 if (client_fd == -1)
                 {

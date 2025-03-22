@@ -20,7 +20,7 @@ public:
     int buffer_size;   ///< Buffer size for reading responses.
     std::string ip_addr;  ///< IP address of the Blink server.
     char *buffer = nullptr; ///< Dynamic buffer for receiving data.
-    int port = -1; ///< Port number of the Blink server.
+    int port; ///< Port number of the Blink server.
 
     /**
      * @brief Constructor for Client class.
@@ -29,8 +29,10 @@ public:
      * @param _buffer_size Size of the buffer for reading responses.
      */
     Client(std::string _ip_addr, int _port, int _buffer_size)
-        : ip_addr(_ip_addr), port(_port), buffer_size(_buffer_size)
+        : ip_addr(_ip_addr)
     {
+        port  = _port;
+        buffer_size = _buffer_size;
         buffer = new char[buffer_size];
     }
 
