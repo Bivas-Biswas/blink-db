@@ -43,7 +43,7 @@ int create_non_locking_socket(const std::string ip, const int port, struct socka
         exit(EXIT_FAILURE);
     }
 
-    if (listen(sockfd, 10) < 0)
+    if (listen(sockfd, SOMAXCONN) < 0)
     {
         perror("Listen failed");
         exit(EXIT_FAILURE);
