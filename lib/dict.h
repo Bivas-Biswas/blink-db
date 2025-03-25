@@ -230,8 +230,19 @@ public:
      * @brief Retrieves the total memory usage of the dictionary for keys, values.
      * @return size_t The total size of the dictionary in bytes.
      */
-    size_t get_size_of_dict(){
+    size_t get_size_of_dict()
+    {
         return total_size_of_dict;
+    }
+
+    /**
+     * @brief Retrieves the total no of keys in the dictionary.
+     * @return int To total no of keys in the dict
+     */
+
+    int size()
+    {
+        return d.ht[0].used + d.ht[1].used;
     }
 
 private:
@@ -417,9 +428,8 @@ private:
             existing->v.val = val;
         }
 
-        size_t entry_size = getEntrySize(entry);
         size_t existing_entry_size = getEntrySize(entry);
-        
+
         total_size_of_dict += existing_entry_size - existing_entry_size;
         return 0;
     }
@@ -581,16 +591,17 @@ private:
 
 /**
  * @brief Hash function for C-style strings.
- * 
- * This function computes a hash value for a given string using the 
- * DJB2 algorithm. It iterates through the characters and accumulates 
+ *
+ * This function computes a hash value for a given string using the
+ * DJB2 algorithm. It iterates through the characters and accumulates
  * a hash value.
- * 
+ *
  * @param key Pointer to the C-style string key.
  * @return unsigned int The computed hash value.
  */
-unsigned int stringHash(const void* key) {
-    const char* str = static_cast<const char*>(key);
+unsigned int stringHash(const void *key)
+{
+    const char *str = static_cast<const char *>(key);
     unsigned int hash = 5381;
     int c;
     while ((c = *str++))
@@ -600,36 +611,38 @@ unsigned int stringHash(const void* key) {
 
 /**
  * @brief Compares two C-style string keys.
- * 
- * This function compares two string keys using `strcmp` and returns 
+ *
+ * This function compares two string keys using `strcmp` and returns
  * whether they are equal.
- * 
+ *
  * @param key1 Pointer to the first string key.
  * @param key2 Pointer to the second string key.
  * @return int Returns 1 if keys are equal, 0 otherwise.
  */
-int stringCompare(const void* key1, const void* key2) {
-    return strcmp(static_cast<const char*>(key1), static_cast<const char*>(key2)) == 0;
+int stringCompare(const void *key1, const void *key2)
+{
+    return strcmp(static_cast<const char *>(key1), static_cast<const char *>(key2)) == 0;
 }
 
 /**
  * @brief Duplicates a C-style string key.
- * 
+ *
  * This function creates a copy of the given string key using `strdup`.
  * The caller is responsible for freeing the allocated memory.
- * 
+ *
  * @param key Pointer to the original string key.
  * @return void* Pointer to the duplicated string.
  */
-void* stringDup(const void* key) {
-    return strdup(static_cast<const char*>(key));
+void *stringDup(const void *key)
+{
+    return strdup(static_cast<const char *>(key));
 }
 
 /**
  * @brief Frees a dynamically allocated C-style string.
- * 
+ *
  * This function releases the memory allocated for a string key or value.
- * 
+ *
  * @param ptr Pointer to the string to be freed.
  */
 void freeString(void* ptr) {
