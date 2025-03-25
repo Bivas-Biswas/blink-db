@@ -68,8 +68,9 @@ void BloomFilter::remove(const std::string &_key)
 
 size_t BloomFilter::hashKey(const std::string &_key)
 {
-    std::hash<std::string> hashFn;
-    return hashFn(_key) % filter_size;
+    std::hash<std::string> hashFn1;
+    std::hash<std::size_t> hashFn2;
+    return hashFn2(hashFn1(_key)) % filter_size;
 }
 
 #endif // BLOOMFILTER_H
