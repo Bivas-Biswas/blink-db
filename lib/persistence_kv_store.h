@@ -10,6 +10,7 @@
 #include <atomic>
 #include <chrono>
 #include <memory>
+#include <mutex>
 
 #include "./bloomfilter.h"
 #include "./tire.h"
@@ -21,17 +22,15 @@
 class PersistenceKVStore
 {
 private:
-    Trie index;                      ///< Trie-based index for fast lookups.
-    BloomFilter bloomFilter;         ///< Bloom filter for quick key existence checks.
-    std::fstream dataFile;           ///< File stream for data storage.
-    std::string filename;            ///< Name of the main database file.
-    std::string tempfilename;        ///< Temporary file for rewriting.
-    std::atomic<bool> dirtyFlag;     ///< Flag to track if the database is modified.
-    std::thread rewriteThread;       ///< Background thread for rewrite operations.
-    std::atomic<bool> stopRewrite;   ///< Flag to stop background rewriting.
-    std::atomic<int> dirty_counter;  ///< Counter for dirty writes.
-    int rewrite_interval_ms;         ///< Interval for rewrite scheduling.
-    int max_dirty_count_to_schedule; ///< Maximum dirty count before triggering rewrite.
+    Trie *index;                   ///< Trie-based index for fast lookups.
+    BloomFilter bloomFilter;       ///< Bloom filter for quick key existence checks.
+    std::fstream dataFile;         ///< File stream for data storage.
+    std::string filename;          ///< Name of the main database file.
+    std::string tempfilename;      ///< Temporary file for rewriting.
+    std::thread rewriteThread;     ///< Background thread for rewrite operations.
+    std::atomic<bool> stopRewrite; ///< Flag to stop background rewriting.
+    int rewrite_interval_ms;       ///< Interval for rewrite scheduling.
+    std::mutex mtx_index;
 
 public:
     /**
@@ -39,9 +38,8 @@ public:
      * @param _dbname The database name.
      * @param _bloom_filter_size The size of BloomFilter.
      * @param _rewrite_interval Interval for background rewrite in milliseconds (default: 5000).
-     * @param _max_dirty_count Maximum dirty count before triggering rewrite (default: 100).
      */
-    PersistenceKVStore(const std::string _dbname, int _bloom_filter_size, int rewrite_interval = 5000, int _max_dirty_count = 100);
+    PersistenceKVStore(const std::string _dbname, int _bloom_filter_size = 10000, int rewrite_interval = 5000);
 
     /**
      * @brief Destructor: Ensures background rewriting stops and closes the file.
@@ -91,13 +89,15 @@ private:
     void triggerRewrite();
 };
 
-PersistenceKVStore::PersistenceKVStore(const std::string _dbname, int _bloom_filter_size, int _rewrite_interval, int _max_dirty_count)
-    : filename(_dbname + ".pkv"), tempfilename(_dbname + "temp.pkv"), rewrite_interval_ms(_rewrite_interval), max_dirty_count_to_schedule(_max_dirty_count), bloomFilter(_bloom_filter_size)
+PersistenceKVStore::PersistenceKVStore(const std::string _dbname, int _bloom_filter_size, int _rewrite_interval)
+    : bloomFilter(_bloom_filter_size)
 {
-    dirtyFlag.store(false);
+    filename = _dbname + ".txt";
+    tempfilename = _dbname + ".temp.txt";
+    rewrite_interval_ms = _rewrite_interval;
     stopRewrite.store(false);
-    dirty_counter.store(0);
     dataFile.open(filename, std::ios::in | std::ios::out | std::ios::binary);
+    index = new Trie();
 
     if (!dataFile)
     {
@@ -112,6 +112,7 @@ PersistenceKVStore::PersistenceKVStore(const std::string _dbname, int _bloom_fil
 
 PersistenceKVStore::~PersistenceKVStore()
 {
+    dataFile.clear();
     stopRewrite.store(true);
     if (rewriteThread.joinable())
     {
@@ -133,18 +134,18 @@ void PersistenceKVStore::insert(const std::string &_key, const std::string &_val
 
     dataFile << _key << " " << _value << std::endl;
     dataFile.flush();
-
-    index.insert(_key, offset);
+    std::lock_guard<std::mutex> lock(mtx_index);
+    index->insert(_key, offset);
     bloomFilter.insert(_key);
-    ++dirty_counter;
 }
 
 bool PersistenceKVStore::get(const std::string &_key, std::string &_value)
 {
+    std::lock_guard<std::mutex> lock(mtx_index);
     if (!bloomFilter.contains(_key))
         return false;
 
-    long offset = index.search(_key);
+    long offset = index->search(_key);
     if (offset == -1)
         return false;
 
@@ -167,12 +168,13 @@ bool PersistenceKVStore::get(const std::string &_key, std::string &_value)
 
 void PersistenceKVStore::remove(const std::string &_key)
 {
-    index.remove(_key);
+    std::lock_guard<std::mutex> lock(mtx_index);
+    index->remove(_key);
     bloomFilter.remove(_key);
-    ++dirty_counter;
 }
 
-void PersistenceKVStore::remove_db(){
+void PersistenceKVStore::remove_db()
+{
     std::remove(filename.c_str());
 }
 
@@ -198,7 +200,7 @@ void PersistenceKVStore::syncIndex()
             break;
         }
 
-        index.insert(key, offset);
+        index->insert(key, offset);
         bloomFilter.insert(key);
     }
 }
@@ -208,10 +210,7 @@ void PersistenceKVStore::startRewriteScheduler()
     while (!stopRewrite.load())
     {
         std::this_thread::sleep_for(std::chrono::milliseconds(rewrite_interval_ms));
-        if (dirty_counter.load() >= max_dirty_count_to_schedule)
-        {
-            triggerRewrite();
-        }
+        triggerRewrite();
     }
 }
 
@@ -221,16 +220,31 @@ void PersistenceKVStore::triggerRewrite()
     dataFile.clear();
     dataFile.seekg(0, std::ios::beg);
 
-    std::unordered_map<std::string, long> newOffsets;
+    Trie *new_index = new Trie();
+
     std::string key, value;
 
-    while (dataFile >> key >> value)
+    while (true)
     {
-        if (!index.isDeleted(key))
+        long curr_pos = dataFile.tellg();
+
+        if (!(dataFile >> key >> value))
+        {
+            break;
+        }
+
+        auto key_offset = index->search(key);
+
+        if (key_offset == -1)
+        {
+            continue;
+        }
+
+        if (key_offset == curr_pos + 1)
         {
             long offset = tempFile.tellp();
             tempFile << key << " " << value << std::endl;
-            newOffsets[key] = offset;
+            new_index->insert(key, offset);
         }
     }
 
@@ -243,13 +257,13 @@ void PersistenceKVStore::triggerRewrite()
     newDataFile.close();
     std::remove(tempfilename.c_str());
 
-    for (const auto &[key, offset] : newOffsets)
-    {
-        index.insert(key, offset);
-    }
+    std::lock_guard<std::mutex> lock(mtx_index);
+
+    Trie *old_index = index;
+    index = new_index;
+    delete old_index;
 
     dataFile.open(filename, std::ios::in | std::ios::out | std::ios::binary);
-    dirty_counter.store(0);
 }
 
 #endif
