@@ -16,7 +16,7 @@
 #include <list>
 #include <chrono>
 
-#include "./lru_cache.h"
+#include "./lru_cache_v1.h"
 #include "../utils/create_non_locking_socket.h"
 #include "../utils/set_nonblocking.h"
 
@@ -27,15 +27,16 @@
 class Server
 {
 private:
-    std::string ip_;         ///< Server IP address.
-    int port_;               ///< Server port number.
-    int max_events_ = 10;    ///< Maximum epoll events.
-    int buffer_size_ = 1024; ///< Buffer size for receiving data.
-    char *buffer_;           ///< Buffer for storing client requests.
-    int max_mem_bytes_;      ///< Maximum memory allocated for caching.
-    LRUCache database_;      ///< LRU cache-based database.
-    std::string tag_;
+    std::string ip;         ///< Server IP address.
+    int port;               ///< Server port number.
+    int max_events = 4096;  ///< Maximum epoll events.
+    int buffer_size = 1024; ///< Buffer size for receiving data.
+    char *buffer;           ///< Buffer for storing client requests.
+    int max_mem_bytes;      ///< Maximum memory allocated for caching.
+    LRUCache database;      ///< LRU cache-based database.
+    std::string tag;
 
+public:
     /**
      * @brief Parses a RESP (Redis Serialization Protocol) formatted string.
      * @param input Input string in RESP format.
@@ -57,7 +58,6 @@ private:
      */
     void handle_command(const std::vector<std::string> &command, std::string &response);
 
-public:
     /**
      * @brief Constructs a Server object.
      * @param ip Server IP address.
@@ -79,21 +79,21 @@ public:
     void init();
 };
 
-Server::Server(std::string ip, int port, int buffer_size, int max_events, int max_mem_bytes)
-    : ip_(ip),
-      database_(max_mem_bytes)
+Server::Server(std::string _ip, int _port, int _buffer_size = 2048, int _max_events=4096, int _max_mem_bytes=1024 * 1024 * 1024)
+    : ip(_ip),
+      database(_max_mem_bytes)
 {
-    port_ = port;
-    buffer_size_ = buffer_size;
-    max_mem_bytes_ = max_mem_bytes;
-    max_events_ = max_events;
-    tag_ = "[" + ip + ":" + std::to_string(port) + "] ";
-    buffer_ = new char[buffer_size];
+    port = _port;
+    buffer_size = _buffer_size;
+    max_mem_bytes = _max_mem_bytes;
+    max_events = _max_events;
+    tag = "[" + ip + ":" + std::to_string(_port) + "] ";
+    buffer = new char[_buffer_size];
 }
 
 Server::~Server()
 {
-    delete[] buffer_;
+    delete[] buffer;
 }
 
 void Server::init()
@@ -101,9 +101,9 @@ void Server::init()
     int server_fd, epoll_fd;
     struct sockaddr_in address;
     socklen_t addrlen = sizeof(address);
-    struct epoll_event event, events[max_events_];
+    struct epoll_event event, events[max_events];
 
-    server_fd = create_non_locking_socket(ip_, port_, address);
+    server_fd = create_non_locking_socket(ip, port, address);
 
     epoll_fd = epoll_create1(0);
     if (epoll_fd == -1)
@@ -120,15 +120,12 @@ void Server::init()
         exit(EXIT_FAILURE);
     }
 
-    std::cout << tag_ << "Blink-compatible server listening on port " << port_ << std::endl;
-    std::cout << tag_ << "Memory limit set to " << (max_mem_bytes_ / (1024 * 1024)) << " MB with LRU eviction policy" << std::endl;
-
-    std::vector<std::string> result;
-    std::string response;
+    std::cout << tag << "Blink-compatible server listening on port " << port << std::endl;
+    std::cout << tag << "Memory limit set to " << (max_mem_bytes / (1024 * 1024)) << " MB with LRU eviction policy" << std::endl;
 
     while (true)
     {
-        int ready_fds = epoll_wait(epoll_fd, events, max_events_, -1);
+        int ready_fds = epoll_wait(epoll_fd, events, max_events, -1);
         if (ready_fds == -1)
         {
             perror("Epoll wait failed");
@@ -164,18 +161,20 @@ void Server::init()
                     continue;
                 }
 
-                // std::cout << tag_ << "New client connected: " << client_ip << ":" << client_port << std::endl;
+                // std::cout << tag << "New client connected: " << client_ip << ":" << client_port << std::endl;
             }
             else
             {
-                memset(buffer_, 0, buffer_size_);
-                int bytes_read = recv(sock_fd, buffer_, buffer_size_, 0);
+                // memset(buffer, 0, buffer_size);
+                int bytes_read = recv(sock_fd, buffer, buffer_size, 0);
 
                 if (bytes_read > 0)
                 {
-                    buffer_[bytes_read] = '\0';
-                    std::string input(buffer_, bytes_read);
-
+                    buffer[bytes_read] = '\0';
+                    std::string input(buffer, bytes_read);
+                    std::vector<std::string> result;
+                    std::string response;
+                    
                     parse_resp(input, result);
                     handle_command(result, response);
 
@@ -183,13 +182,10 @@ void Server::init()
                 }
                 else
                 {
-                    // std::cout << tag_ << "Client " << sock_fd << " disconnected." << std::endl;
+                    // std::cout << tag << "Client " << sock_fd << " disconnected." << std::endl;
                     epoll_ctl(epoll_fd, EPOLL_CTL_DEL, sock_fd, nullptr);
                     close(sock_fd);
                 }
-
-                result.clear();
-                response.clear();
             }
         }
     }
@@ -266,7 +262,7 @@ void Server::handle_command(const std::vector<std::string> &command, std::string
             return;
         }
 
-        database_.set(command[1], command[2]);
+        database.set(strdup(command[1].c_str()), strdup(command[2].c_str()));
         response = "OK";
         encode_resp(response, false);
     }
@@ -279,8 +275,8 @@ void Server::handle_command(const std::vector<std::string> &command, std::string
             return;
         }
 
-        std::string value;
-        if (database_.get(command[1], value))
+        std::string value = database.get(command[1].c_str());
+        if (value != "-1")
         {
             response = "$" + std::to_string(value.length()) + "\r\n" + value + "\r\n";
         }
@@ -301,7 +297,7 @@ void Server::handle_command(const std::vector<std::string> &command, std::string
         int count = 0;
         for (size_t i = 1; i < command.size(); i++)
         {
-            count += database_.del(command[i]) ? 1 : 0;
+            count += database.del(command[i].c_str()) ? 1 : 0;
         }
 
         response = ":" + std::to_string(count) + "\r\n";
@@ -311,11 +307,11 @@ void Server::handle_command(const std::vector<std::string> &command, std::string
     {
         // Add INFO command to get memory usage statistics
         std::string info = "# Memory\r\n";
-        info += "used_memory:" + std::to_string(database_.memory_usage()) + "\r\n";
-        info += "maxmemory:" + std::to_string(database_.max_memory()) + "\r\n";
+        info += "used_memory:" + std::to_string(database.memory_usage()) + "\r\n";
+        info += "maxmemory:" + std::to_string(database.max_memory()) + "\r\n";
         info += "maxmemory_policy:allkeys-lru\r\n";
         info += "# Stats\r\n";
-        info += "keyspace_hits:" + std::to_string(database_.size()) + "\r\n";
+        info += "keyspace_hits:" + std::to_string(database.size()) + "\r\n";
 
         response = "$" + std::to_string(info.length()) + "\r\n" + info + "\r\n";
     }
@@ -339,8 +335,8 @@ void Server::handle_command(const std::vector<std::string> &command, std::string
 
             if (param == "maxmemory")
             {
-                response = "*2\r\n$9\r\nmaxmemory\r\n$" + std::to_string(std::to_string(database_.max_memory()).length()) +
-                           "\r\n" + std::to_string(database_.max_memory()) + "\r\n";
+                response = "*2\r\n$9\r\nmaxmemory\r\n$" + std::to_string(std::to_string(database.max_memory()).length()) +
+                           "\r\n" + std::to_string(database.max_memory()) + "\r\n";
                 return;
             }
             else if (param == "maxmemory-policy")
