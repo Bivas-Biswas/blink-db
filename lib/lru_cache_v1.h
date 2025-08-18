@@ -58,7 +58,7 @@ public:
      *
      * @param max_mem Maximum memory limit in bytes
      */
-    LRUCache(size_t max_mem) : storage("./blink"), dict(stringHash, nullptr, nullptr, stringCompare, freeKey, freeValue), current_memory_usage(0)
+    LRUCache(size_t max_mem) :dict(stringHash, nullptr, nullptr, stringCompare, freeKey, freeValue), current_memory_usage(0), storage("./blink")
     {
         max_memory_bytes = max_mem;
         head = new Node(strdup("-1"), strdup("-1"));
