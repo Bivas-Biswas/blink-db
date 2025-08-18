@@ -101,7 +101,7 @@ Detailed design documents and API documentation are available in the docs/ direc
 * **Design Document**: [docs/DESIGN_DOC.md](docs/DESIGN_DOC.md)
 * **Benchmark Document**: [docs/PERFORMANCE_BENCHMARK.md](docs/PERFORMANCE_BENCHMARK.md)
 * **Doxygen PDF**: [docs/latex/refman.pdf](docs/latex/refman.pdf) (after generation)  
-* **Doxygen HTML**: Open [docs/html/index.html](docs/html/index.html) in your browser.
+* **Doxygen HTML**: Go to [link](https://bivas-biswas.github.io/blink-db/html/index.html) in your browser.
 
 To generate (or regenerate) the Doxygen documentation, run:
 
@@ -111,6 +111,7 @@ This will clean the docs directory, run Doxygen to generate HTML and LaTeX files
 
 ## **📁 Project Structure**
 
+```
 .  
 ├── build/            \# Compiled binaries  
 ├── docs/             \# Design documents and Doxygen output  
@@ -118,4 +119,5 @@ This will clean the docs directory, run Doxygen to generate HTML and LaTeX files
 ├── src/              \# Source code for executables  
 ├── utils/            \# Utility functions  
 ├── Doxyfile          \# Doxygen configuration  
-└── Makefile          \# Build script  
+└── Makefile          \# Build script
+```
