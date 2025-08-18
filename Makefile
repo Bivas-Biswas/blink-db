@@ -6,11 +6,12 @@ BUILD_DIR = build
 CLIENT_SRC = $(SRC_DIR)/blink_cli.cpp
 SERVER_SRC = $(SRC_DIR)/blink_server.cpp
 LB_SERVER_SRC = $(SRC_DIR)/blink_server_with_lb.cpp
+
 CLIENT_BIN = $(BUILD_DIR)/blink_cli
 SERVER_BIN = $(BUILD_DIR)/blink_server
-LB_SERVER_BIN = $(SRC_DIR)/blink_server_with_lb
+LB_SERVER_BIN = $(BUILD_DIR)/blink_server_with_lb
 
-all: $(CLIENT_BIN) $(SERVER_BIN)
+all: $(CLIENT_BIN) $(SERVER_BIN) $(LB_SERVER_BIN)
 
 $(BUILD_DIR):
 	mkdir -p $(BUILD_DIR)
