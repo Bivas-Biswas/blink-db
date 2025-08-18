@@ -1,0 +1,4 @@
+"SET","58882.41"
+"GET","58018.10"
+
+redis-benchmark -h 127.0.0.1 -p 9001 -t set,get,del -n 100000 -c 100 -e -r 1000;

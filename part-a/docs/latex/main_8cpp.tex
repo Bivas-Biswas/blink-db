@@ -1,0 +1,127 @@
+\hypertarget{main_8cpp}{}\doxysection{src/main.cpp File Reference}
+\label{main_8cpp}\index{src/main.cpp@{src/main.cpp}}
+
+
+Command-\/line interface for interacting with the LRU cache database.  
+
+
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$filesystem$>$}\newline
+{\ttfamily \#include $<$sstream$>$}\newline
+{\ttfamily \#include \char`\"{}../lib/lru\+\_\+cache.\+h\char`\"{}}\newline
+Include dependency graph for main.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{main_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\begin{DoxyCompactList}\small\item\em Main function providing a command-\/line interface for the LRU cache. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Command-\/line interface for interacting with the LRU cache database. 
+
+This program provides a simple CLI to interact with an LRUCache-\/based key-\/value store. Supported commands\+:
+\begin{DoxyItemize}
+\item SET $<$key$>$ 
+\end{DoxyItemize}
+
+\+: Stores the key-\/value pair.
+\begin{DoxyItemize}
+\item GET $<$key$>$\+: Retrieves the value for a given key.
+\item DEL $<$key$>$\+: Deletes a key from the cache.
+\item EXIT\+: Terminates the program. 
+\end{DoxyItemize}
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}} 
+\index{main.cpp@{main.cpp}!main@{main}}
+\index{main@{main}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Main function providing a command-\/line interface for the LRU cache. 
+
+\begin{DoxyReturn}{Returns}
+int Program exit status. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{26  \{}
+\DoxyCodeLine{27      \mbox{\hyperlink{classLRUCache}{LRUCache}} database;}
+\DoxyCodeLine{28      std::cout << \textcolor{stringliteral}{"{}Enter command (SET key value, GET key, DEL key, or EXIT to quit):"{}} << std::endl;}
+\DoxyCodeLine{29  }
+\DoxyCodeLine{30      std::string input, command, key, value;}
+\DoxyCodeLine{31      \textcolor{keywordflow}{while} (\textcolor{keyword}{true})}
+\DoxyCodeLine{32      \{}
+\DoxyCodeLine{33          std::cout << \textcolor{stringliteral}{"{}> "{}};}
+\DoxyCodeLine{34          std::getline(std::cin, input);}
+\DoxyCodeLine{35  }
+\DoxyCodeLine{36          std::istringstream iss(input);}
+\DoxyCodeLine{37          iss >> command;}
+\DoxyCodeLine{38          \textcolor{keywordflow}{if} (command == \textcolor{stringliteral}{"{}SET"{}})}
+\DoxyCodeLine{39          \{}
+\DoxyCodeLine{40              iss >> key >> value;}
+\DoxyCodeLine{41              \textcolor{keywordflow}{if} (key.empty() || value.empty())}
+\DoxyCodeLine{42              \{}
+\DoxyCodeLine{43                  std::cout << \textcolor{stringliteral}{"{}Invalid SET command. Usage: SET <key> <value>"{}} << std::endl;}
+\DoxyCodeLine{44                  \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{45              \}}
+\DoxyCodeLine{46              database.\mbox{\hyperlink{classLRUCache_a94fd770e6518bc9bb2df581c36c57205}{set}}(strdup(key.c\_str()), strdup(value.c\_str()));}
+\DoxyCodeLine{47          \}}
+\DoxyCodeLine{48          \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (command == \textcolor{stringliteral}{"{}GET"{}})}
+\DoxyCodeLine{49          \{}
+\DoxyCodeLine{50              iss >> key;}
+\DoxyCodeLine{51              \textcolor{keywordflow}{if} (key.empty())}
+\DoxyCodeLine{52              \{}
+\DoxyCodeLine{53                  std::cout << \textcolor{stringliteral}{"{}Invalid GET command. Usage: GET <key>"{}} << std::endl;}
+\DoxyCodeLine{54                  \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{55              \}}
+\DoxyCodeLine{56              std::string value = database.\mbox{\hyperlink{classLRUCache_afa9c3e5d273b81c21051a809794ea41d}{get}}(key.c\_str());}
+\DoxyCodeLine{57              std::cout << (value == \textcolor{stringliteral}{"{}-\/1"{}} ? \textcolor{stringliteral}{"{}NULL"{}} : value) << std::endl;}
+\DoxyCodeLine{58          \}}
+\DoxyCodeLine{59          \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (command == \textcolor{stringliteral}{"{}DEL"{}})}
+\DoxyCodeLine{60          \{}
+\DoxyCodeLine{61              iss >> key;}
+\DoxyCodeLine{62              \textcolor{keywordflow}{if} (key.empty())}
+\DoxyCodeLine{63              \{}
+\DoxyCodeLine{64                  std::cout << \textcolor{stringliteral}{"{}Invalid DEL command. Usage: DEL <key>"{}} << std::endl;}
+\DoxyCodeLine{65                  \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{66              \}}
+\DoxyCodeLine{67              \textcolor{keywordtype}{int} status = database.\mbox{\hyperlink{classLRUCache_a8a577f475e65e6e16338e7441634f353}{del}}(key.c\_str());}
+\DoxyCodeLine{68              \textcolor{keywordflow}{if} (status)}
+\DoxyCodeLine{69              \{}
+\DoxyCodeLine{70                  std::cout << \textcolor{stringliteral}{"{}Does not exist"{}} << std::endl;}
+\DoxyCodeLine{71              \}}
+\DoxyCodeLine{72          \}}
+\DoxyCodeLine{73          \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (command == \textcolor{stringliteral}{"{}EXIT"{}})}
+\DoxyCodeLine{74          \{}
+\DoxyCodeLine{75              \textcolor{keywordflow}{break};}
+\DoxyCodeLine{76          \}}
+\DoxyCodeLine{77          \textcolor{keywordflow}{else}}
+\DoxyCodeLine{78          \{}
+\DoxyCodeLine{79              std::cout << \textcolor{stringliteral}{"{}Unknown command. Use SET, GET, DEL, or EXIT."{}} << std::endl;}
+\DoxyCodeLine{80          \}}
+\DoxyCodeLine{81      \}}
+\DoxyCodeLine{82  }
+\DoxyCodeLine{83      \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{84  \}}
+
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4_cgraph}
+\end{center}
+\end{figure}

@@ -1,0 +1,219 @@
+\hypertarget{classTrie}{}\doxysection{Trie Class Reference}
+\label{classTrie}\index{Trie@{Trie}}
+
+
+\mbox{\hyperlink{classTrie}{Trie}} data structure for efficient key lookup.  
+
+
+
+
+{\ttfamily \#include $<$tire.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classTrie_a6af57e9f25d0d0a2d59eea5a4a802908}{Trie}} ()
+\begin{DoxyCompactList}\small\item\em Constructs a new \mbox{\hyperlink{classTrie}{Trie}} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classTrie_abf9d6f48d556e09d1b292412df153a4b}{$\sim$\+Trie}} ()
+\begin{DoxyCompactList}\small\item\em Destroys the \mbox{\hyperlink{classTrie}{Trie}} object and deallocates memory. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classTrie_a7a13a211287ca69c00368bfde90f1060}{insert}} (const std\+::string \&key, long offset)
+\begin{DoxyCompactList}\small\item\em Inserts a key with a file offset into the \mbox{\hyperlink{classTrie}{Trie}}. \end{DoxyCompactList}\item 
+long \mbox{\hyperlink{classTrie_a2bbd9365111786a5950407b81df7a59b}{search}} (const std\+::string \&key)
+\begin{DoxyCompactList}\small\item\em Searches for a key in the \mbox{\hyperlink{classTrie}{Trie}}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classTrie_a52af88e2d70a06a7c4a0f75db25be4b2}{remove}} (const std\+::string \&key)
+\begin{DoxyCompactList}\small\item\em Marks a key as deleted in the \mbox{\hyperlink{classTrie}{Trie}}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classTrie_a01acf72e7389880cc4c7ba3377500164}{is\+Deleted}} (const std\+::string \&key)
+\begin{DoxyCompactList}\small\item\em Checks if a key is marked as deleted. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\mbox{\hyperlink{classTrie}{Trie}} data structure for efficient key lookup. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classTrie_a6af57e9f25d0d0a2d59eea5a4a802908}\label{classTrie_a6af57e9f25d0d0a2d59eea5a4a802908}} 
+\index{Trie@{Trie}!Trie@{Trie}}
+\index{Trie@{Trie}!Trie@{Trie}}
+\doxysubsubsection{\texorpdfstring{Trie()}{Trie()}}
+{\footnotesize\ttfamily Trie\+::\+Trie (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs a new \mbox{\hyperlink{classTrie}{Trie}} object. 
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{40 \{ root = \textcolor{keyword}{new} \mbox{\hyperlink{classTrieNode}{TrieNode}}(); \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classTrie_abf9d6f48d556e09d1b292412df153a4b}\label{classTrie_abf9d6f48d556e09d1b292412df153a4b}} 
+\index{Trie@{Trie}!````~Trie@{$\sim$Trie}}
+\index{````~Trie@{$\sim$Trie}!Trie@{Trie}}
+\doxysubsubsection{\texorpdfstring{$\sim$Trie()}{~Trie()}}
+{\footnotesize\ttfamily Trie\+::$\sim$\+Trie (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destroys the \mbox{\hyperlink{classTrie}{Trie}} object and deallocates memory. 
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{45 \{ deleteTrie(root); \}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classTrie_a7a13a211287ca69c00368bfde90f1060}\label{classTrie_a7a13a211287ca69c00368bfde90f1060}} 
+\index{Trie@{Trie}!insert@{insert}}
+\index{insert@{insert}!Trie@{Trie}}
+\doxysubsubsection{\texorpdfstring{insert()}{insert()}}
+{\footnotesize\ttfamily void Trie\+::insert (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key,  }\item[{long}]{offset }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Inserts a key with a file offset into the \mbox{\hyperlink{classTrie}{Trie}}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key to insert. \\
+\hline
+{\em offset} & The file offset associated with the key. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{53      \{}
+\DoxyCodeLine{54          \mbox{\hyperlink{classTrieNode}{TrieNode}} *node = root;}
+\DoxyCodeLine{55          \textcolor{keywordflow}{for} (\textcolor{keywordtype}{char} ch : key)}
+\DoxyCodeLine{56          \{}
+\DoxyCodeLine{57              \textcolor{keywordflow}{if} (!node-\/>\mbox{\hyperlink{classTrieNode_ab0ebb239b5f94dd1c48ee07106276048}{children}}.count(ch))}
+\DoxyCodeLine{58                  node-\/>\mbox{\hyperlink{classTrieNode_ab0ebb239b5f94dd1c48ee07106276048}{children}}[ch] = \textcolor{keyword}{new} \mbox{\hyperlink{classTrieNode}{TrieNode}}();}
+\DoxyCodeLine{59              node = node-\/>\mbox{\hyperlink{classTrieNode_ab0ebb239b5f94dd1c48ee07106276048}{children}}[ch];}
+\DoxyCodeLine{60          \}}
+\DoxyCodeLine{61          node-\/>\mbox{\hyperlink{classTrieNode_a1836e71e2c41bb0f99f00a970491feae}{file\_offset}} = offset;}
+\DoxyCodeLine{62          node-\/>\mbox{\hyperlink{classTrieNode_a0fd0a12ee8f7e229701ba6200ae539cb}{isDeleted}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{63      \}}
+
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classTrie_a7a13a211287ca69c00368bfde90f1060_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classTrie_a01acf72e7389880cc4c7ba3377500164}\label{classTrie_a01acf72e7389880cc4c7ba3377500164}} 
+\index{Trie@{Trie}!isDeleted@{isDeleted}}
+\index{isDeleted@{isDeleted}!Trie@{Trie}}
+\doxysubsubsection{\texorpdfstring{isDeleted()}{isDeleted()}}
+{\footnotesize\ttfamily bool Trie\+::is\+Deleted (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks if a key is marked as deleted. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key to check. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the key is deleted, false otherwise. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{104      \{}
+\DoxyCodeLine{105          \mbox{\hyperlink{classTrieNode}{TrieNode}} *node = root;}
+\DoxyCodeLine{106          \textcolor{keywordflow}{for} (\textcolor{keywordtype}{char} ch : key)}
+\DoxyCodeLine{107          \{}
+\DoxyCodeLine{108              \textcolor{keywordflow}{if} (!node-\/>\mbox{\hyperlink{classTrieNode_ab0ebb239b5f94dd1c48ee07106276048}{children}}.count(ch))}
+\DoxyCodeLine{109                  \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{110              node = node-\/>\mbox{\hyperlink{classTrieNode_ab0ebb239b5f94dd1c48ee07106276048}{children}}[ch];}
+\DoxyCodeLine{111          \}}
+\DoxyCodeLine{112          \textcolor{keywordflow}{return} node-\/>\mbox{\hyperlink{classTrieNode_a0fd0a12ee8f7e229701ba6200ae539cb}{isDeleted}};}
+\DoxyCodeLine{113      \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classTrie_a52af88e2d70a06a7c4a0f75db25be4b2}\label{classTrie_a52af88e2d70a06a7c4a0f75db25be4b2}} 
+\index{Trie@{Trie}!remove@{remove}}
+\index{remove@{remove}!Trie@{Trie}}
+\doxysubsubsection{\texorpdfstring{remove()}{remove()}}
+{\footnotesize\ttfamily void Trie\+::remove (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Marks a key as deleted in the \mbox{\hyperlink{classTrie}{Trie}}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key to remove. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{87      \{}
+\DoxyCodeLine{88          \mbox{\hyperlink{classTrieNode}{TrieNode}} *node = root;}
+\DoxyCodeLine{89          \textcolor{keywordflow}{for} (\textcolor{keywordtype}{char} ch : key)}
+\DoxyCodeLine{90          \{}
+\DoxyCodeLine{91              \textcolor{keywordflow}{if} (!node-\/>\mbox{\hyperlink{classTrieNode_ab0ebb239b5f94dd1c48ee07106276048}{children}}.count(ch))}
+\DoxyCodeLine{92                  \textcolor{keywordflow}{return};}
+\DoxyCodeLine{93              node = node-\/>\mbox{\hyperlink{classTrieNode_ab0ebb239b5f94dd1c48ee07106276048}{children}}[ch];}
+\DoxyCodeLine{94          \}}
+\DoxyCodeLine{95          node-\/>\mbox{\hyperlink{classTrieNode_a0fd0a12ee8f7e229701ba6200ae539cb}{isDeleted}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{96      \}}
+
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=305pt]{classTrie_a52af88e2d70a06a7c4a0f75db25be4b2_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classTrie_a2bbd9365111786a5950407b81df7a59b}\label{classTrie_a2bbd9365111786a5950407b81df7a59b}} 
+\index{Trie@{Trie}!search@{search}}
+\index{search@{search}!Trie@{Trie}}
+\doxysubsubsection{\texorpdfstring{search()}{search()}}
+{\footnotesize\ttfamily long Trie\+::search (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Searches for a key in the \mbox{\hyperlink{classTrie}{Trie}}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key to search for. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The file offset if found, otherwise -\/1. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{71      \{}
+\DoxyCodeLine{72          \mbox{\hyperlink{classTrieNode}{TrieNode}} *node = root;}
+\DoxyCodeLine{73          \textcolor{keywordflow}{for} (\textcolor{keywordtype}{char} ch : key)}
+\DoxyCodeLine{74          \{}
+\DoxyCodeLine{75              \textcolor{keywordflow}{if} (!node-\/>\mbox{\hyperlink{classTrieNode_ab0ebb239b5f94dd1c48ee07106276048}{children}}.count(ch))}
+\DoxyCodeLine{76                  \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{77              node = node-\/>\mbox{\hyperlink{classTrieNode_ab0ebb239b5f94dd1c48ee07106276048}{children}}[ch];}
+\DoxyCodeLine{78          \}}
+\DoxyCodeLine{79          \textcolor{keywordflow}{return} node-\/>\mbox{\hyperlink{classTrieNode_a0fd0a12ee8f7e229701ba6200ae539cb}{isDeleted}} ? -\/1 : node-\/>\mbox{\hyperlink{classTrieNode_a1836e71e2c41bb0f99f00a970491feae}{file\_offset}};}
+\DoxyCodeLine{80      \}}
+
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classTrie_a2bbd9365111786a5950407b81df7a59b_icgraph}
+\end{center}
+\end{figure}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lib/\mbox{\hyperlink{tire_8h}{tire.\+h}}\end{DoxyCompactItemize}

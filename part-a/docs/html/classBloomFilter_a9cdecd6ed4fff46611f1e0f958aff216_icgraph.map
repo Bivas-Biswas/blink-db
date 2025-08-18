@@ -1,0 +1,4 @@
+<map id="BloomFilter::remove" name="BloomFilter::remove">
+<area shape="rect" id="node1" title="Removes a key from the Bloom filter (Note: Bloom filters generally do not support removals correctly)..." alt="" coords="203,13,357,39"/>
+<area shape="rect" id="node2" href="$classPersistenceKVStore.html#a46d823a6b1f2812869fa4fe3c478626c" title="Removes a key from the store." alt="" coords="5,5,155,47"/>
+</map>

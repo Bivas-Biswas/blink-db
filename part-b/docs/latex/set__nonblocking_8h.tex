@@ -1,0 +1,71 @@
+\hypertarget{set__nonblocking_8h}{}\doxysection{utils/set\+\_\+nonblocking.h File Reference}
+\label{set__nonblocking_8h}\index{utils/set\_nonblocking.h@{utils/set\_nonblocking.h}}
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$fcntl.\+h$>$}\newline
+Include dependency graph for set\+\_\+nonblocking.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=211pt]{set__nonblocking_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=260pt]{set__nonblocking_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{set__nonblocking_8h_a6f5a4dea41e37713ff3bdb4975bfa592}{set\+\_\+nonblocking}} (int sock)
+\begin{DoxyCompactList}\small\item\em Sets a socket to non-\/blocking mode. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{set__nonblocking_8h_a6f5a4dea41e37713ff3bdb4975bfa592}\label{set__nonblocking_8h_a6f5a4dea41e37713ff3bdb4975bfa592}} 
+\index{set\_nonblocking.h@{set\_nonblocking.h}!set\_nonblocking@{set\_nonblocking}}
+\index{set\_nonblocking@{set\_nonblocking}!set\_nonblocking.h@{set\_nonblocking.h}}
+\doxysubsubsection{\texorpdfstring{set\_nonblocking()}{set\_nonblocking()}}
+{\footnotesize\ttfamily void set\+\_\+nonblocking (\begin{DoxyParamCaption}\item[{int}]{sock }\end{DoxyParamCaption})}
+
+
+
+Sets a socket to non-\/blocking mode. 
+
+This function retrieves the current file status flags of the socket, adds the O\+\_\+\+NONBLOCK flag, and updates the socket settings.
+
+
+\begin{DoxyParams}{Parameters}
+{\em sock} & The socket file descriptor. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{16 \{}
+\DoxyCodeLine{17     \textcolor{keywordtype}{int} flags = fcntl(sock, F\_GETFL, 0);}
+\DoxyCodeLine{18     \textcolor{keywordflow}{if} (flags == -\/1)}
+\DoxyCodeLine{19     \{}
+\DoxyCodeLine{20         perror(\textcolor{stringliteral}{"{}fcntl F\_GETFL failed"{}});}
+\DoxyCodeLine{21         exit(EXIT\_FAILURE);}
+\DoxyCodeLine{22     \}}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24     \textcolor{keywordflow}{if} (fcntl(sock, F\_SETFL, flags | O\_NONBLOCK) == -\/1)}
+\DoxyCodeLine{25     \{}
+\DoxyCodeLine{26         perror(\textcolor{stringliteral}{"{}fcntl F\_SETFL failed"{}});}
+\DoxyCodeLine{27         exit(EXIT\_FAILURE);}
+\DoxyCodeLine{28     \}}
+\DoxyCodeLine{29 \}}
+
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{set__nonblocking_8h_a6f5a4dea41e37713ff3bdb4975bfa592_icgraph}
+\end{center}
+\end{figure}

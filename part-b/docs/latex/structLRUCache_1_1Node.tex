@@ -1,0 +1,104 @@
+\hypertarget{structLRUCache_1_1Node}{}\doxysection{LRUCache\+::Node Struct Reference}
+\label{structLRUCache_1_1Node}\index{LRUCache::Node@{LRUCache::Node}}
+
+
+Represents a node in the doubly linked list for the LRU cache.  
+
+
+
+
+{\ttfamily \#include $<$lru\+\_\+cache.\+h$>$}
+
+
+
+Collaboration diagram for LRUCache\+::Node\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=221pt]{structLRUCache_1_1Node__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structLRUCache_1_1Node_a13a8a4ad5b60cd1cbad4fccd3a6bb7d2}{Node}} (void $\ast$k, void $\ast$v)
+\begin{DoxyCompactList}\small\item\em Constructs a new \mbox{\hyperlink{structLRUCache_1_1Node}{Node}} with the given key and value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+void $\ast$ \mbox{\hyperlink{structLRUCache_1_1Node_a02a4dc539def869bdefd36862d333d21}{key}}
+\item 
+void $\ast$ \mbox{\hyperlink{structLRUCache_1_1Node_a2b7c28f452d179cbcdda8f4624767efa}{value}}
+\item 
+\mbox{\hyperlink{structLRUCache_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{structLRUCache_1_1Node_af51c25bbd46f542237f5c0b61638f248}{next}}
+\item 
+\mbox{\hyperlink{structLRUCache_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{structLRUCache_1_1Node_a7a0c9f61581b9b06cdbbc15b641f6967}{prev}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a node in the doubly linked list for the LRU cache. 
+
+Each node contains a key-\/value pair and pointers to the next and previous nodes. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{structLRUCache_1_1Node_a13a8a4ad5b60cd1cbad4fccd3a6bb7d2}\label{structLRUCache_1_1Node_a13a8a4ad5b60cd1cbad4fccd3a6bb7d2}} 
+\index{LRUCache::Node@{LRUCache::Node}!Node@{Node}}
+\index{Node@{Node}!LRUCache::Node@{LRUCache::Node}}
+\doxysubsubsection{\texorpdfstring{Node()}{Node()}}
+{\footnotesize\ttfamily LRUCache\+::\+Node\+::\+Node (\begin{DoxyParamCaption}\item[{void $\ast$}]{k,  }\item[{void $\ast$}]{v }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs a new \mbox{\hyperlink{structLRUCache_1_1Node}{Node}} with the given key and value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em k} & Pointer to the key \\
+\hline
+{\em v} & Pointer to the value \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{40         \{}
+\DoxyCodeLine{41             \mbox{\hyperlink{structLRUCache_1_1Node_a02a4dc539def869bdefd36862d333d21}{key}} = k;}
+\DoxyCodeLine{42             \mbox{\hyperlink{structLRUCache_1_1Node_a2b7c28f452d179cbcdda8f4624767efa}{value}} = v;}
+\DoxyCodeLine{43             \mbox{\hyperlink{structLRUCache_1_1Node_af51c25bbd46f542237f5c0b61638f248}{next}} = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{44             \mbox{\hyperlink{structLRUCache_1_1Node_a7a0c9f61581b9b06cdbbc15b641f6967}{prev}} = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{45         \}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{structLRUCache_1_1Node_a02a4dc539def869bdefd36862d333d21}\label{structLRUCache_1_1Node_a02a4dc539def869bdefd36862d333d21}} 
+\index{LRUCache::Node@{LRUCache::Node}!key@{key}}
+\index{key@{key}!LRUCache::Node@{LRUCache::Node}}
+\doxysubsubsection{\texorpdfstring{key}{key}}
+{\footnotesize\ttfamily void$\ast$ LRUCache\+::\+Node\+::key}
+
+Pointer to the key \mbox{\Hypertarget{structLRUCache_1_1Node_af51c25bbd46f542237f5c0b61638f248}\label{structLRUCache_1_1Node_af51c25bbd46f542237f5c0b61638f248}} 
+\index{LRUCache::Node@{LRUCache::Node}!next@{next}}
+\index{next@{next}!LRUCache::Node@{LRUCache::Node}}
+\doxysubsubsection{\texorpdfstring{next}{next}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structLRUCache_1_1Node}{Node}}$\ast$ LRUCache\+::\+Node\+::next}
+
+Pointer to the next node in the list \mbox{\Hypertarget{structLRUCache_1_1Node_a7a0c9f61581b9b06cdbbc15b641f6967}\label{structLRUCache_1_1Node_a7a0c9f61581b9b06cdbbc15b641f6967}} 
+\index{LRUCache::Node@{LRUCache::Node}!prev@{prev}}
+\index{prev@{prev}!LRUCache::Node@{LRUCache::Node}}
+\doxysubsubsection{\texorpdfstring{prev}{prev}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structLRUCache_1_1Node}{Node}}$\ast$ LRUCache\+::\+Node\+::prev}
+
+Pointer to the previous node in the list \mbox{\Hypertarget{structLRUCache_1_1Node_a2b7c28f452d179cbcdda8f4624767efa}\label{structLRUCache_1_1Node_a2b7c28f452d179cbcdda8f4624767efa}} 
+\index{LRUCache::Node@{LRUCache::Node}!value@{value}}
+\index{value@{value}!LRUCache::Node@{LRUCache::Node}}
+\doxysubsubsection{\texorpdfstring{value}{value}}
+{\footnotesize\ttfamily void$\ast$ LRUCache\+::\+Node\+::value}
+
+Pointer to the value 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lib/\mbox{\hyperlink{lru__cache_8h}{lru\+\_\+cache.\+h}}\end{DoxyCompactItemize}

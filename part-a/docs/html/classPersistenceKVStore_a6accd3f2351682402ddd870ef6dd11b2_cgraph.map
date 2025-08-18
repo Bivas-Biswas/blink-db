@@ -1,0 +1,5 @@
+<map id="PersistenceKVStore::insert" name="PersistenceKVStore::insert">
+<area shape="rect" id="node1" title="Inserts a key&#45;value pair into the store." alt="" coords="5,23,155,65"/>
+<area shape="rect" id="node2" href="$classBloomFilter.html#a2543ecabab73c24bec586f6b3b4f4563" title="Inserts a key into the Bloom filter." alt="" coords="203,5,345,32"/>
+<area shape="rect" id="node3" href="$classTrie.html#a7a13a211287ca69c00368bfde90f1060" title="Inserts a key with a file offset into the Trie." alt="" coords="229,56,319,83"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="dict" name="dict">
+<area shape="rect" id="node1" title="The main dictionary structure with two hash tables (for rehashing)." alt="" coords="22,184,69,211"/>
+<area shape="rect" id="node2" href="$structdictht.html" title="Hash table structure containing entries." alt="" coords="16,95,75,121"/>
+<area shape="rect" id="node3" href="$structdictEntry.html" title="Represents an entry in the hash table." alt="" coords="5,5,85,32"/>
+</map>

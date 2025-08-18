@@ -1,0 +1,4 @@
+<map id="create_non_locking_socket" name="create_non_locking_socket">
+<area shape="rect" id="node1" title="Creates a non&#45;blocking socket." alt="" coords="147,5,295,47"/>
+<area shape="rect" id="node2" href="$classServer.html#a1016678b77eacc5aa97f2310f8b442b1" title="Initializes the server, sets up epoll, and starts listening for connections." alt="" coords="5,13,99,39"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="PersistenceKVStore::insert" name="PersistenceKVStore::insert">
+<area shape="rect" id="node1" title="Inserts a key&#45;value pair into the store." alt="" coords="272,5,421,47"/>
+<area shape="rect" id="node2" href="$classLRUCache.html#a94fd770e6518bc9bb2df581c36c57205" title="Adds or updates a key&#45;value pair in the cache." alt="" coords="108,13,224,39"/>
+<area shape="rect" id="node3" href="$main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Main function providing a command&#45;line interface for the LRU cache." alt="" coords="5,13,60,39"/>
+</map>

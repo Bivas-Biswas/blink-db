@@ -1,0 +1,6 @@
+<map id="LRUCache" name="LRUCache">
+<area shape="rect" id="node1" title="Implements a Least Recently Used (LRU) cache with memory constraints." alt="" coords="99,112,187,139"/>
+<area shape="rect" id="node2" href="$classDict.html" title="A dictionary (hash table) implementation with dynamic resizing and rehashing." alt="" coords="5,7,53,33"/>
+<area shape="rect" id="node3" href="$structLRUCache_1_1Node.html" title="Represents a node in the doubly linked list for the LRU cache." alt="" coords="77,7,208,33"/>
+<area shape="rect" id="node4" href="$classPersistenceKVStore.html" title="A persistent key&#45;value store with background rewriting and indexing." alt="" coords="289,7,439,33"/>
+</map>

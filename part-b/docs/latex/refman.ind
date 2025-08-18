@@ -1,0 +1,319 @@
+\begin{theindex}
+
+  \item {$\sim$Client}
+    \subitem {Client}, \hyperpage{9}
+  \item {$\sim$Dict}
+    \subitem {Dict}, \hyperpage{14}
+  \item {$\sim$LRUCache}
+    \subitem {LRUCache}, \hyperpage{23}
+  \item {$\sim$PersistenceKVStore}
+    \subitem {PersistenceKVStore}, \hyperpage{32}
+  \item {$\sim$Server}
+    \subitem {Server}, \hyperpage{37}
+  \item {$\sim$Trie}
+    \subitem {Trie}, \hyperpage{43}
+
+  \indexspace
+
+  \item {add}
+    \subitem {Dict}, \hyperpage{14}
+
+  \indexspace
+
+  \item {BloomFilter}, \hyperpage{5}
+    \subitem {BloomFilter}, \hyperpage{5}
+    \subitem {contains}, \hyperpage{6}
+    \subitem {insert}, \hyperpage{6}
+    \subitem {remove}, \hyperpage{7}
+  \item {buffer}
+    \subitem {Client}, \hyperpage{11}
+  \item {buffer\_size}
+    \subitem {Client}, \hyperpage{11}
+
+  \indexspace
+
+  \item {children}
+    \subitem {TrieNode}, \hyperpage{46}
+  \item {Client}, \hyperpage{7}
+    \subitem {$\sim$Client}, \hyperpage{9}
+    \subitem {buffer}, \hyperpage{11}
+    \subitem {buffer\_size}, \hyperpage{11}
+    \subitem {Client}, \hyperpage{8}
+    \subitem {close\_server}, \hyperpage{9}
+    \subitem {del}, \hyperpage{9}
+    \subitem {get}, \hyperpage{9}
+    \subitem {ip\_addr}, \hyperpage{11}
+    \subitem {port}, \hyperpage{11}
+    \subitem {server\_init}, \hyperpage{10}
+    \subitem {set}, \hyperpage{10}
+  \item {close\_server}
+    \subitem {Client}, \hyperpage{9}
+  \item {contains}
+    \subitem {BloomFilter}, \hyperpage{6}
+  \item {create\_non\_locking\_socket}
+    \subitem {create\_non\_locking\_socket.h}, \hyperpage{57}
+  \item {create\_non\_locking\_socket.h}
+    \subitem {create\_non\_locking\_socket}, \hyperpage{57}
+  \item {current\_memory\_usage}
+    \subitem {LRUCache}, \hyperpage{28}
+
+  \indexspace
+
+  \item {d}
+    \subitem {dictEntry}, \hyperpage{19}
+  \item {del}
+    \subitem {Client}, \hyperpage{9}
+    \subitem {LRUCache}, \hyperpage{24}
+  \item {Dict}, \hyperpage{13}
+    \subitem {$\sim$Dict}, \hyperpage{14}
+    \subitem {add}, \hyperpage{14}
+    \subitem {Dict}, \hyperpage{14}
+    \subitem {enableResize}, \hyperpage{15}
+    \subitem {find}, \hyperpage{15}
+    \subitem {get\_size\_of\_dict}, \hyperpage{16}
+    \subitem {isRehashing}, \hyperpage{16}
+    \subitem {rehash}, \hyperpage{16}
+    \subitem {remove}, \hyperpage{17}
+    \subitem {replace}, \hyperpage{17}
+    \subitem {size}, \hyperpage{18}
+  \item {dict}, \hyperpage{12}
+    \subitem {ht}, \hyperpage{12}
+    \subitem {iterators}, \hyperpage{12}
+    \subitem {LRUCache}, \hyperpage{28}
+    \subitem {rehashidx}, \hyperpage{13}
+  \item {dict.h}
+    \subitem {freeString}, \hyperpage{50}
+    \subitem {stringCompare}, \hyperpage{50}
+    \subitem {stringDup}, \hyperpage{51}
+    \subitem {stringHash}, \hyperpage{51}
+  \item {dictEntry}, \hyperpage{18}
+    \subitem {d}, \hyperpage{19}
+    \subitem {key}, \hyperpage{19}
+    \subitem {next}, \hyperpage{19}
+    \subitem {s64}, \hyperpage{19}
+    \subitem {u64}, \hyperpage{19}
+    \subitem {v}, \hyperpage{19}
+    \subitem {val}, \hyperpage{20}
+  \item {dictht}, \hyperpage{20}
+    \subitem {size}, \hyperpage{21}
+    \subitem {sizemask}, \hyperpage{21}
+    \subitem {table}, \hyperpage{21}
+    \subitem {used}, \hyperpage{21}
+
+  \indexspace
+
+  \item {enableResize}
+    \subitem {Dict}, \hyperpage{15}
+  \item {encode\_resp}
+    \subitem {Server}, \hyperpage{37}
+
+  \indexspace
+
+  \item {file\_offset}
+    \subitem {TrieNode}, \hyperpage{46}
+  \item {find}
+    \subitem {Dict}, \hyperpage{15}
+  \item {freeString}
+    \subitem {dict.h}, \hyperpage{50}
+
+  \indexspace
+
+  \item {get}
+    \subitem {Client}, \hyperpage{9}
+    \subitem {LRUCache}, \hyperpage{24}
+    \subitem {PersistenceKVStore}, \hyperpage{32}
+  \item {get\_size\_of\_dict}
+    \subitem {Dict}, \hyperpage{16}
+
+  \indexspace
+
+  \item {handle\_command}
+    \subitem {Server}, \hyperpage{37}
+  \item {head}
+    \subitem {LRUCache}, \hyperpage{28}
+  \item {ht}
+    \subitem {dict}, \hyperpage{12}
+
+  \indexspace
+
+  \item {init}
+    \subitem {Server}, \hyperpage{40}
+  \item {insert}
+    \subitem {BloomFilter}, \hyperpage{6}
+    \subitem {PersistenceKVStore}, \hyperpage{34}
+    \subitem {Trie}, \hyperpage{43}
+  \item {ip\_addr}
+    \subitem {Client}, \hyperpage{11}
+  \item {isDeleted}
+    \subitem {Trie}, \hyperpage{44}
+    \subitem {TrieNode}, \hyperpage{46}
+  \item {isRehashing}
+    \subitem {Dict}, \hyperpage{16}
+  \item {iterators}
+    \subitem {dict}, \hyperpage{12}
+
+  \indexspace
+
+  \item {key}
+    \subitem {dictEntry}, \hyperpage{19}
+    \subitem {LRUCache::Node}, \hyperpage{30}
+
+  \indexspace
+
+  \item {lib/bloomfilter.h}, \hyperpage{47}
+  \item {lib/client.h}, \hyperpage{48}
+  \item {lib/dict.h}, \hyperpage{49}
+  \item {lib/lru\_cache.h}, \hyperpage{53}
+  \item {lib/persistence\_kv\_store.h}, \hyperpage{54}
+  \item {lib/server.h}, \hyperpage{55}
+  \item {lib/tire.h}, \hyperpage{55}
+  \item {LRUCache}, \hyperpage{22}
+    \subitem {$\sim$LRUCache}, \hyperpage{23}
+    \subitem {current\_memory\_usage}, \hyperpage{28}
+    \subitem {del}, \hyperpage{24}
+    \subitem {dict}, \hyperpage{28}
+    \subitem {get}, \hyperpage{24}
+    \subitem {head}, \hyperpage{28}
+    \subitem {LRUCache}, \hyperpage{23}
+    \subitem {max\_memory}, \hyperpage{25}
+    \subitem {max\_memory\_bytes}, \hyperpage{29}
+    \subitem {memory\_usage}, \hyperpage{26}
+    \subitem {printList}, \hyperpage{26}
+    \subitem {set}, \hyperpage{26}
+    \subitem {size}, \hyperpage{28}
+    \subitem {storage}, \hyperpage{29}
+    \subitem {tail}, \hyperpage{29}
+    \subitem {value}, \hyperpage{29}
+  \item {LRUCache::Node}, \hyperpage{29}
+    \subitem {key}, \hyperpage{30}
+    \subitem {next}, \hyperpage{30}
+    \subitem {Node}, \hyperpage{30}
+    \subitem {prev}, \hyperpage{31}
+    \subitem {value}, \hyperpage{31}
+
+  \indexspace
+
+  \item {max\_memory}
+    \subitem {LRUCache}, \hyperpage{25}
+  \item {max\_memory\_bytes}
+    \subitem {LRUCache}, \hyperpage{29}
+  \item {memory\_usage}
+    \subitem {LRUCache}, \hyperpage{26}
+
+  \indexspace
+
+  \item {next}
+    \subitem {dictEntry}, \hyperpage{19}
+    \subitem {LRUCache::Node}, \hyperpage{30}
+  \item {Node}
+    \subitem {LRUCache::Node}, \hyperpage{30}
+
+  \indexspace
+
+  \item {parse\_resp}
+    \subitem {Server}, \hyperpage{41}
+  \item {PersistenceKVStore}, \hyperpage{31}
+    \subitem {$\sim$PersistenceKVStore}, \hyperpage{32}
+    \subitem {get}, \hyperpage{32}
+    \subitem {insert}, \hyperpage{34}
+    \subitem {PersistenceKVStore}, \hyperpage{32}
+    \subitem {remove}, \hyperpage{34}
+    \subitem {remove\_db}, \hyperpage{35}
+  \item {port}
+    \subitem {Client}, \hyperpage{11}
+  \item {prev}
+    \subitem {LRUCache::Node}, \hyperpage{31}
+  \item {printList}
+    \subitem {LRUCache}, \hyperpage{26}
+
+  \indexspace
+
+  \item {rehash}
+    \subitem {Dict}, \hyperpage{16}
+  \item {rehashidx}
+    \subitem {dict}, \hyperpage{13}
+  \item {remove}
+    \subitem {BloomFilter}, \hyperpage{7}
+    \subitem {Dict}, \hyperpage{17}
+    \subitem {PersistenceKVStore}, \hyperpage{34}
+    \subitem {Trie}, \hyperpage{44}
+  \item {remove\_db}
+    \subitem {PersistenceKVStore}, \hyperpage{35}
+  \item {replace}
+    \subitem {Dict}, \hyperpage{17}
+
+  \indexspace
+
+  \item {s64}
+    \subitem {dictEntry}, \hyperpage{19}
+  \item {search}
+    \subitem {Trie}, \hyperpage{45}
+  \item {Server}, \hyperpage{35}
+    \subitem {$\sim$Server}, \hyperpage{37}
+    \subitem {encode\_resp}, \hyperpage{37}
+    \subitem {handle\_command}, \hyperpage{37}
+    \subitem {init}, \hyperpage{40}
+    \subitem {parse\_resp}, \hyperpage{41}
+    \subitem {Server}, \hyperpage{36}
+  \item {server\_init}
+    \subitem {Client}, \hyperpage{10}
+  \item {set}
+    \subitem {Client}, \hyperpage{10}
+    \subitem {LRUCache}, \hyperpage{26}
+  \item {set\_nonblocking}
+    \subitem {set\_nonblocking.h}, \hyperpage{60}
+  \item {set\_nonblocking.h}
+    \subitem {set\_nonblocking}, \hyperpage{60}
+  \item {size}
+    \subitem {Dict}, \hyperpage{18}
+    \subitem {dictht}, \hyperpage{21}
+    \subitem {LRUCache}, \hyperpage{28}
+  \item {sizemask}
+    \subitem {dictht}, \hyperpage{21}
+  \item {storage}
+    \subitem {LRUCache}, \hyperpage{29}
+  \item {stringCompare}
+    \subitem {dict.h}, \hyperpage{50}
+  \item {stringDup}
+    \subitem {dict.h}, \hyperpage{51}
+  \item {stringHash}
+    \subitem {dict.h}, \hyperpage{51}
+
+  \indexspace
+
+  \item {table}
+    \subitem {dictht}, \hyperpage{21}
+  \item {tail}
+    \subitem {LRUCache}, \hyperpage{29}
+  \item {Trie}, \hyperpage{42}
+    \subitem {$\sim$Trie}, \hyperpage{43}
+    \subitem {insert}, \hyperpage{43}
+    \subitem {isDeleted}, \hyperpage{44}
+    \subitem {remove}, \hyperpage{44}
+    \subitem {search}, \hyperpage{45}
+    \subitem {Trie}, \hyperpage{43}
+  \item {TrieNode}, \hyperpage{46}
+    \subitem {children}, \hyperpage{46}
+    \subitem {file\_offset}, \hyperpage{46}
+    \subitem {isDeleted}, \hyperpage{46}
+
+  \indexspace
+
+  \item {u64}
+    \subitem {dictEntry}, \hyperpage{19}
+  \item {used}
+    \subitem {dictht}, \hyperpage{21}
+  \item {utils/create\_non\_locking\_socket.h}, \hyperpage{56}
+  \item {utils/set\_nonblocking.h}, \hyperpage{59}
+
+  \indexspace
+
+  \item {v}
+    \subitem {dictEntry}, \hyperpage{19}
+  \item {val}
+    \subitem {dictEntry}, \hyperpage{20}
+  \item {value}
+    \subitem {LRUCache}, \hyperpage{29}
+    \subitem {LRUCache::Node}, \hyperpage{31}
+
+\end{theindex}

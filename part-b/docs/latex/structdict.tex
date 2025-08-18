@@ -1,0 +1,71 @@
+\hypertarget{structdict}{}\doxysection{dict Struct Reference}
+\label{structdict}\index{dict@{dict}}
+
+
+The main dictionary structure with two hash tables (for rehashing).  
+
+
+
+
+{\ttfamily \#include $<$dict.\+h$>$}
+
+
+
+Collaboration diagram for dict\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=183pt]{structdict__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structdictht}{dictht}} \mbox{\hyperlink{structdict_a5ed6a359a0f2da7f88c4cc352218445a}{ht}} \mbox{[}2\mbox{]}
+\begin{DoxyCompactList}\small\item\em Two hash tables used during rehashing. \end{DoxyCompactList}\item 
+long \mbox{\hyperlink{structdict_aa6aeb098acd50b590319317ad8811b58}{rehashidx}}
+\begin{DoxyCompactList}\small\item\em Rehashing index (-\/1 if not rehashing) \end{DoxyCompactList}\item 
+unsigned long \mbox{\hyperlink{structdict_a936aefce2677e310e5ecb5943558d614}{iterators}}
+\begin{DoxyCompactList}\small\item\em Number of active iterators. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The main dictionary structure with two hash tables (for rehashing). 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{structdict_a5ed6a359a0f2da7f88c4cc352218445a}\label{structdict_a5ed6a359a0f2da7f88c4cc352218445a}} 
+\index{dict@{dict}!ht@{ht}}
+\index{ht@{ht}!dict@{dict}}
+\doxysubsubsection{\texorpdfstring{ht}{ht}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structdictht}{dictht}} dict\+::ht\mbox{[}2\mbox{]}}
+
+
+
+Two hash tables used during rehashing. 
+
+\mbox{\Hypertarget{structdict_a936aefce2677e310e5ecb5943558d614}\label{structdict_a936aefce2677e310e5ecb5943558d614}} 
+\index{dict@{dict}!iterators@{iterators}}
+\index{iterators@{iterators}!dict@{dict}}
+\doxysubsubsection{\texorpdfstring{iterators}{iterators}}
+{\footnotesize\ttfamily unsigned long dict\+::iterators}
+
+
+
+Number of active iterators. 
+
+\mbox{\Hypertarget{structdict_aa6aeb098acd50b590319317ad8811b58}\label{structdict_aa6aeb098acd50b590319317ad8811b58}} 
+\index{dict@{dict}!rehashidx@{rehashidx}}
+\index{rehashidx@{rehashidx}!dict@{dict}}
+\doxysubsubsection{\texorpdfstring{rehashidx}{rehashidx}}
+{\footnotesize\ttfamily long dict\+::rehashidx}
+
+
+
+Rehashing index (-\/1 if not rehashing) 
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lib/\mbox{\hyperlink{dict_8h}{dict.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,149 @@
+\hypertarget{classBloomFilter}{}\doxysection{Bloom\+Filter Class Reference}
+\label{classBloomFilter}\index{BloomFilter@{BloomFilter}}
+
+
+Implements a simple Bloom filter for fast key existence checks.  
+
+
+
+
+{\ttfamily \#include $<$bloomfilter.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classBloomFilter_a178749a3f48d7778a6112ae3925082dd}{Bloom\+Filter}} (int \+\_\+size=10000)
+\begin{DoxyCompactList}\small\item\em Constructor to initialize the Bloom filter with a given size. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classBloomFilter_a2543ecabab73c24bec586f6b3b4f4563}{insert}} (const std\+::string \&\+\_\+key)
+\begin{DoxyCompactList}\small\item\em Inserts a key into the Bloom filter. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classBloomFilter_a30a32da65c9167b1e638db926a90f502}{contains}} (const std\+::string \&\+\_\+key)
+\begin{DoxyCompactList}\small\item\em Checks if a key exists in the Bloom filter. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classBloomFilter_a9cdecd6ed4fff46611f1e0f958aff216}{remove}} (const std\+::string \&\+\_\+key)
+\begin{DoxyCompactList}\small\item\em Removes a key from the Bloom filter (Note\+: Bloom filters generally do not support removals correctly). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Implements a simple Bloom filter for fast key existence checks. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classBloomFilter_a178749a3f48d7778a6112ae3925082dd}\label{classBloomFilter_a178749a3f48d7778a6112ae3925082dd}} 
+\index{BloomFilter@{BloomFilter}!BloomFilter@{BloomFilter}}
+\index{BloomFilter@{BloomFilter}!BloomFilter@{BloomFilter}}
+\doxysubsubsection{\texorpdfstring{BloomFilter()}{BloomFilter()}}
+{\footnotesize\ttfamily Bloom\+Filter\+::\+Bloom\+Filter (\begin{DoxyParamCaption}\item[{int}]{\+\_\+size = {\ttfamily 10000} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructor to initialize the Bloom filter with a given size. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+size} & The size of the Bloom filter (default\+: 10,000). \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{52 : filter(\_size, \textcolor{keyword}{false}), filter\_size(\_size) \{\}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classBloomFilter_a30a32da65c9167b1e638db926a90f502}\label{classBloomFilter_a30a32da65c9167b1e638db926a90f502}} 
+\index{BloomFilter@{BloomFilter}!contains@{contains}}
+\index{contains@{contains}!BloomFilter@{BloomFilter}}
+\doxysubsubsection{\texorpdfstring{contains()}{contains()}}
+{\footnotesize\ttfamily bool Bloom\+Filter\+::contains (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{\+\_\+key }\end{DoxyParamCaption})}
+
+
+
+Checks if a key exists in the Bloom filter. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+key} & The key to check. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the key is possibly in the filter, false otherwise. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{60 \{}
+\DoxyCodeLine{61     \textcolor{keywordflow}{return} filter[hashKey(\_key)];}
+\DoxyCodeLine{62 \}}
+
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBloomFilter_a30a32da65c9167b1e638db926a90f502_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classBloomFilter_a2543ecabab73c24bec586f6b3b4f4563}\label{classBloomFilter_a2543ecabab73c24bec586f6b3b4f4563}} 
+\index{BloomFilter@{BloomFilter}!insert@{insert}}
+\index{insert@{insert}!BloomFilter@{BloomFilter}}
+\doxysubsubsection{\texorpdfstring{insert()}{insert()}}
+{\footnotesize\ttfamily void Bloom\+Filter\+::insert (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{\+\_\+key }\end{DoxyParamCaption})}
+
+
+
+Inserts a key into the Bloom filter. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+key} & The key to insert. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{55 \{}
+\DoxyCodeLine{56     filter[hashKey(\_key)] = \textcolor{keyword}{true};}
+\DoxyCodeLine{57 \}}
+
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBloomFilter_a2543ecabab73c24bec586f6b3b4f4563_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classBloomFilter_a9cdecd6ed4fff46611f1e0f958aff216}\label{classBloomFilter_a9cdecd6ed4fff46611f1e0f958aff216}} 
+\index{BloomFilter@{BloomFilter}!remove@{remove}}
+\index{remove@{remove}!BloomFilter@{BloomFilter}}
+\doxysubsubsection{\texorpdfstring{remove()}{remove()}}
+{\footnotesize\ttfamily void Bloom\+Filter\+::remove (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{\+\_\+key }\end{DoxyParamCaption})}
+
+
+
+Removes a key from the Bloom filter (Note\+: Bloom filters generally do not support removals correctly). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+key} & The key to remove. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{65 \{}
+\DoxyCodeLine{66     filter[hashKey(\_key)] = \textcolor{keyword}{false};}
+\DoxyCodeLine{67 \}}
+
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=344pt]{classBloomFilter_a9cdecd6ed4fff46611f1e0f958aff216_icgraph}
+\end{center}
+\end{figure}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lib/\mbox{\hyperlink{bloomfilter_8h}{bloomfilter.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,49 @@
+\hypertarget{classTrieNode}{}\doxysection{Trie\+Node Class Reference}
+\label{classTrieNode}\index{TrieNode@{TrieNode}}
+
+
+Represents a node in the \mbox{\hyperlink{classTrie}{Trie}}.  
+
+
+
+
+{\ttfamily \#include $<$tire.\+h$>$}
+
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::unordered\+\_\+map$<$ char, \mbox{\hyperlink{classTrieNode}{Trie\+Node}} $\ast$ $>$ \mbox{\hyperlink{classTrieNode_ab0ebb239b5f94dd1c48ee07106276048}{children}}
+\item 
+long \mbox{\hyperlink{classTrieNode_a1836e71e2c41bb0f99f00a970491feae}{file\+\_\+offset}} = -\/1
+\item 
+bool \mbox{\hyperlink{classTrieNode_a0fd0a12ee8f7e229701ba6200ae539cb}{is\+Deleted}} = false
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a node in the \mbox{\hyperlink{classTrie}{Trie}}. 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classTrieNode_ab0ebb239b5f94dd1c48ee07106276048}\label{classTrieNode_ab0ebb239b5f94dd1c48ee07106276048}} 
+\index{TrieNode@{TrieNode}!children@{children}}
+\index{children@{children}!TrieNode@{TrieNode}}
+\doxysubsubsection{\texorpdfstring{children}{children}}
+{\footnotesize\ttfamily std\+::unordered\+\_\+map$<$char, \mbox{\hyperlink{classTrieNode}{Trie\+Node}} $\ast$$>$ Trie\+Node\+::children}
+
+Child nodes of the \mbox{\hyperlink{classTrie}{Trie}}. \mbox{\Hypertarget{classTrieNode_a1836e71e2c41bb0f99f00a970491feae}\label{classTrieNode_a1836e71e2c41bb0f99f00a970491feae}} 
+\index{TrieNode@{TrieNode}!file\_offset@{file\_offset}}
+\index{file\_offset@{file\_offset}!TrieNode@{TrieNode}}
+\doxysubsubsection{\texorpdfstring{file\_offset}{file\_offset}}
+{\footnotesize\ttfamily long Trie\+Node\+::file\+\_\+offset = -\/1}
+
+Offset of the file where the key is stored. \mbox{\Hypertarget{classTrieNode_a0fd0a12ee8f7e229701ba6200ae539cb}\label{classTrieNode_a0fd0a12ee8f7e229701ba6200ae539cb}} 
+\index{TrieNode@{TrieNode}!isDeleted@{isDeleted}}
+\index{isDeleted@{isDeleted}!TrieNode@{TrieNode}}
+\doxysubsubsection{\texorpdfstring{isDeleted}{isDeleted}}
+{\footnotesize\ttfamily bool Trie\+Node\+::is\+Deleted = false}
+
+Flag indicating whether the key is deleted. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lib/\mbox{\hyperlink{tire_8h}{tire.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,119 @@
+\hypertarget{structdictEntry}{}\doxysection{dict\+Entry Struct Reference}
+\label{structdictEntry}\index{dictEntry@{dictEntry}}
+
+
+Represents an entry in the hash table.  
+
+
+
+
+{\ttfamily \#include $<$dict.\+h$>$}
+
+
+
+Collaboration diagram for dict\+Entry\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=183pt]{structdictEntry__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+void $\ast$ \mbox{\hyperlink{structdictEntry_a1cc436243330e4ac0a1d7d07e5a16ce0}{key}}
+\begin{DoxyCompactList}\small\item\em Key pointer. \end{DoxyCompactList}\item 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+union \{\\
+\>void $\ast$ \mbox{\hyperlink{structdictEntry_a30f939fb9c159fefaaec4907e582b417}{val}}\\
+\>\>{\em Value pointer. }\\
+\>uint64\_t \mbox{\hyperlink{structdictEntry_a9beddc798bf44396445dd0d3c7975e56}{u64}}\\
+\>\>{\em Unsigned 64-\/bit integer. }\\
+\>int64\_t \mbox{\hyperlink{structdictEntry_a7b1c3547c9f7250cfe976c4df89bb5e0}{s64}}\\
+\>\>{\em Signed 64-\/bit integer. }\\
+\>double \mbox{\hyperlink{structdictEntry_aa9d58f76f3972e1937c75c6ac88d5943}{d}}\\
+\>\>{\em Double precision floating point. }\\
+\} \mbox{\hyperlink{structdictEntry_a22534fab6a0d39fdd7ae10c0da85d2c7}{v}}\\
+
+\end{tabbing}\item 
+\mbox{\hyperlink{structdictEntry}{dict\+Entry}} $\ast$ \mbox{\hyperlink{structdictEntry_a351c5cedb6f396e6f79d39d006eb9f33}{next}}
+\begin{DoxyCompactList}\small\item\em Pointer to the next entry (for chaining) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents an entry in the hash table. 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{structdictEntry_aa9d58f76f3972e1937c75c6ac88d5943}\label{structdictEntry_aa9d58f76f3972e1937c75c6ac88d5943}} 
+\index{dictEntry@{dictEntry}!d@{d}}
+\index{d@{d}!dictEntry@{dictEntry}}
+\doxysubsubsection{\texorpdfstring{d}{d}}
+{\footnotesize\ttfamily double dict\+Entry\+::d}
+
+
+
+Double precision floating point. 
+
+\mbox{\Hypertarget{structdictEntry_a1cc436243330e4ac0a1d7d07e5a16ce0}\label{structdictEntry_a1cc436243330e4ac0a1d7d07e5a16ce0}} 
+\index{dictEntry@{dictEntry}!key@{key}}
+\index{key@{key}!dictEntry@{dictEntry}}
+\doxysubsubsection{\texorpdfstring{key}{key}}
+{\footnotesize\ttfamily void$\ast$ dict\+Entry\+::key}
+
+
+
+Key pointer. 
+
+\mbox{\Hypertarget{structdictEntry_a351c5cedb6f396e6f79d39d006eb9f33}\label{structdictEntry_a351c5cedb6f396e6f79d39d006eb9f33}} 
+\index{dictEntry@{dictEntry}!next@{next}}
+\index{next@{next}!dictEntry@{dictEntry}}
+\doxysubsubsection{\texorpdfstring{next}{next}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structdictEntry}{dict\+Entry}}$\ast$ dict\+Entry\+::next}
+
+
+
+Pointer to the next entry (for chaining) 
+
+\mbox{\Hypertarget{structdictEntry_a7b1c3547c9f7250cfe976c4df89bb5e0}\label{structdictEntry_a7b1c3547c9f7250cfe976c4df89bb5e0}} 
+\index{dictEntry@{dictEntry}!s64@{s64}}
+\index{s64@{s64}!dictEntry@{dictEntry}}
+\doxysubsubsection{\texorpdfstring{s64}{s64}}
+{\footnotesize\ttfamily int64\+\_\+t dict\+Entry\+::s64}
+
+
+
+Signed 64-\/bit integer. 
+
+\mbox{\Hypertarget{structdictEntry_a9beddc798bf44396445dd0d3c7975e56}\label{structdictEntry_a9beddc798bf44396445dd0d3c7975e56}} 
+\index{dictEntry@{dictEntry}!u64@{u64}}
+\index{u64@{u64}!dictEntry@{dictEntry}}
+\doxysubsubsection{\texorpdfstring{u64}{u64}}
+{\footnotesize\ttfamily uint64\+\_\+t dict\+Entry\+::u64}
+
+
+
+Unsigned 64-\/bit integer. 
+
+\mbox{\Hypertarget{structdictEntry_a22534fab6a0d39fdd7ae10c0da85d2c7}\label{structdictEntry_a22534fab6a0d39fdd7ae10c0da85d2c7}} 
+\index{dictEntry@{dictEntry}!v@{v}}
+\index{v@{v}!dictEntry@{dictEntry}}
+\doxysubsubsection{\texorpdfstring{}{}}
+{\footnotesize\ttfamily union \{ ... \}  dict\+Entry\+::v}
+
+\mbox{\Hypertarget{structdictEntry_a30f939fb9c159fefaaec4907e582b417}\label{structdictEntry_a30f939fb9c159fefaaec4907e582b417}} 
+\index{dictEntry@{dictEntry}!val@{val}}
+\index{val@{val}!dictEntry@{dictEntry}}
+\doxysubsubsection{\texorpdfstring{val}{val}}
+{\footnotesize\ttfamily void$\ast$ dict\+Entry\+::val}
+
+
+
+Value pointer. 
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lib/\mbox{\hyperlink{dict_8h}{dict.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,4 @@
+<map id="Server::handle_command" name="Server::handle_command">
+<area shape="rect" id="node1" title="Handles client commands and generates appropriate responses." alt="" coords="147,5,335,32"/>
+<area shape="rect" id="node2" href="$classServer.html#a1016678b77eacc5aa97f2310f8b442b1" title="Initializes the server, sets up epoll, and starts listening for connections." alt="" coords="5,5,99,32"/>
+</map>

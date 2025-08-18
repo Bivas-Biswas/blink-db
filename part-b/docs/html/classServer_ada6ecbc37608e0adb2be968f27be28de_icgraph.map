@@ -1,0 +1,5 @@
+<map id="Server::encode_resp" name="Server::encode_resp">
+<area shape="rect" id="node1" title="Encodes a response string into RESP format." alt="" coords="383,5,537,32"/>
+<area shape="rect" id="node2" href="$classServer.html#adc733e6b389380f0efe0f5aeaf1cb3b7" title="Handles client commands and generates appropriate responses." alt="" coords="147,5,335,32"/>
+<area shape="rect" id="node3" href="$classServer.html#a1016678b77eacc5aa97f2310f8b442b1" title="Initializes the server, sets up epoll, and starts listening for connections." alt="" coords="5,5,99,32"/>
+</map>

@@ -1,0 +1,463 @@
+\hypertarget{classServer}{}\doxysection{Server Class Reference}
+\label{classServer}\index{Server@{Server}}
+
+
+Implements a Blink-\/compatible server with an LRU-\/based in-\/memory database.  
+
+
+
+
+{\ttfamily \#include $<$server.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classServer_a0d8d3fd2e86f5a00e97050ce8ec103a9}{parse\+\_\+resp}} (const std\+::string \&input, std\+::vector$<$ std\+::string $>$ \&result)
+\begin{DoxyCompactList}\small\item\em Parses a RESP (Redis Serialization Protocol) formatted string. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classServer_ada6ecbc37608e0adb2be968f27be28de}{encode\+\_\+resp}} (std\+::string \&response, bool is\+\_\+error)
+\begin{DoxyCompactList}\small\item\em Encodes a response string into RESP format. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classServer_adc733e6b389380f0efe0f5aeaf1cb3b7}{handle\+\_\+command}} (const std\+::vector$<$ std\+::string $>$ \&command, std\+::string \&response)
+\begin{DoxyCompactList}\small\item\em Handles client commands and generates appropriate responses. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classServer_a3b389299b66aaee992a7d5e8992c9806}{Server}} (std\+::string ip, int port, int buffer\+\_\+size, int max\+\_\+events, int max\+\_\+mem\+\_\+bytes)
+\begin{DoxyCompactList}\small\item\em Constructs a \mbox{\hyperlink{classServer}{Server}} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classServer_a4b3aa2579cb1c8cd1d069582c14d0fa6}{$\sim$\+Server}} ()
+\begin{DoxyCompactList}\small\item\em Destructor to release allocated resources. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classServer_a1016678b77eacc5aa97f2310f8b442b1}{init}} ()
+\begin{DoxyCompactList}\small\item\em Initializes the server, sets up epoll, and starts listening for connections. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Implements a Blink-\/compatible server with an LRU-\/based in-\/memory database. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classServer_a3b389299b66aaee992a7d5e8992c9806}\label{classServer_a3b389299b66aaee992a7d5e8992c9806}} 
+\index{Server@{Server}!Server@{Server}}
+\index{Server@{Server}!Server@{Server}}
+\doxysubsubsection{\texorpdfstring{Server()}{Server()}}
+{\footnotesize\ttfamily Server\+::\+Server (\begin{DoxyParamCaption}\item[{std\+::string}]{ip,  }\item[{int}]{port,  }\item[{int}]{buffer\+\_\+size = {\ttfamily 2048},  }\item[{int}]{max\+\_\+events = {\ttfamily 4096},  }\item[{int}]{max\+\_\+mem\+\_\+bytes = {\ttfamily 1024~$\ast$~1024~$\ast$~1024} }\end{DoxyParamCaption})}
+
+
+
+Constructs a \mbox{\hyperlink{classServer}{Server}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ip} & \mbox{\hyperlink{classServer}{Server}} IP address. \\
+\hline
+{\em port} & \mbox{\hyperlink{classServer}{Server}} port number. \\
+\hline
+{\em buffer\+\_\+size} & Buffer size for receiving data. \\
+\hline
+{\em max\+\_\+events} & Maximum epoll events. \\
+\hline
+{\em max\+\_\+mem\+\_\+bytes} & Maximum memory allocation for caching. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{83     : ip(\_ip),}
+\DoxyCodeLine{84       database(\_max\_mem\_bytes)}
+\DoxyCodeLine{85 \{}
+\DoxyCodeLine{86     port = \_port;}
+\DoxyCodeLine{87     buffer\_size = \_buffer\_size;}
+\DoxyCodeLine{88     max\_mem\_bytes = \_max\_mem\_bytes;}
+\DoxyCodeLine{89     max\_events = \_max\_events;}
+\DoxyCodeLine{90     tag = \textcolor{stringliteral}{"{}["{}} + ip + \textcolor{stringliteral}{"{}:"{}} + std::to\_string(\_port) + \textcolor{stringliteral}{"{}] "{}};}
+\DoxyCodeLine{91     buffer = \textcolor{keyword}{new} \textcolor{keywordtype}{char}[\_buffer\_size];}
+\DoxyCodeLine{92 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classServer_a4b3aa2579cb1c8cd1d069582c14d0fa6}\label{classServer_a4b3aa2579cb1c8cd1d069582c14d0fa6}} 
+\index{Server@{Server}!````~Server@{$\sim$Server}}
+\index{````~Server@{$\sim$Server}!Server@{Server}}
+\doxysubsubsection{\texorpdfstring{$\sim$Server()}{~Server()}}
+{\footnotesize\ttfamily Server\+::$\sim$\+Server (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Destructor to release allocated resources. 
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{95 \{}
+\DoxyCodeLine{96     \textcolor{keyword}{delete}[] buffer;}
+\DoxyCodeLine{97 \}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classServer_ada6ecbc37608e0adb2be968f27be28de}\label{classServer_ada6ecbc37608e0adb2be968f27be28de}} 
+\index{Server@{Server}!encode\_resp@{encode\_resp}}
+\index{encode\_resp@{encode\_resp}!Server@{Server}}
+\doxysubsubsection{\texorpdfstring{encode\_resp()}{encode\_resp()}}
+{\footnotesize\ttfamily void Server\+::encode\+\_\+resp (\begin{DoxyParamCaption}\item[{std\+::string \&}]{response,  }\item[{bool}]{is\+\_\+error }\end{DoxyParamCaption})}
+
+
+
+Encodes a response string into RESP format. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em response} & Response string to encode. \\
+\hline
+{\em is\+\_\+error} & Whether the response is an error message. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{229 \{}
+\DoxyCodeLine{230     \textcolor{keywordflow}{if} (is\_error)}
+\DoxyCodeLine{231     \{}
+\DoxyCodeLine{232         response = \textcolor{stringliteral}{"{}-\/ERR "{}} + response + \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n"{}};}
+\DoxyCodeLine{233     \}}
+\DoxyCodeLine{234     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (response.empty())}
+\DoxyCodeLine{235     \{}
+\DoxyCodeLine{236         response = \textcolor{stringliteral}{"{}\$-\/1\(\backslash\)r\(\backslash\)n"{}};}
+\DoxyCodeLine{237     \}}
+\DoxyCodeLine{238     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{239     \{}
+\DoxyCodeLine{240         response = \textcolor{stringliteral}{"{}+"{}} + response + \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n"{}};}
+\DoxyCodeLine{241     \}}
+\DoxyCodeLine{242 \}}
+
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classServer_ada6ecbc37608e0adb2be968f27be28de_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classServer_adc733e6b389380f0efe0f5aeaf1cb3b7}\label{classServer_adc733e6b389380f0efe0f5aeaf1cb3b7}} 
+\index{Server@{Server}!handle\_command@{handle\_command}}
+\index{handle\_command@{handle\_command}!Server@{Server}}
+\doxysubsubsection{\texorpdfstring{handle\_command()}{handle\_command()}}
+{\footnotesize\ttfamily void Server\+::handle\+\_\+command (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::string $>$ \&}]{command,  }\item[{std\+::string \&}]{response }\end{DoxyParamCaption})}
+
+
+
+Handles client commands and generates appropriate responses. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em command} & Parsed command tokens. \\
+\hline
+{\em response} & String to store the response. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{245 \{}
+\DoxyCodeLine{246     \textcolor{keywordflow}{if} (command.empty())}
+\DoxyCodeLine{247     \{}
+\DoxyCodeLine{248         response = \textcolor{stringliteral}{"{}Invalid command"{}};}
+\DoxyCodeLine{249         \mbox{\hyperlink{classServer_ada6ecbc37608e0adb2be968f27be28de}{encode\_resp}}(response, \textcolor{keyword}{true});}
+\DoxyCodeLine{250         \textcolor{keywordflow}{return};}
+\DoxyCodeLine{251     \}}
+\DoxyCodeLine{252 }
+\DoxyCodeLine{253     std::string cmd = command[0];}
+\DoxyCodeLine{254     std::transform(cmd.begin(), cmd.end(), cmd.begin(), ::toupper);}
+\DoxyCodeLine{255 }
+\DoxyCodeLine{256     \textcolor{keywordflow}{if} (cmd == \textcolor{stringliteral}{"{}SET"{}})}
+\DoxyCodeLine{257     \{}
+\DoxyCodeLine{258         \textcolor{keywordflow}{if} (command.size() < 3)}
+\DoxyCodeLine{259         \{}
+\DoxyCodeLine{260             response = \textcolor{stringliteral}{"{}SET command requires key and value"{}};}
+\DoxyCodeLine{261             \mbox{\hyperlink{classServer_ada6ecbc37608e0adb2be968f27be28de}{encode\_resp}}(response, \textcolor{keyword}{true});}
+\DoxyCodeLine{262             \textcolor{keywordflow}{return};}
+\DoxyCodeLine{263         \}}
+\DoxyCodeLine{264 }
+\DoxyCodeLine{265         database.\mbox{\hyperlink{classLRUCache_a94fd770e6518bc9bb2df581c36c57205}{set}}(strdup(command[1].c\_str()), strdup(command[2].c\_str()));}
+\DoxyCodeLine{266         response = \textcolor{stringliteral}{"{}OK"{}};}
+\DoxyCodeLine{267         \mbox{\hyperlink{classServer_ada6ecbc37608e0adb2be968f27be28de}{encode\_resp}}(response, \textcolor{keyword}{false});}
+\DoxyCodeLine{268     \}}
+\DoxyCodeLine{269     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (cmd == \textcolor{stringliteral}{"{}GET"{}})}
+\DoxyCodeLine{270     \{}
+\DoxyCodeLine{271         \textcolor{keywordflow}{if} (command.size() < 2)}
+\DoxyCodeLine{272         \{}
+\DoxyCodeLine{273             response = \textcolor{stringliteral}{"{}GET command requires key"{}};}
+\DoxyCodeLine{274             \mbox{\hyperlink{classServer_ada6ecbc37608e0adb2be968f27be28de}{encode\_resp}}(response, \textcolor{keyword}{true});}
+\DoxyCodeLine{275             \textcolor{keywordflow}{return};}
+\DoxyCodeLine{276         \}}
+\DoxyCodeLine{277 }
+\DoxyCodeLine{278         std::string value = database.\mbox{\hyperlink{classLRUCache_afa9c3e5d273b81c21051a809794ea41d}{get}}(command[1].c\_str());}
+\DoxyCodeLine{279         \textcolor{keywordflow}{if} (value != \textcolor{stringliteral}{"{}-\/1"{}})}
+\DoxyCodeLine{280         \{}
+\DoxyCodeLine{281             response = \textcolor{stringliteral}{"{}\$"{}} + std::to\_string(value.length()) + \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n"{}} + value + \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n"{}};}
+\DoxyCodeLine{282         \}}
+\DoxyCodeLine{283         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{284         \{}
+\DoxyCodeLine{285             response = \textcolor{stringliteral}{"{}\$-\/1\(\backslash\)r\(\backslash\)n"{}};}
+\DoxyCodeLine{286         \}}
+\DoxyCodeLine{287     \}}
+\DoxyCodeLine{288     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (cmd == \textcolor{stringliteral}{"{}DEL"{}})}
+\DoxyCodeLine{289     \{}
+\DoxyCodeLine{290         \textcolor{keywordflow}{if} (command.size() < 2)}
+\DoxyCodeLine{291         \{}
+\DoxyCodeLine{292             response = \textcolor{stringliteral}{"{}DEL command requires key"{}};}
+\DoxyCodeLine{293             \mbox{\hyperlink{classServer_ada6ecbc37608e0adb2be968f27be28de}{encode\_resp}}(response, \textcolor{keyword}{true});}
+\DoxyCodeLine{294             \textcolor{keywordflow}{return};}
+\DoxyCodeLine{295         \}}
+\DoxyCodeLine{296 }
+\DoxyCodeLine{297         \textcolor{keywordtype}{int} count = 0;}
+\DoxyCodeLine{298         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 1; i < command.size(); i++)}
+\DoxyCodeLine{299         \{}
+\DoxyCodeLine{300             count += database.\mbox{\hyperlink{classLRUCache_a8a577f475e65e6e16338e7441634f353}{del}}(command[i].c\_str()) ? 1 : 0;}
+\DoxyCodeLine{301         \}}
+\DoxyCodeLine{302 }
+\DoxyCodeLine{303         response = \textcolor{stringliteral}{"{}:"{}} + std::to\_string(count) + \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n"{}};}
+\DoxyCodeLine{304     \}}
+\DoxyCodeLine{305 }
+\DoxyCodeLine{306     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (cmd == \textcolor{stringliteral}{"{}INFO"{}})}
+\DoxyCodeLine{307     \{}
+\DoxyCodeLine{308         \textcolor{comment}{// Add INFO command to get memory usage statistics}}
+\DoxyCodeLine{309         std::string info = \textcolor{stringliteral}{"{}\# Memory\(\backslash\)r\(\backslash\)n"{}};}
+\DoxyCodeLine{310         info += \textcolor{stringliteral}{"{}used\_memory:"{}} + std::to\_string(database.\mbox{\hyperlink{classLRUCache_adde621c282c0341a837eb0f104221f8b}{memory\_usage}}()) + \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n"{}};}
+\DoxyCodeLine{311         info += \textcolor{stringliteral}{"{}maxmemory:"{}} + std::to\_string(database.\mbox{\hyperlink{classLRUCache_ad3a592727d00864187479cf40bb7bbcd}{max\_memory}}()) + \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n"{}};}
+\DoxyCodeLine{312         info += \textcolor{stringliteral}{"{}maxmemory\_policy:allkeys-\/lru\(\backslash\)r\(\backslash\)n"{}};}
+\DoxyCodeLine{313         info += \textcolor{stringliteral}{"{}\# Stats\(\backslash\)r\(\backslash\)n"{}};}
+\DoxyCodeLine{314         info += \textcolor{stringliteral}{"{}keyspace\_hits:"{}} + std::to\_string(database.\mbox{\hyperlink{classLRUCache_a18f7a4ee1d05d840a8d0f01e883b7555}{size}}()) + \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n"{}};}
+\DoxyCodeLine{315 }
+\DoxyCodeLine{316         response = \textcolor{stringliteral}{"{}\$"{}} + std::to\_string(info.length()) + \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n"{}} + info + \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n"{}};}
+\DoxyCodeLine{317     \}}
+\DoxyCodeLine{318     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (cmd == \textcolor{stringliteral}{"{}CONFIG"{}})}
+\DoxyCodeLine{319     \{}
+\DoxyCodeLine{320         \textcolor{comment}{// Basic CONFIG command implementation}}
+\DoxyCodeLine{321         \textcolor{keywordflow}{if} (command.size() < 2)}
+\DoxyCodeLine{322         \{}
+\DoxyCodeLine{323             response = \textcolor{stringliteral}{"{}CONFIG command requires subcommand"{}};}
+\DoxyCodeLine{324             \mbox{\hyperlink{classServer_ada6ecbc37608e0adb2be968f27be28de}{encode\_resp}}(response, \textcolor{keyword}{true});}
+\DoxyCodeLine{325             \textcolor{keywordflow}{return};}
+\DoxyCodeLine{326         \}}
+\DoxyCodeLine{327 }
+\DoxyCodeLine{328         std::string subcmd = command[1];}
+\DoxyCodeLine{329         std::transform(subcmd.begin(), subcmd.end(), subcmd.begin(), ::toupper);}
+\DoxyCodeLine{330 }
+\DoxyCodeLine{331         \textcolor{keywordflow}{if} (subcmd == \textcolor{stringliteral}{"{}GET"{}} \&\& command.size() >= 3)}
+\DoxyCodeLine{332         \{}
+\DoxyCodeLine{333             std::string param = command[2];}
+\DoxyCodeLine{334             std::transform(param.begin(), param.end(), param.begin(), ::tolower);}
+\DoxyCodeLine{335 }
+\DoxyCodeLine{336             \textcolor{keywordflow}{if} (param == \textcolor{stringliteral}{"{}maxmemory"{}})}
+\DoxyCodeLine{337             \{}
+\DoxyCodeLine{338                 response = \textcolor{stringliteral}{"{}*2\(\backslash\)r\(\backslash\)n\$9\(\backslash\)r\(\backslash\)nmaxmemory\(\backslash\)r\(\backslash\)n\$"{}} + std::to\_string(std::to\_string(database.\mbox{\hyperlink{classLRUCache_ad3a592727d00864187479cf40bb7bbcd}{max\_memory}}()).length()) +}
+\DoxyCodeLine{339                            \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n"{}} + std::to\_string(database.\mbox{\hyperlink{classLRUCache_ad3a592727d00864187479cf40bb7bbcd}{max\_memory}}()) + \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n"{}};}
+\DoxyCodeLine{340                 \textcolor{keywordflow}{return};}
+\DoxyCodeLine{341             \}}
+\DoxyCodeLine{342             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (param == \textcolor{stringliteral}{"{}maxmemory-\/policy"{}})}
+\DoxyCodeLine{343             \{}
+\DoxyCodeLine{344                 response = \textcolor{stringliteral}{"{}*2\(\backslash\)r\(\backslash\)n\$16\(\backslash\)r\(\backslash\)nmaxmemory-\/policy\(\backslash\)r\(\backslash\)n\$11\(\backslash\)r\(\backslash\)nallkeys-\/lru\(\backslash\)r\(\backslash\)n"{}};}
+\DoxyCodeLine{345                 \textcolor{keywordflow}{return};}
+\DoxyCodeLine{346             \}}
+\DoxyCodeLine{347         \}}
+\DoxyCodeLine{348         response = \textcolor{stringliteral}{"{}Supported CONFIG commands: GET maxmemory, GET maxmemory-\/policy"{}};}
+\DoxyCodeLine{349         \mbox{\hyperlink{classServer_ada6ecbc37608e0adb2be968f27be28de}{encode\_resp}}(response, \textcolor{keyword}{false});}
+\DoxyCodeLine{350     \}}
+\DoxyCodeLine{351 }
+\DoxyCodeLine{352     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{353     \{}
+\DoxyCodeLine{354         response = \textcolor{stringliteral}{"{}Unknown command"{}};}
+\DoxyCodeLine{355         \mbox{\hyperlink{classServer_ada6ecbc37608e0adb2be968f27be28de}{encode\_resp}}(response, \textcolor{keyword}{true});}
+\DoxyCodeLine{356     \}}
+\DoxyCodeLine{357 \}}
+
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classServer_adc733e6b389380f0efe0f5aeaf1cb3b7_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=327pt]{classServer_adc733e6b389380f0efe0f5aeaf1cb3b7_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classServer_a1016678b77eacc5aa97f2310f8b442b1}\label{classServer_a1016678b77eacc5aa97f2310f8b442b1}} 
+\index{Server@{Server}!init@{init}}
+\index{init@{init}!Server@{Server}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily void Server\+::init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Initializes the server, sets up epoll, and starts listening for connections. 
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{100 \{}
+\DoxyCodeLine{101     \textcolor{keywordtype}{int} server\_fd, epoll\_fd;}
+\DoxyCodeLine{102     \textcolor{keyword}{struct }sockaddr\_in address;}
+\DoxyCodeLine{103     socklen\_t addrlen = \textcolor{keyword}{sizeof}(address);}
+\DoxyCodeLine{104     \textcolor{keyword}{struct }epoll\_event event, events[max\_events];}
+\DoxyCodeLine{105 }
+\DoxyCodeLine{106     server\_fd = \mbox{\hyperlink{create__non__locking__socket_8h_a05a7e9ad0559e723ab0bc57c15684854}{create\_non\_locking\_socket}}(ip, port, address);}
+\DoxyCodeLine{107 }
+\DoxyCodeLine{108     epoll\_fd = epoll\_create1(0);}
+\DoxyCodeLine{109     \textcolor{keywordflow}{if} (epoll\_fd == -\/1)}
+\DoxyCodeLine{110     \{}
+\DoxyCodeLine{111         perror(\textcolor{stringliteral}{"{}[Server]: Epoll creation failed"{}});}
+\DoxyCodeLine{112         exit(EXIT\_FAILURE);}
+\DoxyCodeLine{113     \}}
+\DoxyCodeLine{114 }
+\DoxyCodeLine{115     \textcolor{keyword}{event}.events = EPOLLIN;}
+\DoxyCodeLine{116     \textcolor{keyword}{event}.data.fd = server\_fd;}
+\DoxyCodeLine{117     \textcolor{keywordflow}{if} (epoll\_ctl(epoll\_fd, EPOLL\_CTL\_ADD, server\_fd, \&event) == -\/1)}
+\DoxyCodeLine{118     \{}
+\DoxyCodeLine{119         perror(\textcolor{stringliteral}{"{}[Server] Epoll\_ctl failed"{}});}
+\DoxyCodeLine{120         exit(EXIT\_FAILURE);}
+\DoxyCodeLine{121     \}}
+\DoxyCodeLine{122 }
+\DoxyCodeLine{123     std::cout << tag << \textcolor{stringliteral}{"{}Blink-\/compatible server listening on port "{}} << port << std::endl;}
+\DoxyCodeLine{124     std::cout << tag << \textcolor{stringliteral}{"{}Memory limit set to "{}} << (max\_mem\_bytes / (1024 * 1024)) << \textcolor{stringliteral}{"{} MB with LRU eviction policy"{}} << std::endl;}
+\DoxyCodeLine{125 }
+\DoxyCodeLine{126     \textcolor{keywordflow}{while} (\textcolor{keyword}{true})}
+\DoxyCodeLine{127     \{}
+\DoxyCodeLine{128         \textcolor{keywordtype}{int} ready\_fds = epoll\_wait(epoll\_fd, events, max\_events, -\/1);}
+\DoxyCodeLine{129         \textcolor{keywordflow}{if} (ready\_fds == -\/1)}
+\DoxyCodeLine{130         \{}
+\DoxyCodeLine{131             perror(\textcolor{stringliteral}{"{}Epoll wait failed"{}});}
+\DoxyCodeLine{132             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{133         \}}
+\DoxyCodeLine{134 }
+\DoxyCodeLine{135         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < ready\_fds; i++)}
+\DoxyCodeLine{136         \{}
+\DoxyCodeLine{137             \textcolor{keywordtype}{int} sock\_fd = events[i].data.fd;}
+\DoxyCodeLine{138 }
+\DoxyCodeLine{139             \textcolor{keywordflow}{if} (sock\_fd == server\_fd)}
+\DoxyCodeLine{140             \{}
+\DoxyCodeLine{141                 \textcolor{keywordtype}{int} client\_fd = accept(server\_fd, (\textcolor{keyword}{struct} sockaddr *)\&address, \&addrlen);}
+\DoxyCodeLine{142 }
+\DoxyCodeLine{143                 \textcolor{comment}{// char client\_ip[INET\_ADDRSTRLEN];}}
+\DoxyCodeLine{144                 \textcolor{comment}{// inet\_ntop(AF\_INET, \&address.sin\_addr, client\_ip, INET\_ADDRSTRLEN);}}
+\DoxyCodeLine{145                 \textcolor{comment}{// int client\_port = ntohs(address.sin\_port);}}
+\DoxyCodeLine{146 }
+\DoxyCodeLine{147                 \textcolor{keywordflow}{if} (client\_fd == -\/1)}
+\DoxyCodeLine{148                 \{}
+\DoxyCodeLine{149                     perror(\textcolor{stringliteral}{"{}Accept failed"{}});}
+\DoxyCodeLine{150                     \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{151                 \}}
+\DoxyCodeLine{152 }
+\DoxyCodeLine{153                 \mbox{\hyperlink{set__nonblocking_8h_a6f5a4dea41e37713ff3bdb4975bfa592}{set\_nonblocking}}(client\_fd);}
+\DoxyCodeLine{154 }
+\DoxyCodeLine{155                 \textcolor{keyword}{event}.events = EPOLLIN | EPOLLET;}
+\DoxyCodeLine{156                 \textcolor{keyword}{event}.data.fd = client\_fd;}
+\DoxyCodeLine{157                 \textcolor{keywordflow}{if} (epoll\_ctl(epoll\_fd, EPOLL\_CTL\_ADD, client\_fd, \&event) == -\/1)}
+\DoxyCodeLine{158                 \{}
+\DoxyCodeLine{159                     perror(\textcolor{stringliteral}{"{}Epoll\_ctl client add failed"{}});}
+\DoxyCodeLine{160                     close(client\_fd);}
+\DoxyCodeLine{161                     \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{162                 \}}
+\DoxyCodeLine{163 }
+\DoxyCodeLine{164                 \textcolor{comment}{// std::cout << tag << "{}New client connected: "{} << client\_ip << "{}:"{} << client\_port << std::endl;}}
+\DoxyCodeLine{165             \}}
+\DoxyCodeLine{166             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{167             \{}
+\DoxyCodeLine{168                 \textcolor{comment}{// memset(buffer, 0, buffer\_size);}}
+\DoxyCodeLine{169                 \textcolor{keywordtype}{int} bytes\_read = recv(sock\_fd, buffer, buffer\_size, 0);}
+\DoxyCodeLine{170 }
+\DoxyCodeLine{171                 \textcolor{keywordflow}{if} (bytes\_read > 0)}
+\DoxyCodeLine{172                 \{}
+\DoxyCodeLine{173                     buffer[bytes\_read] = \textcolor{charliteral}{'\(\backslash\)0'};}
+\DoxyCodeLine{174                     std::string input(buffer, bytes\_read);}
+\DoxyCodeLine{175                     std::vector<std::string> result;}
+\DoxyCodeLine{176                     std::string response;}
+\DoxyCodeLine{177                     }
+\DoxyCodeLine{178                     \mbox{\hyperlink{classServer_a0d8d3fd2e86f5a00e97050ce8ec103a9}{parse\_resp}}(input, result);}
+\DoxyCodeLine{179                     \mbox{\hyperlink{classServer_adc733e6b389380f0efe0f5aeaf1cb3b7}{handle\_command}}(result, response);}
+\DoxyCodeLine{180 }
+\DoxyCodeLine{181                     send(sock\_fd, response.c\_str(), response.length(), 0);}
+\DoxyCodeLine{182                 \}}
+\DoxyCodeLine{183                 \textcolor{keywordflow}{else}}
+\DoxyCodeLine{184                 \{}
+\DoxyCodeLine{185                     \textcolor{comment}{// std::cout << tag << "{}Client "{} << sock\_fd << "{} disconnected."{} << std::endl;}}
+\DoxyCodeLine{186                     epoll\_ctl(epoll\_fd, EPOLL\_CTL\_DEL, sock\_fd, \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{187                     close(sock\_fd);}
+\DoxyCodeLine{188                 \}}
+\DoxyCodeLine{189             \}}
+\DoxyCodeLine{190         \}}
+\DoxyCodeLine{191     \}}
+\DoxyCodeLine{192 }
+\DoxyCodeLine{193     close(server\_fd);}
+\DoxyCodeLine{194     close(epoll\_fd);}
+\DoxyCodeLine{195 \}}
+
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classServer_a1016678b77eacc5aa97f2310f8b442b1_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classServer_a0d8d3fd2e86f5a00e97050ce8ec103a9}\label{classServer_a0d8d3fd2e86f5a00e97050ce8ec103a9}} 
+\index{Server@{Server}!parse\_resp@{parse\_resp}}
+\index{parse\_resp@{parse\_resp}!Server@{Server}}
+\doxysubsubsection{\texorpdfstring{parse\_resp()}{parse\_resp()}}
+{\footnotesize\ttfamily void Server\+::parse\+\_\+resp (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{input,  }\item[{std\+::vector$<$ std\+::string $>$ \&}]{result }\end{DoxyParamCaption})}
+
+
+
+Parses a RESP (Redis Serialization Protocol) formatted string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em input} & Input string in RESP format. \\
+\hline
+{\em result} & Vector to store parsed tokens. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{198 \{}
+\DoxyCodeLine{199     \textcolor{keywordflow}{if} (input.empty())}
+\DoxyCodeLine{200         \textcolor{keywordflow}{return};}
+\DoxyCodeLine{201 }
+\DoxyCodeLine{202     \textcolor{keywordflow}{if} (input[0] == \textcolor{charliteral}{'*'})}
+\DoxyCodeLine{203     \{}
+\DoxyCodeLine{204         \textcolor{keywordtype}{size\_t} pos = 1;}
+\DoxyCodeLine{205         \textcolor{keywordtype}{size\_t} newline = input.find(\textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n"{}}, pos);}
+\DoxyCodeLine{206         \textcolor{keywordtype}{int} array\_len = std::stoi(input.substr(pos, newline -\/ pos));}
+\DoxyCodeLine{207 }
+\DoxyCodeLine{208         pos = newline + 2;}
+\DoxyCodeLine{209         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < array\_len; i++)}
+\DoxyCodeLine{210         \{}
+\DoxyCodeLine{211             \textcolor{keywordflow}{if} (pos >= input.length())}
+\DoxyCodeLine{212                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{213 }
+\DoxyCodeLine{214             \textcolor{keywordflow}{if} (input[pos] == \textcolor{charliteral}{'\$'})}
+\DoxyCodeLine{215             \{}
+\DoxyCodeLine{216                 pos++;}
+\DoxyCodeLine{217                 newline = input.find(\textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n"{}}, pos);}
+\DoxyCodeLine{218                 \textcolor{keywordtype}{int} str\_len = std::stoi(input.substr(pos, newline -\/ pos));}
+\DoxyCodeLine{219 }
+\DoxyCodeLine{220                 pos = newline + 2;}
+\DoxyCodeLine{221                 result.push\_back(input.substr(pos, str\_len));}
+\DoxyCodeLine{222                 pos += str\_len + 2;}
+\DoxyCodeLine{223             \}}
+\DoxyCodeLine{224         \}}
+\DoxyCodeLine{225     \}}
+\DoxyCodeLine{226 \}}
+
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=293pt]{classServer_a0d8d3fd2e86f5a00e97050ce8ec103a9_icgraph}
+\end{center}
+\end{figure}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lib/\mbox{\hyperlink{server_8h}{server.\+h}}\end{DoxyCompactItemize}

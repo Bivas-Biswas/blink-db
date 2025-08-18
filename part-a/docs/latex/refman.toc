@@ -1,0 +1,125 @@
+\@ifundefined {etoctocstyle}{\let \etoc@startlocaltoc \@gobble \let \etoc@settocdepth \@gobble \let \etoc@depthtag \@gobble \let \etoc@setlocaltop \@gobble }{}
+\contentsline {chapter}{\numberline {1}Class Index}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Class List}{1}{section.1.1}%
+\contentsline {chapter}{\numberline {2}File Index}{3}{chapter.2}%
+\contentsline {section}{\numberline {2.1}File List}{3}{section.2.1}%
+\contentsline {chapter}{\numberline {3}Class Documentation}{5}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Bloom\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Filter Class Reference}{5}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Detailed Description}{5}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}Constructor \& Destructor Documentation}{5}{subsection.3.1.2}%
+\contentsline {subsubsection}{\numberline {3.1.2.1}BloomFilter()}{5}{subsubsection.3.1.2.1}%
+\contentsline {subsection}{\numberline {3.1.3}Member Function Documentation}{6}{subsection.3.1.3}%
+\contentsline {subsubsection}{\numberline {3.1.3.1}contains()}{6}{subsubsection.3.1.3.1}%
+\contentsline {subsubsection}{\numberline {3.1.3.2}insert()}{6}{subsubsection.3.1.3.2}%
+\contentsline {subsubsection}{\numberline {3.1.3.3}remove()}{7}{subsubsection.3.1.3.3}%
+\contentsline {section}{\numberline {3.2}dict Struct Reference}{7}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Detailed Description}{8}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Member Data Documentation}{8}{subsection.3.2.2}%
+\contentsline {subsubsection}{\numberline {3.2.2.1}ht}{8}{subsubsection.3.2.2.1}%
+\contentsline {subsubsection}{\numberline {3.2.2.2}iterators}{9}{subsubsection.3.2.2.2}%
+\contentsline {subsubsection}{\numberline {3.2.2.3}rehashidx}{9}{subsubsection.3.2.2.3}%
+\contentsline {section}{\numberline {3.3}Dict Class Reference}{9}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Detailed Description}{10}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Constructor \& Destructor Documentation}{10}{subsection.3.3.2}%
+\contentsline {subsubsection}{\numberline {3.3.2.1}Dict()}{10}{subsubsection.3.3.2.1}%
+\contentsline {subsubsection}{\numberline {3.3.2.2}$\sim $Dict()}{10}{subsubsection.3.3.2.2}%
+\contentsline {subsection}{\numberline {3.3.3}Member Function Documentation}{10}{subsection.3.3.3}%
+\contentsline {subsubsection}{\numberline {3.3.3.1}add()}{11}{subsubsection.3.3.3.1}%
+\contentsline {subsubsection}{\numberline {3.3.3.2}enableResize()}{11}{subsubsection.3.3.3.2}%
+\contentsline {subsubsection}{\numberline {3.3.3.3}find()}{11}{subsubsection.3.3.3.3}%
+\contentsline {subsubsection}{\numberline {3.3.3.4}get\_size\_of\_dict()}{12}{subsubsection.3.3.3.4}%
+\contentsline {subsubsection}{\numberline {3.3.3.5}isRehashing()}{12}{subsubsection.3.3.3.5}%
+\contentsline {subsubsection}{\numberline {3.3.3.6}rehash()}{12}{subsubsection.3.3.3.6}%
+\contentsline {subsubsection}{\numberline {3.3.3.7}remove()}{13}{subsubsection.3.3.3.7}%
+\contentsline {subsubsection}{\numberline {3.3.3.8}replace()}{13}{subsubsection.3.3.3.8}%
+\contentsline {subsubsection}{\numberline {3.3.3.9}size()}{14}{subsubsection.3.3.3.9}%
+\contentsline {section}{\numberline {3.4}dict\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Entry Struct Reference}{14}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}Detailed Description}{15}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}Member Data Documentation}{15}{subsection.3.4.2}%
+\contentsline {subsubsection}{\numberline {3.4.2.1}d}{15}{subsubsection.3.4.2.1}%
+\contentsline {subsubsection}{\numberline {3.4.2.2}key}{15}{subsubsection.3.4.2.2}%
+\contentsline {subsubsection}{\numberline {3.4.2.3}next}{15}{subsubsection.3.4.2.3}%
+\contentsline {subsubsection}{\numberline {3.4.2.4}s64}{15}{subsubsection.3.4.2.4}%
+\contentsline {subsubsection}{\numberline {3.4.2.5}u64}{15}{subsubsection.3.4.2.5}%
+\contentsline {subsubsection}{\numberline {3.4.2.6}}{16}{subsubsection.3.4.2.6}%
+\contentsline {subsubsection}{\numberline {3.4.2.7}val}{16}{subsubsection.3.4.2.7}%
+\contentsline {section}{\numberline {3.5}dictht Struct Reference}{16}{section.3.5}%
+\contentsline {subsection}{\numberline {3.5.1}Detailed Description}{17}{subsection.3.5.1}%
+\contentsline {subsection}{\numberline {3.5.2}Member Data Documentation}{17}{subsection.3.5.2}%
+\contentsline {subsubsection}{\numberline {3.5.2.1}size}{17}{subsubsection.3.5.2.1}%
+\contentsline {subsubsection}{\numberline {3.5.2.2}sizemask}{17}{subsubsection.3.5.2.2}%
+\contentsline {subsubsection}{\numberline {3.5.2.3}table}{17}{subsubsection.3.5.2.3}%
+\contentsline {subsubsection}{\numberline {3.5.2.4}used}{17}{subsubsection.3.5.2.4}%
+\contentsline {section}{\numberline {3.6}LRUCache Class Reference}{18}{section.3.6}%
+\contentsline {subsection}{\numberline {3.6.1}Detailed Description}{19}{subsection.3.6.1}%
+\contentsline {subsection}{\numberline {3.6.2}Constructor \& Destructor Documentation}{19}{subsection.3.6.2}%
+\contentsline {subsubsection}{\numberline {3.6.2.1}LRUCache()}{19}{subsubsection.3.6.2.1}%
+\contentsline {subsubsection}{\numberline {3.6.2.2}$\sim $LRUCache()}{19}{subsubsection.3.6.2.2}%
+\contentsline {subsection}{\numberline {3.6.3}Member Function Documentation}{20}{subsection.3.6.3}%
+\contentsline {subsubsection}{\numberline {3.6.3.1}del()}{20}{subsubsection.3.6.3.1}%
+\contentsline {subsubsection}{\numberline {3.6.3.2}get()}{20}{subsubsection.3.6.3.2}%
+\contentsline {subsubsection}{\numberline {3.6.3.3}max\_memory()}{21}{subsubsection.3.6.3.3}%
+\contentsline {subsubsection}{\numberline {3.6.3.4}memory\_usage()}{22}{subsubsection.3.6.3.4}%
+\contentsline {subsubsection}{\numberline {3.6.3.5}printList()}{22}{subsubsection.3.6.3.5}%
+\contentsline {subsubsection}{\numberline {3.6.3.6}set()}{22}{subsubsection.3.6.3.6}%
+\contentsline {subsubsection}{\numberline {3.6.3.7}size()}{23}{subsubsection.3.6.3.7}%
+\contentsline {subsection}{\numberline {3.6.4}Member Data Documentation}{24}{subsection.3.6.4}%
+\contentsline {subsubsection}{\numberline {3.6.4.1}current\_memory\_usage}{24}{subsubsection.3.6.4.1}%
+\contentsline {subsubsection}{\numberline {3.6.4.2}dict}{24}{subsubsection.3.6.4.2}%
+\contentsline {subsubsection}{\numberline {3.6.4.3}head}{24}{subsubsection.3.6.4.3}%
+\contentsline {subsubsection}{\numberline {3.6.4.4}max\_memory\_bytes}{24}{subsubsection.3.6.4.4}%
+\contentsline {subsubsection}{\numberline {3.6.4.5}storage}{24}{subsubsection.3.6.4.5}%
+\contentsline {subsubsection}{\numberline {3.6.4.6}tail}{24}{subsubsection.3.6.4.6}%
+\contentsline {subsubsection}{\numberline {3.6.4.7}value}{25}{subsubsection.3.6.4.7}%
+\contentsline {section}{\numberline {3.7}LRUCache\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Node Struct Reference}{25}{section.3.7}%
+\contentsline {subsection}{\numberline {3.7.1}Detailed Description}{25}{subsection.3.7.1}%
+\contentsline {subsection}{\numberline {3.7.2}Constructor \& Destructor Documentation}{25}{subsection.3.7.2}%
+\contentsline {subsubsection}{\numberline {3.7.2.1}Node()}{25}{subsubsection.3.7.2.1}%
+\contentsline {subsection}{\numberline {3.7.3}Member Data Documentation}{26}{subsection.3.7.3}%
+\contentsline {subsubsection}{\numberline {3.7.3.1}key}{26}{subsubsection.3.7.3.1}%
+\contentsline {subsubsection}{\numberline {3.7.3.2}next}{26}{subsubsection.3.7.3.2}%
+\contentsline {subsubsection}{\numberline {3.7.3.3}prev}{26}{subsubsection.3.7.3.3}%
+\contentsline {subsubsection}{\numberline {3.7.3.4}value}{26}{subsubsection.3.7.3.4}%
+\contentsline {section}{\numberline {3.8}Persistence\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}KVStore Class Reference}{26}{section.3.8}%
+\contentsline {subsection}{\numberline {3.8.1}Detailed Description}{27}{subsection.3.8.1}%
+\contentsline {subsection}{\numberline {3.8.2}Constructor \& Destructor Documentation}{27}{subsection.3.8.2}%
+\contentsline {subsubsection}{\numberline {3.8.2.1}PersistenceKVStore()}{27}{subsubsection.3.8.2.1}%
+\contentsline {subsubsection}{\numberline {3.8.2.2}$\sim $PersistenceKVStore()}{28}{subsubsection.3.8.2.2}%
+\contentsline {subsection}{\numberline {3.8.3}Member Function Documentation}{28}{subsection.3.8.3}%
+\contentsline {subsubsection}{\numberline {3.8.3.1}get()}{28}{subsubsection.3.8.3.1}%
+\contentsline {subsubsection}{\numberline {3.8.3.2}insert()}{29}{subsubsection.3.8.3.2}%
+\contentsline {subsubsection}{\numberline {3.8.3.3}remove()}{30}{subsubsection.3.8.3.3}%
+\contentsline {subsubsection}{\numberline {3.8.3.4}remove\_db()}{31}{subsubsection.3.8.3.4}%
+\contentsline {section}{\numberline {3.9}Trie Class Reference}{31}{section.3.9}%
+\contentsline {subsection}{\numberline {3.9.1}Detailed Description}{32}{subsection.3.9.1}%
+\contentsline {subsection}{\numberline {3.9.2}Constructor \& Destructor Documentation}{32}{subsection.3.9.2}%
+\contentsline {subsubsection}{\numberline {3.9.2.1}Trie()}{32}{subsubsection.3.9.2.1}%
+\contentsline {subsubsection}{\numberline {3.9.2.2}$\sim $Trie()}{32}{subsubsection.3.9.2.2}%
+\contentsline {subsection}{\numberline {3.9.3}Member Function Documentation}{32}{subsection.3.9.3}%
+\contentsline {subsubsection}{\numberline {3.9.3.1}insert()}{32}{subsubsection.3.9.3.1}%
+\contentsline {subsubsection}{\numberline {3.9.3.2}isDeleted()}{33}{subsubsection.3.9.3.2}%
+\contentsline {subsubsection}{\numberline {3.9.3.3}remove()}{33}{subsubsection.3.9.3.3}%
+\contentsline {subsubsection}{\numberline {3.9.3.4}search()}{34}{subsubsection.3.9.3.4}%
+\contentsline {section}{\numberline {3.10}Trie\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Node Class Reference}{35}{section.3.10}%
+\contentsline {subsection}{\numberline {3.10.1}Detailed Description}{35}{subsection.3.10.1}%
+\contentsline {subsection}{\numberline {3.10.2}Member Data Documentation}{35}{subsection.3.10.2}%
+\contentsline {subsubsection}{\numberline {3.10.2.1}children}{35}{subsubsection.3.10.2.1}%
+\contentsline {subsubsection}{\numberline {3.10.2.2}file\_offset}{35}{subsubsection.3.10.2.2}%
+\contentsline {subsubsection}{\numberline {3.10.2.3}isDeleted}{35}{subsubsection.3.10.2.3}%
+\contentsline {chapter}{\numberline {4}File Documentation}{37}{chapter.4}%
+\contentsline {section}{\numberline {4.1}lib/bloomfilter.h File Reference}{37}{section.4.1}%
+\contentsline {section}{\numberline {4.2}lib/dict.h File Reference}{38}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Detailed Description}{39}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Function Documentation}{39}{subsection.4.2.2}%
+\contentsline {subsubsection}{\numberline {4.2.2.1}freeString()}{40}{subsubsection.4.2.2.1}%
+\contentsline {subsubsection}{\numberline {4.2.2.2}stringCompare()}{40}{subsubsection.4.2.2.2}%
+\contentsline {subsubsection}{\numberline {4.2.2.3}stringDup()}{40}{subsubsection.4.2.2.3}%
+\contentsline {subsubsection}{\numberline {4.2.2.4}stringHash()}{41}{subsubsection.4.2.2.4}%
+\contentsline {section}{\numberline {4.3}lib/lru\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cache.h File Reference}{41}{section.4.3}%
+\contentsline {section}{\numberline {4.4}lib/persistence\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}kv\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}store.h File Reference}{42}{section.4.4}%
+\contentsline {section}{\numberline {4.5}lib/tire.h File Reference}{43}{section.4.5}%
+\contentsline {section}{\numberline {4.6}src/main.cpp File Reference}{44}{section.4.6}%
+\contentsline {subsection}{\numberline {4.6.1}Detailed Description}{45}{subsection.4.6.1}%
+\contentsline {subsection}{\numberline {4.6.2}Function Documentation}{45}{subsection.4.6.2}%
+\contentsline {subsubsection}{\numberline {4.6.2.1}main()}{45}{subsubsection.4.6.2.1}%
+\contentsline {chapter}{Index}{47}{section*.54}%

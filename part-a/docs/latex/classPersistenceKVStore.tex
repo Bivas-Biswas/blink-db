@@ -1,0 +1,272 @@
+\hypertarget{classPersistenceKVStore}{}\doxysection{Persistence\+KVStore Class Reference}
+\label{classPersistenceKVStore}\index{PersistenceKVStore@{PersistenceKVStore}}
+
+
+A persistent key-\/value store with background rewriting and indexing.  
+
+
+
+
+{\ttfamily \#include $<$persistence\+\_\+kv\+\_\+store.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classPersistenceKVStore_aa841ef6526c7fb68c6a16e8ba310105f}{Persistence\+KVStore}} (const std\+::string \+\_\+dbname, int \+\_\+bloom\+\_\+filter\+\_\+size=10000, int rewrite\+\_\+interval=5000)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Initializes the key-\/value store, loads the index, and starts the rewrite scheduler. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classPersistenceKVStore_a89204ac72bb8e48292fb831314017bdf}{$\sim$\+Persistence\+KVStore}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: Ensures background rewriting stops and closes the file. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classPersistenceKVStore_a6accd3f2351682402ddd870ef6dd11b2}{insert}} (const std\+::string \&\+\_\+key, const std\+::string \&\+\_\+value)
+\begin{DoxyCompactList}\small\item\em Inserts a key-\/value pair into the store. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classPersistenceKVStore_a718ce3a40a4a341b84694c6fa588c362}{get}} (const std\+::string \&\+\_\+key, std\+::string \&\+\_\+value)
+\begin{DoxyCompactList}\small\item\em Retrieves the value for a given key. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classPersistenceKVStore_a46d823a6b1f2812869fa4fe3c478626c}{remove}} (const std\+::string \&\+\_\+key)
+\begin{DoxyCompactList}\small\item\em Removes a key from the store. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classPersistenceKVStore_ae55db431a3c5fcfb8f3f6988aafd7c44}{remove\+\_\+db}} ()
+\begin{DoxyCompactList}\small\item\em Removes the database file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A persistent key-\/value store with background rewriting and indexing. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classPersistenceKVStore_aa841ef6526c7fb68c6a16e8ba310105f}\label{classPersistenceKVStore_aa841ef6526c7fb68c6a16e8ba310105f}} 
+\index{PersistenceKVStore@{PersistenceKVStore}!PersistenceKVStore@{PersistenceKVStore}}
+\index{PersistenceKVStore@{PersistenceKVStore}!PersistenceKVStore@{PersistenceKVStore}}
+\doxysubsubsection{\texorpdfstring{PersistenceKVStore()}{PersistenceKVStore()}}
+{\footnotesize\ttfamily Persistence\+KVStore\+::\+Persistence\+KVStore (\begin{DoxyParamCaption}\item[{const std\+::string}]{\+\_\+dbname,  }\item[{int}]{\+\_\+bloom\+\_\+filter\+\_\+size = {\ttfamily 10000},  }\item[{int}]{rewrite\+\_\+interval = {\ttfamily 5000} }\end{DoxyParamCaption})}
+
+
+
+Constructor\+: Initializes the key-\/value store, loads the index, and starts the rewrite scheduler. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+dbname} & The database name. \\
+\hline
+{\em \+\_\+bloom\+\_\+filter\+\_\+size} & The size of \mbox{\hyperlink{classBloomFilter}{Bloom\+Filter}}. \\
+\hline
+{\em \+\_\+rewrite\+\_\+interval} & Interval for background rewrite in milliseconds (default\+: 5000). \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{93     : bloomFilter(\_bloom\_filter\_size)}
+\DoxyCodeLine{94 \{}
+\DoxyCodeLine{95     filename = \_dbname + \textcolor{stringliteral}{"{}.txt"{}};}
+\DoxyCodeLine{96     tempfilename = \_dbname + \textcolor{stringliteral}{"{}.temp.txt"{}};}
+\DoxyCodeLine{97     rewrite\_interval\_ms = \_rewrite\_interval;}
+\DoxyCodeLine{98     stopRewrite.store(\textcolor{keyword}{false});}
+\DoxyCodeLine{99     dataFile.open(filename, std::ios::in | std::ios::out | std::ios::binary);}
+\DoxyCodeLine{100     index = \textcolor{keyword}{new} \mbox{\hyperlink{classTrie}{Trie}}();}
+\DoxyCodeLine{101 }
+\DoxyCodeLine{102     \textcolor{keywordflow}{if} (!dataFile)}
+\DoxyCodeLine{103     \{}
+\DoxyCodeLine{104         dataFile.open(filename, std::ios::out | std::ios::binary);}
+\DoxyCodeLine{105         dataFile.close();}
+\DoxyCodeLine{106         dataFile.open(filename, std::ios::in | std::ios::out | std::ios::binary);}
+\DoxyCodeLine{107     \}}
+\DoxyCodeLine{108 }
+\DoxyCodeLine{109     syncIndex();}
+\DoxyCodeLine{110     rewriteThread = std::thread(\&PersistenceKVStore::startRewriteScheduler, \textcolor{keyword}{this});}
+\DoxyCodeLine{111 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classPersistenceKVStore_a89204ac72bb8e48292fb831314017bdf}\label{classPersistenceKVStore_a89204ac72bb8e48292fb831314017bdf}} 
+\index{PersistenceKVStore@{PersistenceKVStore}!````~PersistenceKVStore@{$\sim$PersistenceKVStore}}
+\index{````~PersistenceKVStore@{$\sim$PersistenceKVStore}!PersistenceKVStore@{PersistenceKVStore}}
+\doxysubsubsection{\texorpdfstring{$\sim$PersistenceKVStore()}{~PersistenceKVStore()}}
+{\footnotesize\ttfamily Persistence\+KVStore\+::$\sim$\+Persistence\+KVStore (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Destructor\+: Ensures background rewriting stops and closes the file. 
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{114 \{}
+\DoxyCodeLine{115     dataFile.clear();}
+\DoxyCodeLine{116     stopRewrite.store(\textcolor{keyword}{true});}
+\DoxyCodeLine{117     \textcolor{keywordflow}{if} (rewriteThread.joinable())}
+\DoxyCodeLine{118     \{}
+\DoxyCodeLine{119         rewriteThread.join();}
+\DoxyCodeLine{120     \}}
+\DoxyCodeLine{121     dataFile.close();}
+\DoxyCodeLine{122 \}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classPersistenceKVStore_a718ce3a40a4a341b84694c6fa588c362}\label{classPersistenceKVStore_a718ce3a40a4a341b84694c6fa588c362}} 
+\index{PersistenceKVStore@{PersistenceKVStore}!get@{get}}
+\index{get@{get}!PersistenceKVStore@{PersistenceKVStore}}
+\doxysubsubsection{\texorpdfstring{get()}{get()}}
+{\footnotesize\ttfamily bool Persistence\+KVStore\+::get (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{\+\_\+key,  }\item[{std\+::string \&}]{\+\_\+value }\end{DoxyParamCaption})}
+
+
+
+Retrieves the value for a given key. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+key} & The key to search for. \\
+\hline
+{\em \+\_\+value} & Reference to store the retrieved value. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the key exists, false otherwise. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{143 \{}
+\DoxyCodeLine{144     std::lock\_guard<std::mutex> lock(mtx\_index);}
+\DoxyCodeLine{145     \textcolor{keywordflow}{if} (!bloomFilter.\mbox{\hyperlink{classBloomFilter_a30a32da65c9167b1e638db926a90f502}{contains}}(\_key))}
+\DoxyCodeLine{146         \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{147 }
+\DoxyCodeLine{148     \textcolor{keywordtype}{long} offset = index-\/>\mbox{\hyperlink{classTrie_a2bbd9365111786a5950407b81df7a59b}{search}}(\_key);}
+\DoxyCodeLine{149     \textcolor{keywordflow}{if} (offset == -\/1)}
+\DoxyCodeLine{150         \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{151 }
+\DoxyCodeLine{152     dataFile.clear();}
+\DoxyCodeLine{153     dataFile.seekg(offset, std::ios::beg);}
+\DoxyCodeLine{154 }
+\DoxyCodeLine{155     \textcolor{keywordflow}{if} (!dataFile)}
+\DoxyCodeLine{156         \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{157 }
+\DoxyCodeLine{158     std::string storedKey;}
+\DoxyCodeLine{159     dataFile >> storedKey;}
+\DoxyCodeLine{160 }
+\DoxyCodeLine{161     \textcolor{keywordflow}{if} (storedKey != \_key)}
+\DoxyCodeLine{162         \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{163 }
+\DoxyCodeLine{164     std::getline(dataFile >> std::ws, \_value);}
+\DoxyCodeLine{165 }
+\DoxyCodeLine{166     \textcolor{keywordflow}{return} !\_value.empty();}
+\DoxyCodeLine{167 \}}
+
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classPersistenceKVStore_a718ce3a40a4a341b84694c6fa588c362_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classPersistenceKVStore_a718ce3a40a4a341b84694c6fa588c362_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classPersistenceKVStore_a6accd3f2351682402ddd870ef6dd11b2}\label{classPersistenceKVStore_a6accd3f2351682402ddd870ef6dd11b2}} 
+\index{PersistenceKVStore@{PersistenceKVStore}!insert@{insert}}
+\index{insert@{insert}!PersistenceKVStore@{PersistenceKVStore}}
+\doxysubsubsection{\texorpdfstring{insert()}{insert()}}
+{\footnotesize\ttfamily void Persistence\+KVStore\+::insert (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{\+\_\+key,  }\item[{const std\+::string \&}]{\+\_\+value }\end{DoxyParamCaption})}
+
+
+
+Inserts a key-\/value pair into the store. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+key} & The key to insert. \\
+\hline
+{\em \+\_\+value} & The corresponding value. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{125 \{}
+\DoxyCodeLine{126     dataFile.clear();}
+\DoxyCodeLine{127     dataFile.seekp(0, std::ios::end);}
+\DoxyCodeLine{128     \textcolor{keywordtype}{long} offset = dataFile.tellp();}
+\DoxyCodeLine{129     \textcolor{keywordflow}{if} (offset == -\/1)}
+\DoxyCodeLine{130     \{}
+\DoxyCodeLine{131         std::cerr << \textcolor{stringliteral}{"{}Error: tellp() returned -\/1"{}} << std::endl;}
+\DoxyCodeLine{132         \textcolor{keywordflow}{return};}
+\DoxyCodeLine{133     \}}
+\DoxyCodeLine{134 }
+\DoxyCodeLine{135     dataFile << \_key << \textcolor{stringliteral}{"{} "{}} << \_value << std::endl;}
+\DoxyCodeLine{136     dataFile.flush();}
+\DoxyCodeLine{137     std::lock\_guard<std::mutex> lock(mtx\_index);}
+\DoxyCodeLine{138     index-\/>\mbox{\hyperlink{classTrie_a7a13a211287ca69c00368bfde90f1060}{insert}}(\_key, offset);}
+\DoxyCodeLine{139     bloomFilter.\mbox{\hyperlink{classBloomFilter_a2543ecabab73c24bec586f6b3b4f4563}{insert}}(\_key);}
+\DoxyCodeLine{140 \}}
+
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=335pt]{classPersistenceKVStore_a6accd3f2351682402ddd870ef6dd11b2_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classPersistenceKVStore_a6accd3f2351682402ddd870ef6dd11b2_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classPersistenceKVStore_a46d823a6b1f2812869fa4fe3c478626c}\label{classPersistenceKVStore_a46d823a6b1f2812869fa4fe3c478626c}} 
+\index{PersistenceKVStore@{PersistenceKVStore}!remove@{remove}}
+\index{remove@{remove}!PersistenceKVStore@{PersistenceKVStore}}
+\doxysubsubsection{\texorpdfstring{remove()}{remove()}}
+{\footnotesize\ttfamily void Persistence\+KVStore\+::remove (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{\+\_\+key }\end{DoxyParamCaption})}
+
+
+
+Removes a key from the store. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+key} & The key to remove. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{170 \{}
+\DoxyCodeLine{171     std::lock\_guard<std::mutex> lock(mtx\_index);}
+\DoxyCodeLine{172     index-\/>\mbox{\hyperlink{classTrie_a52af88e2d70a06a7c4a0f75db25be4b2}{remove}}(\_key);}
+\DoxyCodeLine{173     bloomFilter.\mbox{\hyperlink{classBloomFilter_a9cdecd6ed4fff46611f1e0f958aff216}{remove}}(\_key);}
+\DoxyCodeLine{174 \}}
+
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=344pt]{classPersistenceKVStore_a46d823a6b1f2812869fa4fe3c478626c_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classPersistenceKVStore_ae55db431a3c5fcfb8f3f6988aafd7c44}\label{classPersistenceKVStore_ae55db431a3c5fcfb8f3f6988aafd7c44}} 
+\index{PersistenceKVStore@{PersistenceKVStore}!remove\_db@{remove\_db}}
+\index{remove\_db@{remove\_db}!PersistenceKVStore@{PersistenceKVStore}}
+\doxysubsubsection{\texorpdfstring{remove\_db()}{remove\_db()}}
+{\footnotesize\ttfamily void Persistence\+KVStore\+::remove\+\_\+db (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Removes the database file. 
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{177 \{}
+\DoxyCodeLine{178     std::remove(filename.c\_str());}
+\DoxyCodeLine{179 \}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lib/\mbox{\hyperlink{persistence__kv__store_8h}{persistence\+\_\+kv\+\_\+store.\+h}}\end{DoxyCompactItemize}
