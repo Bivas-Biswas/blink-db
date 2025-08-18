@@ -1,0 +1,108 @@
+\hypertarget{create__non__locking__socket_8h}{}\doxysection{utils/create\+\_\+non\+\_\+locking\+\_\+socket.h File Reference}
+\label{create__non__locking__socket_8h}\index{utils/create\_non\_locking\_socket.h@{utils/create\_non\_locking\_socket.h}}
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$arpa/inet.\+h$>$}\newline
+{\ttfamily \#include $<$fcntl.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}./set\+\_\+nonblocking.\+h\char`\"{}}\newline
+Include dependency graph for create\+\_\+non\+\_\+locking\+\_\+socket.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{create__non__locking__socket_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=332pt]{create__non__locking__socket_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{create__non__locking__socket_8h_a05a7e9ad0559e723ab0bc57c15684854}{create\+\_\+non\+\_\+locking\+\_\+socket}} (const std\+::string ip, const int port, struct sockaddr\+\_\+in \&addr)
+\begin{DoxyCompactList}\small\item\em Creates a non-\/blocking socket. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{create__non__locking__socket_8h_a05a7e9ad0559e723ab0bc57c15684854}\label{create__non__locking__socket_8h_a05a7e9ad0559e723ab0bc57c15684854}} 
+\index{create\_non\_locking\_socket.h@{create\_non\_locking\_socket.h}!create\_non\_locking\_socket@{create\_non\_locking\_socket}}
+\index{create\_non\_locking\_socket@{create\_non\_locking\_socket}!create\_non\_locking\_socket.h@{create\_non\_locking\_socket.h}}
+\doxysubsubsection{\texorpdfstring{create\_non\_locking\_socket()}{create\_non\_locking\_socket()}}
+{\footnotesize\ttfamily int create\+\_\+non\+\_\+locking\+\_\+socket (\begin{DoxyParamCaption}\item[{const std\+::string}]{ip,  }\item[{const int}]{port,  }\item[{struct sockaddr\+\_\+in \&}]{addr }\end{DoxyParamCaption})}
+
+
+
+Creates a non-\/blocking socket. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ip} & The ip to bind the socket to. \\
+\hline
+{\em port} & The port number to bind the socket to. \\
+\hline
+{\em addr} & The addr to save the socket address. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The socket file descriptor. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{19 \{}
+\DoxyCodeLine{20     \textcolor{keywordtype}{int} sockfd = socket(AF\_INET, SOCK\_STREAM, 0);}
+\DoxyCodeLine{21     \textcolor{keywordtype}{int} opt = 1;}
+\DoxyCodeLine{22     setsockopt(sockfd, SOL\_SOCKET, SO\_REUSEADDR, \&opt, \textcolor{keyword}{sizeof}(opt));     }
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24     \textcolor{keywordflow}{if} (sockfd < 0)}
+\DoxyCodeLine{25     \{}
+\DoxyCodeLine{26         perror(\textcolor{stringliteral}{"{}Socket creation failed"{}});}
+\DoxyCodeLine{27         exit(EXIT\_FAILURE);}
+\DoxyCodeLine{28     \}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30     \mbox{\hyperlink{set__nonblocking_8h_a6f5a4dea41e37713ff3bdb4975bfa592}{set\_nonblocking}}(sockfd);}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32     addr.sin\_family = AF\_INET;}
+\DoxyCodeLine{33     addr.sin\_port = htons(port);}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35     \textcolor{keywordflow}{if} (inet\_pton(AF\_INET, ip.c\_str(), \&addr.sin\_addr) <= 0) \{}
+\DoxyCodeLine{36         perror(\textcolor{stringliteral}{"{}Invalid IP address"{}});}
+\DoxyCodeLine{37         exit(EXIT\_FAILURE);}
+\DoxyCodeLine{38     \}}
+\DoxyCodeLine{39 }
+\DoxyCodeLine{40     \textcolor{keywordflow}{if} (bind(sockfd, (\textcolor{keyword}{struct} sockaddr *)\&addr, \textcolor{keyword}{sizeof}(addr)) < 0)}
+\DoxyCodeLine{41     \{}
+\DoxyCodeLine{42         perror(\textcolor{stringliteral}{"{}Bind failed"{}});}
+\DoxyCodeLine{43         exit(EXIT\_FAILURE);}
+\DoxyCodeLine{44     \}}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46     \textcolor{keywordflow}{if} (listen(sockfd, SOMAXCONN) < 0)}
+\DoxyCodeLine{47     \{}
+\DoxyCodeLine{48         perror(\textcolor{stringliteral}{"{}Listen failed"{}});}
+\DoxyCodeLine{49         exit(EXIT\_FAILURE);}
+\DoxyCodeLine{50     \}}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{52     \textcolor{keywordflow}{return} sockfd;}
+\DoxyCodeLine{53 \}}
+
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=323pt]{create__non__locking__socket_8h_a05a7e9ad0559e723ab0bc57c15684854_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{create__non__locking__socket_8h_a05a7e9ad0559e723ab0bc57c15684854_icgraph}
+\end{center}
+\end{figure}

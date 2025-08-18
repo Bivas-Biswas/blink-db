@@ -1,0 +1,165 @@
+\hypertarget{dict_8h}{}\doxysection{lib/dict.h File Reference}
+\label{dict_8h}\index{lib/dict.h@{lib/dict.h}}
+
+
+Implementation of a dictionary (hash table) with rehashing support.  
+
+
+{\ttfamily \#include $<$cstdint$>$}\newline
+{\ttfamily \#include $<$cstdlib$>$}\newline
+{\ttfamily \#include $<$cstring$>$}\newline
+{\ttfamily \#include $<$functional$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$limits.\+h$>$}\newline
+Include dependency graph for dict.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dict_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=332pt]{dict_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classDict}{Dict}}
+\begin{DoxyCompactList}\small\item\em A dictionary (hash table) implementation with dynamic resizing and rehashing. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+unsigned int \mbox{\hyperlink{dict_8h_aa501d8459078506f4e594b6dcd08bba7}{string\+Hash}} (const void $\ast$key)
+\begin{DoxyCompactList}\small\item\em Hash function for C-\/style strings. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{dict_8h_a17315bf7519654861352381302cd40c6}{string\+Compare}} (const void $\ast$key1, const void $\ast$key2)
+\begin{DoxyCompactList}\small\item\em Compares two C-\/style string keys. \end{DoxyCompactList}\item 
+void $\ast$ \mbox{\hyperlink{dict_8h_a15f763264871634cb309b4bc7208ec2e}{string\+Dup}} (const void $\ast$key)
+\begin{DoxyCompactList}\small\item\em Duplicates a C-\/style string key. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{dict_8h_a69beda11346b926623e4309bb18a97ab}{free\+String}} (void $\ast$ptr)
+\begin{DoxyCompactList}\small\item\em Frees a dynamically allocated C-\/style string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Implementation of a dictionary (hash table) with rehashing support. 
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{dict_8h_a69beda11346b926623e4309bb18a97ab}\label{dict_8h_a69beda11346b926623e4309bb18a97ab}} 
+\index{dict.h@{dict.h}!freeString@{freeString}}
+\index{freeString@{freeString}!dict.h@{dict.h}}
+\doxysubsubsection{\texorpdfstring{freeString()}{freeString()}}
+{\footnotesize\ttfamily void free\+String (\begin{DoxyParamCaption}\item[{void $\ast$}]{ptr }\end{DoxyParamCaption})}
+
+
+
+Frees a dynamically allocated C-\/style string. 
+
+This function releases the memory allocated for a string key or value.
+
+
+\begin{DoxyParams}{Parameters}
+{\em ptr} & Pointer to the string to be freed. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{648                            \{}
+\DoxyCodeLine{649     free(ptr);}
+\DoxyCodeLine{650 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{dict_8h_a17315bf7519654861352381302cd40c6}\label{dict_8h_a17315bf7519654861352381302cd40c6}} 
+\index{dict.h@{dict.h}!stringCompare@{stringCompare}}
+\index{stringCompare@{stringCompare}!dict.h@{dict.h}}
+\doxysubsubsection{\texorpdfstring{stringCompare()}{stringCompare()}}
+{\footnotesize\ttfamily int string\+Compare (\begin{DoxyParamCaption}\item[{const void $\ast$}]{key1,  }\item[{const void $\ast$}]{key2 }\end{DoxyParamCaption})}
+
+
+
+Compares two C-\/style string keys. 
+
+This function compares two string keys using {\ttfamily strcmp} and returns whether they are equal.
+
+
+\begin{DoxyParams}{Parameters}
+{\em key1} & Pointer to the first string key. \\
+\hline
+{\em key2} & Pointer to the second string key. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int Returns 1 if keys are equal, 0 otherwise. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{623 \{}
+\DoxyCodeLine{624     \textcolor{keywordflow}{return} strcmp(\textcolor{keyword}{static\_cast<}\textcolor{keyword}{const }\textcolor{keywordtype}{char} *\textcolor{keyword}{>}(key1), \textcolor{keyword}{static\_cast<}\textcolor{keyword}{const }\textcolor{keywordtype}{char} *\textcolor{keyword}{>}(key2)) == 0;}
+\DoxyCodeLine{625 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{dict_8h_a15f763264871634cb309b4bc7208ec2e}\label{dict_8h_a15f763264871634cb309b4bc7208ec2e}} 
+\index{dict.h@{dict.h}!stringDup@{stringDup}}
+\index{stringDup@{stringDup}!dict.h@{dict.h}}
+\doxysubsubsection{\texorpdfstring{stringDup()}{stringDup()}}
+{\footnotesize\ttfamily void$\ast$ string\+Dup (\begin{DoxyParamCaption}\item[{const void $\ast$}]{key }\end{DoxyParamCaption})}
+
+
+
+Duplicates a C-\/style string key. 
+
+This function creates a copy of the given string key using {\ttfamily strdup}. The caller is responsible for freeing the allocated memory.
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & Pointer to the original string key. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void$\ast$ Pointer to the duplicated string. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{637 \{}
+\DoxyCodeLine{638     \textcolor{keywordflow}{return} strdup(\textcolor{keyword}{static\_cast<}\textcolor{keyword}{const }\textcolor{keywordtype}{char} *\textcolor{keyword}{>}(key));}
+\DoxyCodeLine{639 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{dict_8h_aa501d8459078506f4e594b6dcd08bba7}\label{dict_8h_aa501d8459078506f4e594b6dcd08bba7}} 
+\index{dict.h@{dict.h}!stringHash@{stringHash}}
+\index{stringHash@{stringHash}!dict.h@{dict.h}}
+\doxysubsubsection{\texorpdfstring{stringHash()}{stringHash()}}
+{\footnotesize\ttfamily unsigned int string\+Hash (\begin{DoxyParamCaption}\item[{const void $\ast$}]{key }\end{DoxyParamCaption})}
+
+
+
+Hash function for C-\/style strings. 
+
+This function computes a hash value for a given string using the DJB2 algorithm. It iterates through the characters and accumulates a hash value.
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & Pointer to the C-\/style string key. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+unsigned int The computed hash value. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{603 \{}
+\DoxyCodeLine{604     \textcolor{keyword}{const} \textcolor{keywordtype}{char} *str = \textcolor{keyword}{static\_cast<}\textcolor{keyword}{const }\textcolor{keywordtype}{char} *\textcolor{keyword}{>}(key);}
+\DoxyCodeLine{605     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} hash = 5381;}
+\DoxyCodeLine{606     \textcolor{keywordtype}{int} c;}
+\DoxyCodeLine{607     \textcolor{keywordflow}{while} ((c = *str++))}
+\DoxyCodeLine{608         hash = ((hash << 5) + hash) + c; \textcolor{comment}{// hash * 33 + c}}
+\DoxyCodeLine{609     \textcolor{keywordflow}{return} hash;}
+\DoxyCodeLine{610 \}}
+
+\end{DoxyCode}

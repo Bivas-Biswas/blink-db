@@ -1,0 +1,249 @@
+\hypertarget{classLoadBalancer}{}\doxysection{Load\+Balancer Class Reference}
+\label{classLoadBalancer}\index{LoadBalancer@{LoadBalancer}}
+
+
+Handles load balancing by distributing client requests to backend servers.  
+
+
+
+
+{\ttfamily \#include $<$load\+\_\+balancer.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classLoadBalancer_ab818ebc121c5936dd0304eb463a93906}{Load\+Balancer}} (std\+::string lb\+\_\+ip, int lb\+\_\+port, std\+::vector$<$ \mbox{\hyperlink{structServerAdd}{Server\+Add}} $>$ \&servers\+\_\+add, int buffer\+\_\+size, int max\+\_\+events)
+\begin{DoxyCompactList}\small\item\em Constructs a \mbox{\hyperlink{classLoadBalancer}{Load\+Balancer}} instance. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classLoadBalancer_a69951a7bb77be7fafd4d5ad6919abd80}{$\sim$\+Load\+Balancer}} ()
+\begin{DoxyCompactList}\small\item\em Destructor to clean up resources. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classLoadBalancer_a501ac1cc68e80422abcadd40446b1091}{server\+\_\+init}} (parsing\+Key\+Func\+Ptr func)
+\begin{DoxyCompactList}\small\item\em Initializes the server and starts handling client requests. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Handles load balancing by distributing client requests to backend servers. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classLoadBalancer_ab818ebc121c5936dd0304eb463a93906}\label{classLoadBalancer_ab818ebc121c5936dd0304eb463a93906}} 
+\index{LoadBalancer@{LoadBalancer}!LoadBalancer@{LoadBalancer}}
+\index{LoadBalancer@{LoadBalancer}!LoadBalancer@{LoadBalancer}}
+\doxysubsubsection{\texorpdfstring{LoadBalancer()}{LoadBalancer()}}
+{\footnotesize\ttfamily Load\+Balancer\+::\+Load\+Balancer (\begin{DoxyParamCaption}\item[{std\+::string}]{lb\+\_\+ip,  }\item[{int}]{lb\+\_\+port,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structServerAdd}{Server\+Add}} $>$ \&}]{servers\+\_\+add,  }\item[{int}]{buffer\+\_\+size,  }\item[{int}]{max\+\_\+events }\end{DoxyParamCaption})}
+
+
+
+Constructs a \mbox{\hyperlink{classLoadBalancer}{Load\+Balancer}} instance. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em lb\+\_\+port} & The port the load balancer listens on. \\
+\hline
+{\em serves\+\_\+add} & The list of server addresses and ports. \\
+\hline
+{\em buffer\+\_\+size} & The size of the buffer for client messages. \\
+\hline
+{\em max\+\_\+events} & The maximum number of events handled by epoll. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{81                                                                                                                            : servers\_add\_(servers\_add)}
+\DoxyCodeLine{82 \{}
+\DoxyCodeLine{83     lb\_ip\_ = lb\_ip;}
+\DoxyCodeLine{84     lb\_port\_ = lb\_port;}
+\DoxyCodeLine{85     buffer\_size\_= buffer\_size;}
+\DoxyCodeLine{86     max\_events\_= max\_events;}
+\DoxyCodeLine{87 }
+\DoxyCodeLine{88     buffer\_ = \textcolor{keyword}{new} \textcolor{keywordtype}{char}[buffer\_size];}
+\DoxyCodeLine{89     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \&server\_add : servers\_add)}
+\DoxyCodeLine{90     \{}
+\DoxyCodeLine{91         \textcolor{keywordtype}{int} key = hashKey(server\_add.ip + std::to\_string(server\_add.port));}
+\DoxyCodeLine{92         hash\_ring\_.insert(key);}
+\DoxyCodeLine{93         server\_map\_[key] = server\_add;}
+\DoxyCodeLine{94     \}}
+\DoxyCodeLine{95 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classLoadBalancer_a69951a7bb77be7fafd4d5ad6919abd80}\label{classLoadBalancer_a69951a7bb77be7fafd4d5ad6919abd80}} 
+\index{LoadBalancer@{LoadBalancer}!````~LoadBalancer@{$\sim$LoadBalancer}}
+\index{````~LoadBalancer@{$\sim$LoadBalancer}!LoadBalancer@{LoadBalancer}}
+\doxysubsubsection{\texorpdfstring{$\sim$LoadBalancer()}{~LoadBalancer()}}
+{\footnotesize\ttfamily Load\+Balancer\+::$\sim$\+Load\+Balancer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Destructor to clean up resources. 
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{98 \{}
+\DoxyCodeLine{99     \textcolor{keyword}{delete}[] buffer\_;}
+\DoxyCodeLine{100 \}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classLoadBalancer_a501ac1cc68e80422abcadd40446b1091}\label{classLoadBalancer_a501ac1cc68e80422abcadd40446b1091}} 
+\index{LoadBalancer@{LoadBalancer}!server\_init@{server\_init}}
+\index{server\_init@{server\_init}!LoadBalancer@{LoadBalancer}}
+\doxysubsubsection{\texorpdfstring{server\_init()}{server\_init()}}
+{\footnotesize\ttfamily void Load\+Balancer\+::server\+\_\+init (\begin{DoxyParamCaption}\item[{parsing\+Key\+Func\+Ptr}]{func }\end{DoxyParamCaption})}
+
+
+
+Initializes the server and starts handling client requests. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em func} & Function pointer for parsing the key from client messages. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{120 \{}
+\DoxyCodeLine{121     \textcolor{keyword}{struct }sockaddr\_in address;}
+\DoxyCodeLine{122     \textcolor{keywordtype}{int} lb\_sockfd, epoll\_fd;}
+\DoxyCodeLine{123     \textcolor{keyword}{struct }epoll\_event event, events[max\_events\_];}
+\DoxyCodeLine{124     \textcolor{keywordtype}{int} addrlen = \textcolor{keyword}{sizeof}(address);}
+\DoxyCodeLine{125 }
+\DoxyCodeLine{126     lb\_sockfd = \mbox{\hyperlink{create__non__locking__socket_8h_a05a7e9ad0559e723ab0bc57c15684854}{create\_non\_locking\_socket}}(lb\_ip\_, lb\_port\_, address);}
+\DoxyCodeLine{127 }
+\DoxyCodeLine{128     epoll\_fd = epoll\_create1(0);}
+\DoxyCodeLine{129     \textcolor{keywordflow}{if} (epoll\_fd == -\/1)}
+\DoxyCodeLine{130     \{}
+\DoxyCodeLine{131         perror(\textcolor{stringliteral}{"{}[LB]: Epoll creation failed"{}});}
+\DoxyCodeLine{132         exit(EXIT\_FAILURE);}
+\DoxyCodeLine{133     \}}
+\DoxyCodeLine{134 }
+\DoxyCodeLine{135     \textcolor{keyword}{event}.events = EPOLLIN;}
+\DoxyCodeLine{136     \textcolor{keyword}{event}.data.fd = lb\_sockfd;}
+\DoxyCodeLine{137 }
+\DoxyCodeLine{138     \textcolor{keywordflow}{if} (epoll\_ctl(epoll\_fd, EPOLL\_CTL\_ADD, lb\_sockfd, \&event) == -\/1)}
+\DoxyCodeLine{139     \{}
+\DoxyCodeLine{140         perror(\textcolor{stringliteral}{"{}[LB]: Epoll\_ctl failed"{}});}
+\DoxyCodeLine{141         exit(EXIT\_FAILURE);}
+\DoxyCodeLine{142     \}}
+\DoxyCodeLine{143 }
+\DoxyCodeLine{144     std::cout << \textcolor{stringliteral}{"{}[LB]: Load Balancer listening on port "{}} << lb\_port\_ << std::endl;}
+\DoxyCodeLine{145 }
+\DoxyCodeLine{146     \textcolor{keywordflow}{while} (\textcolor{keyword}{true})}
+\DoxyCodeLine{147     \{}
+\DoxyCodeLine{148         \textcolor{keywordtype}{int} num\_events = epoll\_wait(epoll\_fd, events, max\_events\_, -\/1);}
+\DoxyCodeLine{149         \textcolor{keywordflow}{if} (num\_events == -\/1)}
+\DoxyCodeLine{150         \{}
+\DoxyCodeLine{151             perror(\textcolor{stringliteral}{"{}[LB]: Epoll wait failed"{}});}
+\DoxyCodeLine{152             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{153         \}}
+\DoxyCodeLine{154 }
+\DoxyCodeLine{155         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < num\_events; ++i)}
+\DoxyCodeLine{156         \{}
+\DoxyCodeLine{157             \textcolor{keywordtype}{int} sock\_fd = events[i].data.fd;}
+\DoxyCodeLine{158 }
+\DoxyCodeLine{159             \textcolor{keywordflow}{if} (sock\_fd == lb\_sockfd)}
+\DoxyCodeLine{160             \{}
+\DoxyCodeLine{161                 \textcolor{comment}{// New client connection}}
+\DoxyCodeLine{162                 \textcolor{keywordtype}{int} client\_fd = accept(lb\_sockfd, (\textcolor{keyword}{struct} sockaddr *)\&address, (socklen\_t *)\&addrlen);}
+\DoxyCodeLine{163 }
+\DoxyCodeLine{164                 \textcolor{comment}{// char client\_ip[INET\_ADDRSTRLEN];}}
+\DoxyCodeLine{165                 \textcolor{comment}{// inet\_ntop(AF\_INET, \&address.sin\_addr, client\_ip, INET\_ADDRSTRLEN);}}
+\DoxyCodeLine{166                 \textcolor{comment}{// int client\_port = ntohs(address.sin\_port);}}
+\DoxyCodeLine{167 }
+\DoxyCodeLine{168                 \textcolor{keywordflow}{if} (client\_fd == -\/1)}
+\DoxyCodeLine{169                 \{}
+\DoxyCodeLine{170                     perror(\textcolor{stringliteral}{"{}[LB]: Accept failed"{}});}
+\DoxyCodeLine{171                     \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{172                 \}}
+\DoxyCodeLine{173 }
+\DoxyCodeLine{174                 \mbox{\hyperlink{set__nonblocking_8h_a6f5a4dea41e37713ff3bdb4975bfa592}{set\_nonblocking}}(client\_fd);}
+\DoxyCodeLine{175 }
+\DoxyCodeLine{176                 \textcolor{keyword}{event}.events = EPOLLIN | EPOLLET;}
+\DoxyCodeLine{177                 \textcolor{keyword}{event}.data.fd = client\_fd;}
+\DoxyCodeLine{178 }
+\DoxyCodeLine{179                 \textcolor{keywordflow}{if} (epoll\_ctl(epoll\_fd, EPOLL\_CTL\_ADD, client\_fd, \&event) == -\/1)}
+\DoxyCodeLine{180                 \{}
+\DoxyCodeLine{181                     perror(\textcolor{stringliteral}{"{}Epoll\_ctl client add failed"{}});}
+\DoxyCodeLine{182                     close(client\_fd);}
+\DoxyCodeLine{183                     \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{184                 \}}
+\DoxyCodeLine{185 }
+\DoxyCodeLine{186             \textcolor{comment}{//    std::cout << "{}[LB]: New client connected: "{} << client\_ip << "{}:"{} << client\_port << std::endl;}}
+\DoxyCodeLine{187             \}}
+\DoxyCodeLine{188             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{189             \{}
+\DoxyCodeLine{190                 \textcolor{comment}{// Handle client request}}
+\DoxyCodeLine{191                 memset(buffer\_, 0, buffer\_size\_);}
+\DoxyCodeLine{192                 \textcolor{keywordtype}{int} bytes\_read = recv(sock\_fd, buffer\_, buffer\_size\_, 0);}
+\DoxyCodeLine{193 }
+\DoxyCodeLine{194                 \textcolor{keywordflow}{if} (bytes\_read > 0)}
+\DoxyCodeLine{195                 \{}
+\DoxyCodeLine{196                     buffer\_[bytes\_read] = \textcolor{charliteral}{'\(\backslash\)0'};}
+\DoxyCodeLine{197                     std::string key = \mbox{\hyperlink{blink__server__with__lb_8cpp_ac65aea3c57d529ec8802efbffa9e5496}{parse\_key}}(buffer\_, bytes\_read);}
+\DoxyCodeLine{198                     \mbox{\hyperlink{structServerAdd}{ServerAdd}} server\_add = getServer(key);}
+\DoxyCodeLine{199 }
+\DoxyCodeLine{200                     \textcolor{comment}{// Create a new connection to the backend server}}
+\DoxyCodeLine{201                     \textcolor{keywordtype}{int} server\_fd = socket(AF\_INET, SOCK\_STREAM, 0);}
+\DoxyCodeLine{202                     \textcolor{keyword}{struct }sockaddr\_in server\_addr;}
+\DoxyCodeLine{203                     server\_addr.sin\_family = AF\_INET;}
+\DoxyCodeLine{204                     server\_addr.sin\_port = htons(server\_add.\mbox{\hyperlink{structServerAdd_adc3d13d9d6ce5af3f6cc1551b60bc676}{port}});}
+\DoxyCodeLine{205 }
+\DoxyCodeLine{206                     \textcolor{keywordflow}{if} (inet\_pton(AF\_INET, server\_add.\mbox{\hyperlink{structServerAdd_ad5b31065e4dcb19cb9794bc659ce9d55}{ip}}.c\_str(), \&server\_addr.sin\_addr) <= 0)}
+\DoxyCodeLine{207                     \{}
+\DoxyCodeLine{208                         perror(\textcolor{stringliteral}{"{}[LB]: Invalid IP address"{}});}
+\DoxyCodeLine{209                         exit(EXIT\_FAILURE);}
+\DoxyCodeLine{210                     \}}
+\DoxyCodeLine{211 }
+\DoxyCodeLine{212                     \textcolor{keywordflow}{if} (connect(server\_fd, (\textcolor{keyword}{struct} sockaddr *)\&server\_addr, \textcolor{keyword}{sizeof}(server\_addr)) == 0)}
+\DoxyCodeLine{213                     \{}
+\DoxyCodeLine{214                         send(server\_fd, buffer\_, bytes\_read, 0);}
+\DoxyCodeLine{215                         \textcolor{comment}{// char response[buffer\_size\_] = \{0\};}}
+\DoxyCodeLine{216                         \textcolor{keywordtype}{int} resp\_bytes = recv(server\_fd, buffer\_, buffer\_size\_, 0);}
+\DoxyCodeLine{217                         \textcolor{keywordflow}{if} (resp\_bytes > 0)}
+\DoxyCodeLine{218                         \{}
+\DoxyCodeLine{219                             send(sock\_fd, buffer\_, resp\_bytes, 0);}
+\DoxyCodeLine{220                         \}}
+\DoxyCodeLine{221                         close(server\_fd); \textcolor{comment}{// Close backend server connection after response}}
+\DoxyCodeLine{222                     \}}
+\DoxyCodeLine{223                     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{224                     \{}
+\DoxyCodeLine{225                         perror(\textcolor{stringliteral}{"{}[LB]:erver connection failed"{}});}
+\DoxyCodeLine{226                         close(server\_fd);}
+\DoxyCodeLine{227                     \}}
+\DoxyCodeLine{228                 \}}
+\DoxyCodeLine{229                 \textcolor{keywordflow}{else}}
+\DoxyCodeLine{230                 \{}
+\DoxyCodeLine{231                     \textcolor{comment}{// Client disconnected}}
+\DoxyCodeLine{232                     \textcolor{comment}{// std::cout << "{}[LB]: Client "{} << sock\_fd << "{} disconnected."{} << std::endl;}}
+\DoxyCodeLine{233                     epoll\_ctl(epoll\_fd, EPOLL\_CTL\_DEL, sock\_fd, \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{234                     close(sock\_fd);}
+\DoxyCodeLine{235                 \}}
+\DoxyCodeLine{236             \}}
+\DoxyCodeLine{237         \}}
+\DoxyCodeLine{238     \}}
+\DoxyCodeLine{239 }
+\DoxyCodeLine{240     close(lb\_sockfd);}
+\DoxyCodeLine{241     close(epoll\_fd);}
+\DoxyCodeLine{242 \}}
+
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classLoadBalancer_a501ac1cc68e80422abcadd40446b1091_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=297pt]{classLoadBalancer_a501ac1cc68e80422abcadd40446b1091_icgraph}
+\end{center}
+\end{figure}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lib/\mbox{\hyperlink{load__balancer_8h}{load\+\_\+balancer.\+h}}\end{DoxyCompactItemize}

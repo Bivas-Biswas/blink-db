@@ -2,6 +2,7 @@ CC = g++
 CFLAGS = -Wall -Wextra -std=c++17
 SRC_DIR = src
 BUILD_DIR = build
+DOCS_DIR = docs
 
 CLIENT_SRC = $(SRC_DIR)/blink_cli.cpp
 SERVER_SRC = $(SRC_DIR)/blink_server.cpp
@@ -35,6 +36,10 @@ run_server: $(SERVER_BIN)
 
 run_lb_server: $(LB_SERVER_BIN)
 	$(LB_SERVER_BIN)
+
+doxygen:
+	rm -rf $(DOCS_DIR) && doxygen Doxyfile && cd docs/latex && make
+
 
 clean:
 	rm -rf $(BUILD_DIR)

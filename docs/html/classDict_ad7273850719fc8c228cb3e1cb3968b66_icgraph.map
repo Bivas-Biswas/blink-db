@@ -1,0 +1,5 @@
+<map id="Dict::add" name="Dict::add">
+<area shape="rect" id="node1" title="Adds a key&#45;value pair to the dictionary with automatic rehashing." alt="" coords="171,31,251,57"/>
+<area shape="rect" id="node2" href="$classLRUCache.html#afa9c3e5d273b81c21051a809794ea41d" title="Retrieves the value for a given key." alt="" coords="5,5,123,32"/>
+<area shape="rect" id="node3" href="$classLRUCache.html#a94fd770e6518bc9bb2df581c36c57205" title="Adds or updates a key&#45;value pair in the cache." alt="" coords="6,56,122,83"/>
+</map>

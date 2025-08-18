@@ -1,0 +1,4 @@
+<map id="Dict::size" name="Dict::size">
+<area shape="rect" id="node1" title="Retrieves the total no of keys in the dictionary." alt="" coords="176,5,259,32"/>
+<area shape="rect" id="node2" href="$classLRUCache.html#a18f7a4ee1d05d840a8d0f01e883b7555" title="Gets the number of items in the cache." alt="" coords="5,5,128,32"/>
+</map>

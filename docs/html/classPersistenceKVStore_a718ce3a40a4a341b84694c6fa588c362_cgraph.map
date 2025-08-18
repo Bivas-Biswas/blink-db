@@ -1,0 +1,5 @@
+<map id="PersistenceKVStore::get" name="PersistenceKVStore::get">
+<area shape="rect" id="node1" title="Retrieves the value for a given key." alt="" coords="5,31,184,57"/>
+<area shape="rect" id="node2" href="$classBloomFilter.html#a30a32da65c9167b1e638db926a90f502" title="Checks if a key exists in the Bloom filter." alt="" coords="232,5,392,32"/>
+<area shape="rect" id="node3" href="$classTrie.html#a2bbd9365111786a5950407b81df7a59b" title=" " alt="" coords="264,56,360,83"/>
+</map>

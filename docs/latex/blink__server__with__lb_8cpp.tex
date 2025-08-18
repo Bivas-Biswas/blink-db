@@ -1,0 +1,209 @@
+\hypertarget{blink__server__with__lb_8cpp}{}\doxysection{src/blink\+\_\+server\+\_\+with\+\_\+lb.cpp File Reference}
+\label{blink__server__with__lb_8cpp}\index{src/blink\_server\_with\_lb.cpp@{src/blink\_server\_with\_lb.cpp}}
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$unordered\+\_\+map$>$}\newline
+{\ttfamily \#include $<$set$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$cstdlib$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$arpa/inet.\+h$>$}\newline
+{\ttfamily \#include $<$fcntl.\+h$>$}\newline
+{\ttfamily \#include $<$sys/epoll.\+h$>$}\newline
+{\ttfamily \#include $<$thread$>$}\newline
+{\ttfamily \#include \char`\"{}../lib/server.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../lib/load\+\_\+balancer.\+h\char`\"{}}\newline
+Include dependency graph for blink\+\_\+server\+\_\+with\+\_\+lb.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{blink__server__with__lb_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{blink__server__with__lb_8cpp_ae42954bb8545d24e3e9dcde5920c9a0b}{MAX\+\_\+\+EVENTS}}~100
+\item 
+\#define \mbox{\hyperlink{blink__server__with__lb_8cpp_a6b20d41d6252e9871430c242cb1a56e7}{BUFFER\+\_\+\+SIZE}}~1024
+\item 
+\#define \mbox{\hyperlink{blink__server__with__lb_8cpp_ac42367fe5c999ec6650de83e9d72fe8c}{SERVER\+\_\+\+PORT}}~9001
+\item 
+\#define \mbox{\hyperlink{blink__server__with__lb_8cpp_a0282585c8da386b1067a7f8204a1f3bc}{MAX\+\_\+\+MEMORY\+\_\+\+BYTES}}~1024 $\ast$ 1024 $\ast$ 10
+\item 
+\#define \mbox{\hyperlink{blink__server__with__lb_8cpp_a28d06fc286f28044ed3380969700ff3f}{SERVER\+\_\+\+IP}}~\char`\"{}127.\+0.\+0.\+1\char`\"{}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{blink__server__with__lb_8cpp_a92c506cc67dab3e3a4bfe3d097190d6f}{server\+Thread}} (std\+::string ip, int port)
+\item 
+std\+::string \mbox{\hyperlink{blink__server__with__lb_8cpp_ac65aea3c57d529ec8802efbffa9e5496}{parse\+\_\+key}} (char $\ast$buffer, int bytes\+\_\+read)
+\item 
+int \mbox{\hyperlink{blink__server__with__lb_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{blink__server__with__lb_8cpp_a6b20d41d6252e9871430c242cb1a56e7}\label{blink__server__with__lb_8cpp_a6b20d41d6252e9871430c242cb1a56e7}} 
+\index{blink\_server\_with\_lb.cpp@{blink\_server\_with\_lb.cpp}!BUFFER\_SIZE@{BUFFER\_SIZE}}
+\index{BUFFER\_SIZE@{BUFFER\_SIZE}!blink\_server\_with\_lb.cpp@{blink\_server\_with\_lb.cpp}}
+\doxysubsubsection{\texorpdfstring{BUFFER\_SIZE}{BUFFER\_SIZE}}
+{\footnotesize\ttfamily \#define BUFFER\+\_\+\+SIZE~1024}
+
+\mbox{\Hypertarget{blink__server__with__lb_8cpp_ae42954bb8545d24e3e9dcde5920c9a0b}\label{blink__server__with__lb_8cpp_ae42954bb8545d24e3e9dcde5920c9a0b}} 
+\index{blink\_server\_with\_lb.cpp@{blink\_server\_with\_lb.cpp}!MAX\_EVENTS@{MAX\_EVENTS}}
+\index{MAX\_EVENTS@{MAX\_EVENTS}!blink\_server\_with\_lb.cpp@{blink\_server\_with\_lb.cpp}}
+\doxysubsubsection{\texorpdfstring{MAX\_EVENTS}{MAX\_EVENTS}}
+{\footnotesize\ttfamily \#define MAX\+\_\+\+EVENTS~100}
+
+\mbox{\Hypertarget{blink__server__with__lb_8cpp_a0282585c8da386b1067a7f8204a1f3bc}\label{blink__server__with__lb_8cpp_a0282585c8da386b1067a7f8204a1f3bc}} 
+\index{blink\_server\_with\_lb.cpp@{blink\_server\_with\_lb.cpp}!MAX\_MEMORY\_BYTES@{MAX\_MEMORY\_BYTES}}
+\index{MAX\_MEMORY\_BYTES@{MAX\_MEMORY\_BYTES}!blink\_server\_with\_lb.cpp@{blink\_server\_with\_lb.cpp}}
+\doxysubsubsection{\texorpdfstring{MAX\_MEMORY\_BYTES}{MAX\_MEMORY\_BYTES}}
+{\footnotesize\ttfamily \#define MAX\+\_\+\+MEMORY\+\_\+\+BYTES~1024 $\ast$ 1024 $\ast$ 10}
+
+\mbox{\Hypertarget{blink__server__with__lb_8cpp_a28d06fc286f28044ed3380969700ff3f}\label{blink__server__with__lb_8cpp_a28d06fc286f28044ed3380969700ff3f}} 
+\index{blink\_server\_with\_lb.cpp@{blink\_server\_with\_lb.cpp}!SERVER\_IP@{SERVER\_IP}}
+\index{SERVER\_IP@{SERVER\_IP}!blink\_server\_with\_lb.cpp@{blink\_server\_with\_lb.cpp}}
+\doxysubsubsection{\texorpdfstring{SERVER\_IP}{SERVER\_IP}}
+{\footnotesize\ttfamily \#define SERVER\+\_\+\+IP~\char`\"{}127.\+0.\+0.\+1\char`\"{}}
+
+\mbox{\Hypertarget{blink__server__with__lb_8cpp_ac42367fe5c999ec6650de83e9d72fe8c}\label{blink__server__with__lb_8cpp_ac42367fe5c999ec6650de83e9d72fe8c}} 
+\index{blink\_server\_with\_lb.cpp@{blink\_server\_with\_lb.cpp}!SERVER\_PORT@{SERVER\_PORT}}
+\index{SERVER\_PORT@{SERVER\_PORT}!blink\_server\_with\_lb.cpp@{blink\_server\_with\_lb.cpp}}
+\doxysubsubsection{\texorpdfstring{SERVER\_PORT}{SERVER\_PORT}}
+{\footnotesize\ttfamily \#define SERVER\+\_\+\+PORT~9001}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{blink__server__with__lb_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{blink__server__with__lb_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}} 
+\index{blink\_server\_with\_lb.cpp@{blink\_server\_with\_lb.cpp}!main@{main}}
+\index{main@{main}!blink\_server\_with\_lb.cpp@{blink\_server\_with\_lb.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{64            \{}
+\DoxyCodeLine{65 }
+\DoxyCodeLine{66     \textcolor{keywordtype}{int} num\_servers;}
+\DoxyCodeLine{67     std::cout << \textcolor{stringliteral}{"{}Enter number of servers: "{}};}
+\DoxyCodeLine{68     std::cin >> num\_servers;}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{70     std::vector<ServerAdd> servers\_addr;}
+\DoxyCodeLine{71     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < num\_servers; ++i) \{}
+\DoxyCodeLine{72         \mbox{\hyperlink{structServerAdd}{ServerAdd}} server\_add;}
+\DoxyCodeLine{73         server\_add.\mbox{\hyperlink{structServerAdd_adc3d13d9d6ce5af3f6cc1551b60bc676}{port}} = 5000 + i;}
+\DoxyCodeLine{74         server\_add.\mbox{\hyperlink{structServerAdd_ad5b31065e4dcb19cb9794bc659ce9d55}{ip}} = \mbox{\hyperlink{blink__server__with__lb_8cpp_a28d06fc286f28044ed3380969700ff3f}{SERVER\_IP}};}
+\DoxyCodeLine{75         servers\_addr.push\_back(server\_add);}
+\DoxyCodeLine{76     \}}
+\DoxyCodeLine{77 }
+\DoxyCodeLine{78     std::vector<std::thread> server\_threads;}
+\DoxyCodeLine{79     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \&server\_addr : servers\_addr) \{}
+\DoxyCodeLine{80         server\_threads.emplace\_back(\mbox{\hyperlink{blink__server__with__lb_8cpp_a92c506cc67dab3e3a4bfe3d097190d6f}{serverThread}}, server\_addr.ip, server\_addr.port);}
+\DoxyCodeLine{81     \}}
+\DoxyCodeLine{82 }
+\DoxyCodeLine{83     \mbox{\hyperlink{classLoadBalancer}{LoadBalancer}} loadBalancer(\mbox{\hyperlink{blink__server__with__lb_8cpp_a28d06fc286f28044ed3380969700ff3f}{SERVER\_IP}}, \mbox{\hyperlink{blink__server__with__lb_8cpp_ac42367fe5c999ec6650de83e9d72fe8c}{SERVER\_PORT}}, servers\_addr, \mbox{\hyperlink{blink__server__with__lb_8cpp_a6b20d41d6252e9871430c242cb1a56e7}{BUFFER\_SIZE}}, \mbox{\hyperlink{blink__server__with__lb_8cpp_ae42954bb8545d24e3e9dcde5920c9a0b}{MAX\_EVENTS}});}
+\DoxyCodeLine{84 }
+\DoxyCodeLine{85     loadBalancer.server\_init(\&\mbox{\hyperlink{blink__server__with__lb_8cpp_ac65aea3c57d529ec8802efbffa9e5496}{parse\_key}});}
+\DoxyCodeLine{86 }
+\DoxyCodeLine{87     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto}\& t : server\_threads) t.join();}
+\DoxyCodeLine{88 }
+\DoxyCodeLine{89     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{90 \}}
+
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{blink__server__with__lb_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{blink__server__with__lb_8cpp_ac65aea3c57d529ec8802efbffa9e5496}\label{blink__server__with__lb_8cpp_ac65aea3c57d529ec8802efbffa9e5496}} 
+\index{blink\_server\_with\_lb.cpp@{blink\_server\_with\_lb.cpp}!parse\_key@{parse\_key}}
+\index{parse\_key@{parse\_key}!blink\_server\_with\_lb.cpp@{blink\_server\_with\_lb.cpp}}
+\doxysubsubsection{\texorpdfstring{parse\_key()}{parse\_key()}}
+{\footnotesize\ttfamily std\+::string parse\+\_\+key (\begin{DoxyParamCaption}\item[{char $\ast$}]{buffer,  }\item[{int}]{bytes\+\_\+read }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{28                                                  \{}
+\DoxyCodeLine{29     }
+\DoxyCodeLine{30     std::string input(buffer, bytes\_read);}
+\DoxyCodeLine{31     std::vector<std::string> result;}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33     \textcolor{keywordflow}{if} (input.empty())}
+\DoxyCodeLine{34         \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36     \textcolor{keywordflow}{if} (input[0] == \textcolor{charliteral}{'*'})}
+\DoxyCodeLine{37     \{}
+\DoxyCodeLine{38         \textcolor{keywordtype}{size\_t} pos = 1;}
+\DoxyCodeLine{39         \textcolor{keywordtype}{size\_t} newline = input.find(\textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n"{}}, pos);}
+\DoxyCodeLine{40         \textcolor{keywordtype}{int} array\_len = std::stoi(input.substr(pos, newline -\/ pos));}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42         pos = newline + 2;}
+\DoxyCodeLine{43         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < array\_len; i++)}
+\DoxyCodeLine{44         \{}
+\DoxyCodeLine{45             \textcolor{keywordflow}{if} (pos >= input.length())}
+\DoxyCodeLine{46                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{47 }
+\DoxyCodeLine{48             \textcolor{keywordflow}{if} (input[pos] == \textcolor{charliteral}{'\$'})}
+\DoxyCodeLine{49             \{}
+\DoxyCodeLine{50                 pos++;}
+\DoxyCodeLine{51                 newline = input.find(\textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n"{}}, pos);}
+\DoxyCodeLine{52                 \textcolor{keywordtype}{int} str\_len = std::stoi(input.substr(pos, newline -\/ pos));}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54                 pos = newline + 2;}
+\DoxyCodeLine{55                 result.push\_back(input.substr(pos, str\_len));}
+\DoxyCodeLine{56                 pos += str\_len + 2;}
+\DoxyCodeLine{57             \}}
+\DoxyCodeLine{58         \}}
+\DoxyCodeLine{59     \}}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{61     \textcolor{keywordflow}{return} result[1];}
+\DoxyCodeLine{62 \}}
+
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{blink__server__with__lb_8cpp_ac65aea3c57d529ec8802efbffa9e5496_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{blink__server__with__lb_8cpp_a92c506cc67dab3e3a4bfe3d097190d6f}\label{blink__server__with__lb_8cpp_a92c506cc67dab3e3a4bfe3d097190d6f}} 
+\index{blink\_server\_with\_lb.cpp@{blink\_server\_with\_lb.cpp}!serverThread@{serverThread}}
+\index{serverThread@{serverThread}!blink\_server\_with\_lb.cpp@{blink\_server\_with\_lb.cpp}}
+\doxysubsubsection{\texorpdfstring{serverThread()}{serverThread()}}
+{\footnotesize\ttfamily void server\+Thread (\begin{DoxyParamCaption}\item[{std\+::string}]{ip,  }\item[{int}]{port }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{23                                           \{}
+\DoxyCodeLine{24     \mbox{\hyperlink{classServer}{Server}} server(ip, port, \mbox{\hyperlink{blink__server__with__lb_8cpp_a6b20d41d6252e9871430c242cb1a56e7}{BUFFER\_SIZE}}, \mbox{\hyperlink{blink__server__with__lb_8cpp_ae42954bb8545d24e3e9dcde5920c9a0b}{MAX\_EVENTS}}, \mbox{\hyperlink{blink__server__with__lb_8cpp_a0282585c8da386b1067a7f8204a1f3bc}{MAX\_MEMORY\_BYTES}});}
+\DoxyCodeLine{25     server.init();}
+\DoxyCodeLine{26 \}}
+
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{blink__server__with__lb_8cpp_a92c506cc67dab3e3a4bfe3d097190d6f_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=238pt]{blink__server__with__lb_8cpp_a92c506cc67dab3e3a4bfe3d097190d6f_icgraph}
+\end{center}
+\end{figure}

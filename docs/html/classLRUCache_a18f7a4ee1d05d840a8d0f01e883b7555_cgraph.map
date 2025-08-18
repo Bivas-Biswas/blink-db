@@ -1,0 +1,4 @@
+<map id="LRUCache::size" name="LRUCache::size">
+<area shape="rect" id="node1" title="Gets the number of items in the cache." alt="" coords="5,5,128,32"/>
+<area shape="rect" id="node2" href="$classDict.html#a9cfce08a086df862a97afc0fff66459c" title="Retrieves the total no of keys in the dictionary." alt="" coords="176,5,259,32"/>
+</map>

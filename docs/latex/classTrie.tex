@@ -1,0 +1,159 @@
+\hypertarget{classTrie}{}\doxysection{Trie Class Reference}
+\label{classTrie}\index{Trie@{Trie}}
+
+
+{\ttfamily \#include $<$tire.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classTrie_a6af57e9f25d0d0a2d59eea5a4a802908}{Trie}} ()
+\item 
+\mbox{\hyperlink{classTrie_abf9d6f48d556e09d1b292412df153a4b}{$\sim$\+Trie}} ()
+\item 
+void \mbox{\hyperlink{classTrie_a7a13a211287ca69c00368bfde90f1060}{insert}} (const std\+::string \&key, long offset)
+\item 
+long \mbox{\hyperlink{classTrie_a2bbd9365111786a5950407b81df7a59b}{search}} (const std\+::string \&key)
+\item 
+void \mbox{\hyperlink{classTrie_a52af88e2d70a06a7c4a0f75db25be4b2}{remove}} (const std\+::string \&key)
+\item 
+bool \mbox{\hyperlink{classTrie_a01acf72e7389880cc4c7ba3377500164}{is\+Deleted}} (const std\+::string \&key)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classTrie_a6af57e9f25d0d0a2d59eea5a4a802908}\label{classTrie_a6af57e9f25d0d0a2d59eea5a4a802908}} 
+\index{Trie@{Trie}!Trie@{Trie}}
+\index{Trie@{Trie}!Trie@{Trie}}
+\doxysubsubsection{\texorpdfstring{Trie()}{Trie()}}
+{\footnotesize\ttfamily Trie\+::\+Trie (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{22 \{ root = \textcolor{keyword}{new} \mbox{\hyperlink{classTrieNode}{TrieNode}}(); \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classTrie_abf9d6f48d556e09d1b292412df153a4b}\label{classTrie_abf9d6f48d556e09d1b292412df153a4b}} 
+\index{Trie@{Trie}!````~Trie@{$\sim$Trie}}
+\index{````~Trie@{$\sim$Trie}!Trie@{Trie}}
+\doxysubsubsection{\texorpdfstring{$\sim$Trie()}{~Trie()}}
+{\footnotesize\ttfamily Trie\+::$\sim$\+Trie (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{23 \{ deleteTrie(root); \}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classTrie_a7a13a211287ca69c00368bfde90f1060}\label{classTrie_a7a13a211287ca69c00368bfde90f1060}} 
+\index{Trie@{Trie}!insert@{insert}}
+\index{insert@{insert}!Trie@{Trie}}
+\doxysubsubsection{\texorpdfstring{insert()}{insert()}}
+{\footnotesize\ttfamily void Trie\+::insert (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key,  }\item[{long}]{offset }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{26     \{}
+\DoxyCodeLine{27         \mbox{\hyperlink{classTrieNode}{TrieNode}} *node = root;}
+\DoxyCodeLine{28         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{char} ch : key)}
+\DoxyCodeLine{29         \{}
+\DoxyCodeLine{30             \textcolor{keywordflow}{if} (!node-\/>\mbox{\hyperlink{classTrieNode_ab0ebb239b5f94dd1c48ee07106276048}{children}}.count(ch))}
+\DoxyCodeLine{31                 node-\/>\mbox{\hyperlink{classTrieNode_ab0ebb239b5f94dd1c48ee07106276048}{children}}[ch] = \textcolor{keyword}{new} \mbox{\hyperlink{classTrieNode}{TrieNode}}();}
+\DoxyCodeLine{32             node = node-\/>\mbox{\hyperlink{classTrieNode_ab0ebb239b5f94dd1c48ee07106276048}{children}}[ch];}
+\DoxyCodeLine{33         \}}
+\DoxyCodeLine{34         node-\/>\mbox{\hyperlink{classTrieNode_a1836e71e2c41bb0f99f00a970491feae}{file\_offset}} = offset;}
+\DoxyCodeLine{35         node-\/>\mbox{\hyperlink{classTrieNode_a0fd0a12ee8f7e229701ba6200ae539cb}{isDeleted}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{36     \}}
+
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classTrie_a7a13a211287ca69c00368bfde90f1060_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classTrie_a01acf72e7389880cc4c7ba3377500164}\label{classTrie_a01acf72e7389880cc4c7ba3377500164}} 
+\index{Trie@{Trie}!isDeleted@{isDeleted}}
+\index{isDeleted@{isDeleted}!Trie@{Trie}}
+\doxysubsubsection{\texorpdfstring{isDeleted()}{isDeleted()}}
+{\footnotesize\ttfamily bool Trie\+::is\+Deleted (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{63     \{}
+\DoxyCodeLine{64         \mbox{\hyperlink{classTrieNode}{TrieNode}} *node = root;}
+\DoxyCodeLine{65         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{char} ch : key)}
+\DoxyCodeLine{66         \{}
+\DoxyCodeLine{67             \textcolor{keywordflow}{if} (!node-\/>\mbox{\hyperlink{classTrieNode_ab0ebb239b5f94dd1c48ee07106276048}{children}}.count(ch))}
+\DoxyCodeLine{68                 \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{69             node = node-\/>\mbox{\hyperlink{classTrieNode_ab0ebb239b5f94dd1c48ee07106276048}{children}}[ch];}
+\DoxyCodeLine{70         \}}
+\DoxyCodeLine{71         \textcolor{keywordflow}{return} node-\/>\mbox{\hyperlink{classTrieNode_a0fd0a12ee8f7e229701ba6200ae539cb}{isDeleted}};}
+\DoxyCodeLine{72     \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classTrie_a52af88e2d70a06a7c4a0f75db25be4b2}\label{classTrie_a52af88e2d70a06a7c4a0f75db25be4b2}} 
+\index{Trie@{Trie}!remove@{remove}}
+\index{remove@{remove}!Trie@{Trie}}
+\doxysubsubsection{\texorpdfstring{remove()}{remove()}}
+{\footnotesize\ttfamily void Trie\+::remove (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{51     \{}
+\DoxyCodeLine{52         \mbox{\hyperlink{classTrieNode}{TrieNode}} *node = root;}
+\DoxyCodeLine{53         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{char} ch : key)}
+\DoxyCodeLine{54         \{}
+\DoxyCodeLine{55             \textcolor{keywordflow}{if} (!node-\/>\mbox{\hyperlink{classTrieNode_ab0ebb239b5f94dd1c48ee07106276048}{children}}.count(ch))}
+\DoxyCodeLine{56                 \textcolor{keywordflow}{return};}
+\DoxyCodeLine{57             node = node-\/>\mbox{\hyperlink{classTrieNode_ab0ebb239b5f94dd1c48ee07106276048}{children}}[ch];}
+\DoxyCodeLine{58         \}}
+\DoxyCodeLine{59         node-\/>\mbox{\hyperlink{classTrieNode_a0fd0a12ee8f7e229701ba6200ae539cb}{isDeleted}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{60     \}}
+
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=305pt]{classTrie_a52af88e2d70a06a7c4a0f75db25be4b2_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classTrie_a2bbd9365111786a5950407b81df7a59b}\label{classTrie_a2bbd9365111786a5950407b81df7a59b}} 
+\index{Trie@{Trie}!search@{search}}
+\index{search@{search}!Trie@{Trie}}
+\doxysubsubsection{\texorpdfstring{search()}{search()}}
+{\footnotesize\ttfamily long Trie\+::search (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{39     \{}
+\DoxyCodeLine{40         \mbox{\hyperlink{classTrieNode}{TrieNode}} *node = root;}
+\DoxyCodeLine{41         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{char} ch : key)}
+\DoxyCodeLine{42         \{}
+\DoxyCodeLine{43             \textcolor{keywordflow}{if} (!node-\/>\mbox{\hyperlink{classTrieNode_ab0ebb239b5f94dd1c48ee07106276048}{children}}.count(ch))}
+\DoxyCodeLine{44                 \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{45             node = node-\/>\mbox{\hyperlink{classTrieNode_ab0ebb239b5f94dd1c48ee07106276048}{children}}[ch];}
+\DoxyCodeLine{46         \}}
+\DoxyCodeLine{47         \textcolor{keywordflow}{return} node-\/>\mbox{\hyperlink{classTrieNode_a0fd0a12ee8f7e229701ba6200ae539cb}{isDeleted}} ? -\/1 : node-\/>\mbox{\hyperlink{classTrieNode_a1836e71e2c41bb0f99f00a970491feae}{file\_offset}};}
+\DoxyCodeLine{48     \}}
+
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classTrie_a2bbd9365111786a5950407b81df7a59b_icgraph}
+\end{center}
+\end{figure}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lib/\mbox{\hyperlink{tire_8h}{tire.\+h}}\end{DoxyCompactItemize}

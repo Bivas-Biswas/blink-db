@@ -1,0 +1,341 @@
+\begin{theindex}
+
+  \item {$\sim$Client}
+    \subitem {Client}, \hyperpage{9}
+  \item {$\sim$Dict}
+    \subitem {Dict}, \hyperpage{14}
+  \item {$\sim$LRUCache}
+    \subitem {LRUCache}, \hyperpage{25}
+  \item {$\sim$LoadBalancer}
+    \subitem {LoadBalancer}, \hyperpage{20}
+  \item {$\sim$PersistenceKVStore}
+    \subitem {PersistenceKVStore}, \hyperpage{36}
+  \item {$\sim$Server}
+    \subitem {Server}, \hyperpage{41}
+  \item {$\sim$Trie}
+    \subitem {Trie}, \hyperpage{48}
+
+  \indexspace
+
+  \item {add}
+    \subitem {Dict}, \hyperpage{14}
+
+  \indexspace
+
+  \item {blink\_cli.cpp}
+    \subitem {BUFFER\_SIZE}, \hyperpage{66}
+    \subitem {command\_loop}, \hyperpage{66}
+    \subitem {main}, \hyperpage{68}
+    \subitem {SERVER\_IP}, \hyperpage{66}
+    \subitem {SERVER\_PORT}, \hyperpage{66}
+  \item {blink\_server.cpp}
+    \subitem {BUFFER\_SIZE}, \hyperpage{70}
+    \subitem {main}, \hyperpage{69}
+    \subitem {MAX\_EVENTS}, \hyperpage{70}
+    \subitem {MAX\_MEMORY\_BYTES}, \hyperpage{70}
+    \subitem {SERVER\_IP}, \hyperpage{71}
+    \subitem {SERVER\_PORT}, \hyperpage{71}
+  \item {blink\_server\_with\_lb.cpp}
+    \subitem {BUFFER\_SIZE}, \hyperpage{72}
+    \subitem {main}, \hyperpage{72}
+    \subitem {MAX\_EVENTS}, \hyperpage{72}
+    \subitem {MAX\_MEMORY\_BYTES}, \hyperpage{72}
+    \subitem {parse\_key}, \hyperpage{73}
+    \subitem {SERVER\_IP}, \hyperpage{72}
+    \subitem {SERVER\_PORT}, \hyperpage{72}
+    \subitem {serverThread}, \hyperpage{74}
+  \item {BloomFilter}, \hyperpage{5}
+    \subitem {BloomFilter}, \hyperpage{5}
+    \subitem {contains}, \hyperpage{6}
+    \subitem {insert}, \hyperpage{6}
+    \subitem {remove}, \hyperpage{7}
+  \item {buffer}
+    \subitem {Client}, \hyperpage{12}
+  \item {BUFFER\_SIZE}
+    \subitem {blink\_cli.cpp}, \hyperpage{66}
+    \subitem {blink\_server.cpp}, \hyperpage{70}
+    \subitem {blink\_server\_with\_lb.cpp}, \hyperpage{72}
+  \item {buffer\_size}
+    \subitem {Client}, \hyperpage{12}
+
+  \indexspace
+
+  \item {children}
+    \subitem {TrieNode}, \hyperpage{51}
+  \item {Client}, \hyperpage{7}
+    \subitem {$\sim$Client}, \hyperpage{9}
+    \subitem {buffer}, \hyperpage{12}
+    \subitem {buffer\_size}, \hyperpage{12}
+    \subitem {Client}, \hyperpage{8}
+    \subitem {close\_server}, \hyperpage{9}
+    \subitem {del}, \hyperpage{9}
+    \subitem {get}, \hyperpage{10}
+    \subitem {ip\_addr}, \hyperpage{12}
+    \subitem {port}, \hyperpage{12}
+    \subitem {server\_init}, \hyperpage{11}
+    \subitem {set}, \hyperpage{11}
+  \item {close\_server}
+    \subitem {Client}, \hyperpage{9}
+  \item {command\_loop}
+    \subitem {blink\_cli.cpp}, \hyperpage{66}
+  \item {contains}
+    \subitem {BloomFilter}, \hyperpage{6}
+  \item {create\_non\_locking\_socket}
+    \subitem {create\_non\_locking\_socket.h}, \hyperpage{76}
+  \item {create\_non\_locking\_socket.h}
+    \subitem {create\_non\_locking\_socket}, \hyperpage{76}
+
+  \indexspace
+
+  \item {del}
+    \subitem {Client}, \hyperpage{9}
+    \subitem {LRUCache}, \hyperpage{25}
+  \item {Dict}, \hyperpage{13}
+    \subitem {$\sim$Dict}, \hyperpage{14}
+    \subitem {add}, \hyperpage{14}
+    \subitem {Dict}, \hyperpage{14}
+    \subitem {enableResize}, \hyperpage{15}
+    \subitem {find}, \hyperpage{15}
+    \subitem {get\_size\_of\_dict}, \hyperpage{16}
+    \subitem {isRehashing}, \hyperpage{16}
+    \subitem {rehash}, \hyperpage{17}
+    \subitem {remove}, \hyperpage{17}
+    \subitem {replace}, \hyperpage{18}
+    \subitem {size}, \hyperpage{18}
+  \item {dict}
+    \subitem {LRUCache}, \hyperpage{32}
+  \item {dict.h}
+    \subitem {freeString}, \hyperpage{56}
+    \subitem {stringCompare}, \hyperpage{57}
+    \subitem {stringDup}, \hyperpage{57}
+    \subitem {stringHash}, \hyperpage{58}
+
+  \indexspace
+
+  \item {enableResize}
+    \subitem {Dict}, \hyperpage{15}
+  \item {encode\_resp}
+    \subitem {Server}, \hyperpage{41}
+
+  \indexspace
+
+  \item {file\_offset}
+    \subitem {TrieNode}, \hyperpage{51}
+  \item {find}
+    \subitem {Dict}, \hyperpage{15}
+  \item {freeString}
+    \subitem {dict.h}, \hyperpage{56}
+
+  \indexspace
+
+  \item {get}
+    \subitem {Client}, \hyperpage{10}
+    \subitem {LRUCache}, \hyperpage{26, 27}
+    \subitem {PersistenceKVStore}, \hyperpage{36}
+  \item {get\_size\_of\_dict}
+    \subitem {Dict}, \hyperpage{16}
+
+  \indexspace
+
+  \item {handle\_command}
+    \subitem {Server}, \hyperpage{41}
+  \item {head}
+    \subitem {LRUCache}, \hyperpage{32}
+
+  \indexspace
+
+  \item {init}
+    \subitem {Server}, \hyperpage{44}
+  \item {insert}
+    \subitem {BloomFilter}, \hyperpage{6}
+    \subitem {PersistenceKVStore}, \hyperpage{37}
+    \subitem {Trie}, \hyperpage{48}
+  \item {ip}
+    \subitem {ServerAdd}, \hyperpage{47}
+  \item {ip\_addr}
+    \subitem {Client}, \hyperpage{12}
+  \item {isDeleted}
+    \subitem {Trie}, \hyperpage{49}
+    \subitem {TrieNode}, \hyperpage{51}
+  \item {isRehashing}
+    \subitem {Dict}, \hyperpage{16}
+
+  \indexspace
+
+  \item {key}
+    \subitem {LRUCache::Node}, \hyperpage{34}
+
+  \indexspace
+
+  \item {lib/bloomfilter.h}, \hyperpage{53}
+  \item {lib/client.h}, \hyperpage{54}
+  \item {lib/dict.h}, \hyperpage{55}
+  \item {lib/load\_balancer.h}, \hyperpage{58}
+  \item {lib/lru\_cache\_v0.h}, \hyperpage{59}
+  \item {lib/lru\_cache\_v1.h}, \hyperpage{60}
+  \item {lib/persistence\_kv\_store.h}, \hyperpage{61}
+  \item {lib/server.h}, \hyperpage{62}
+  \item {lib/tire.h}, \hyperpage{63}
+  \item {lib/types.h}, \hyperpage{64}
+  \item {LoadBalancer}, \hyperpage{19}
+    \subitem {$\sim$LoadBalancer}, \hyperpage{20}
+    \subitem {LoadBalancer}, \hyperpage{20}
+    \subitem {server\_init}, \hyperpage{20}
+  \item {LRUCache}, \hyperpage{23}
+    \subitem {$\sim$LRUCache}, \hyperpage{25}
+    \subitem {del}, \hyperpage{25}
+    \subitem {dict}, \hyperpage{32}
+    \subitem {get}, \hyperpage{26, 27}
+    \subitem {head}, \hyperpage{32}
+    \subitem {LRUCache}, \hyperpage{24}
+    \subitem {max\_memory}, \hyperpage{28}
+    \subitem {memory\_usage}, \hyperpage{28, 29}
+    \subitem {printList}, \hyperpage{29}
+    \subitem {set}, \hyperpage{29, 30}
+    \subitem {size}, \hyperpage{31, 32}
+    \subitem {storage}, \hyperpage{32}
+    \subitem {tail}, \hyperpage{33}
+    \subitem {value}, \hyperpage{33}
+  \item {LRUCache::Node}, \hyperpage{33}
+    \subitem {key}, \hyperpage{34}
+    \subitem {next}, \hyperpage{34}
+    \subitem {Node}, \hyperpage{34}
+    \subitem {prev}, \hyperpage{34}
+    \subitem {value}, \hyperpage{34}
+
+  \indexspace
+
+  \item {main}
+    \subitem {blink\_cli.cpp}, \hyperpage{68}
+    \subitem {blink\_server.cpp}, \hyperpage{69}
+    \subitem {blink\_server\_with\_lb.cpp}, \hyperpage{72}
+  \item {MAX\_EVENTS}
+    \subitem {blink\_server.cpp}, \hyperpage{70}
+    \subitem {blink\_server\_with\_lb.cpp}, \hyperpage{72}
+  \item {max\_memory}
+    \subitem {LRUCache}, \hyperpage{28}
+  \item {MAX\_MEMORY\_BYTES}
+    \subitem {blink\_server.cpp}, \hyperpage{70}
+    \subitem {blink\_server\_with\_lb.cpp}, \hyperpage{72}
+  \item {memory\_usage}
+    \subitem {LRUCache}, \hyperpage{28, 29}
+
+  \indexspace
+
+  \item {next}
+    \subitem {LRUCache::Node}, \hyperpage{34}
+  \item {Node}
+    \subitem {LRUCache::Node}, \hyperpage{34}
+
+  \indexspace
+
+  \item {parse\_key}
+    \subitem {blink\_server\_with\_lb.cpp}, \hyperpage{73}
+  \item {parse\_resp}
+    \subitem {Server}, \hyperpage{46}
+  \item {PersistenceKVStore}, \hyperpage{35}
+    \subitem {$\sim$PersistenceKVStore}, \hyperpage{36}
+    \subitem {get}, \hyperpage{36}
+    \subitem {insert}, \hyperpage{37}
+    \subitem {PersistenceKVStore}, \hyperpage{35}
+    \subitem {remove}, \hyperpage{38}
+    \subitem {remove\_db}, \hyperpage{39}
+  \item {port}
+    \subitem {Client}, \hyperpage{12}
+    \subitem {ServerAdd}, \hyperpage{47}
+  \item {prev}
+    \subitem {LRUCache::Node}, \hyperpage{34}
+  \item {printList}
+    \subitem {LRUCache}, \hyperpage{29}
+
+  \indexspace
+
+  \item {rehash}
+    \subitem {Dict}, \hyperpage{17}
+  \item {remove}
+    \subitem {BloomFilter}, \hyperpage{7}
+    \subitem {Dict}, \hyperpage{17}
+    \subitem {PersistenceKVStore}, \hyperpage{38}
+    \subitem {Trie}, \hyperpage{49}
+  \item {remove\_db}
+    \subitem {PersistenceKVStore}, \hyperpage{39}
+  \item {replace}
+    \subitem {Dict}, \hyperpage{18}
+
+  \indexspace
+
+  \item {search}
+    \subitem {Trie}, \hyperpage{50}
+  \item {Server}, \hyperpage{39}
+    \subitem {$\sim$Server}, \hyperpage{41}
+    \subitem {encode\_resp}, \hyperpage{41}
+    \subitem {handle\_command}, \hyperpage{41}
+    \subitem {init}, \hyperpage{44}
+    \subitem {parse\_resp}, \hyperpage{46}
+    \subitem {Server}, \hyperpage{40}
+  \item {server\_init}
+    \subitem {Client}, \hyperpage{11}
+    \subitem {LoadBalancer}, \hyperpage{20}
+  \item {SERVER\_IP}
+    \subitem {blink\_cli.cpp}, \hyperpage{66}
+    \subitem {blink\_server.cpp}, \hyperpage{71}
+    \subitem {blink\_server\_with\_lb.cpp}, \hyperpage{72}
+  \item {SERVER\_PORT}
+    \subitem {blink\_cli.cpp}, \hyperpage{66}
+    \subitem {blink\_server.cpp}, \hyperpage{71}
+    \subitem {blink\_server\_with\_lb.cpp}, \hyperpage{72}
+  \item {ServerAdd}, \hyperpage{47}
+    \subitem {ip}, \hyperpage{47}
+    \subitem {port}, \hyperpage{47}
+  \item {serverThread}
+    \subitem {blink\_server\_with\_lb.cpp}, \hyperpage{74}
+  \item {set}
+    \subitem {Client}, \hyperpage{11}
+    \subitem {LRUCache}, \hyperpage{29, 30}
+  \item {set\_nonblocking}
+    \subitem {set\_nonblocking.h}, \hyperpage{79}
+  \item {set\_nonblocking.h}
+    \subitem {set\_nonblocking}, \hyperpage{79}
+  \item {size}
+    \subitem {Dict}, \hyperpage{18}
+    \subitem {LRUCache}, \hyperpage{31, 32}
+  \item {src/blink\_cli.cpp}, \hyperpage{65}
+  \item {src/blink\_server.cpp}, \hyperpage{68}
+  \item {src/blink\_server\_with\_lb.cpp}, \hyperpage{71}
+  \item {storage}
+    \subitem {LRUCache}, \hyperpage{32}
+  \item {stringCompare}
+    \subitem {dict.h}, \hyperpage{57}
+  \item {stringDup}
+    \subitem {dict.h}, \hyperpage{57}
+  \item {stringHash}
+    \subitem {dict.h}, \hyperpage{58}
+
+  \indexspace
+
+  \item {tail}
+    \subitem {LRUCache}, \hyperpage{33}
+  \item {Trie}, \hyperpage{48}
+    \subitem {$\sim$Trie}, \hyperpage{48}
+    \subitem {insert}, \hyperpage{48}
+    \subitem {isDeleted}, \hyperpage{49}
+    \subitem {remove}, \hyperpage{49}
+    \subitem {search}, \hyperpage{50}
+    \subitem {Trie}, \hyperpage{48}
+  \item {TrieNode}, \hyperpage{50}
+    \subitem {children}, \hyperpage{51}
+    \subitem {file\_offset}, \hyperpage{51}
+    \subitem {isDeleted}, \hyperpage{51}
+
+  \indexspace
+
+  \item {utils/create\_non\_locking\_socket.h}, \hyperpage{75}
+  \item {utils/set\_nonblocking.h}, \hyperpage{78}
+
+  \indexspace
+
+  \item {value}
+    \subitem {LRUCache}, \hyperpage{33}
+    \subitem {LRUCache::Node}, \hyperpage{34}
+
+\end{theindex}

@@ -1,0 +1,6 @@
+<map id="command_loop" name="command_loop">
+<area shape="rect" id="node1" title="Reads user input, parses commands, and interacts with the Client class." alt="" coords="5,56,128,83"/>
+<area shape="rect" id="node2" href="$classClient.html#a115d5c86cf42098638aa4b262e5afae3" title="Sends a DEL command to delete a key." alt="" coords="177,5,265,32"/>
+<area shape="rect" id="node3" href="$classClient.html#af10514dc3fdc66ba070d82a2211d381e" title="Sends a GET command to retrieve the value of a key." alt="" coords="176,56,265,83"/>
+<area shape="rect" id="node4" href="$classClient.html#a3ad5ae59149ce241b7efea71fe065fec" title="Sends a SET command to store a key&#45;value pair." alt="" coords="177,107,265,133"/>
+</map>

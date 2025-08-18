@@ -1,0 +1,171 @@
+\hypertarget{blink__cli_8cpp}{}\doxysection{src/blink\+\_\+cli.cpp File Reference}
+\label{blink__cli_8cpp}\index{src/blink\_cli.cpp@{src/blink\_cli.cpp}}
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include \char`\"{}../lib/client.\+h\char`\"{}}\newline
+Include dependency graph for blink\+\_\+cli.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{blink__cli_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{blink__cli_8cpp_a6b20d41d6252e9871430c242cb1a56e7}{BUFFER\+\_\+\+SIZE}}~1024
+\item 
+\#define \mbox{\hyperlink{blink__cli_8cpp_ac42367fe5c999ec6650de83e9d72fe8c}{SERVER\+\_\+\+PORT}}~9001
+\item 
+\#define \mbox{\hyperlink{blink__cli_8cpp_a28d06fc286f28044ed3380969700ff3f}{SERVER\+\_\+\+IP}}~\char`\"{}127.\+0.\+0.\+1\char`\"{}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{blink__cli_8cpp_a3d07c9c8554b653b482975f4149bfa06}{command\+\_\+loop}} (\mbox{\hyperlink{classClient}{Client}} \&client)
+\begin{DoxyCompactList}\small\item\em Reads user input, parses commands, and interacts with the \mbox{\hyperlink{classClient}{Client}} class. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{blink__cli_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{blink__cli_8cpp_a6b20d41d6252e9871430c242cb1a56e7}\label{blink__cli_8cpp_a6b20d41d6252e9871430c242cb1a56e7}} 
+\index{blink\_cli.cpp@{blink\_cli.cpp}!BUFFER\_SIZE@{BUFFER\_SIZE}}
+\index{BUFFER\_SIZE@{BUFFER\_SIZE}!blink\_cli.cpp@{blink\_cli.cpp}}
+\doxysubsubsection{\texorpdfstring{BUFFER\_SIZE}{BUFFER\_SIZE}}
+{\footnotesize\ttfamily \#define BUFFER\+\_\+\+SIZE~1024}
+
+\mbox{\Hypertarget{blink__cli_8cpp_a28d06fc286f28044ed3380969700ff3f}\label{blink__cli_8cpp_a28d06fc286f28044ed3380969700ff3f}} 
+\index{blink\_cli.cpp@{blink\_cli.cpp}!SERVER\_IP@{SERVER\_IP}}
+\index{SERVER\_IP@{SERVER\_IP}!blink\_cli.cpp@{blink\_cli.cpp}}
+\doxysubsubsection{\texorpdfstring{SERVER\_IP}{SERVER\_IP}}
+{\footnotesize\ttfamily \#define SERVER\+\_\+\+IP~\char`\"{}127.\+0.\+0.\+1\char`\"{}}
+
+\mbox{\Hypertarget{blink__cli_8cpp_ac42367fe5c999ec6650de83e9d72fe8c}\label{blink__cli_8cpp_ac42367fe5c999ec6650de83e9d72fe8c}} 
+\index{blink\_cli.cpp@{blink\_cli.cpp}!SERVER\_PORT@{SERVER\_PORT}}
+\index{SERVER\_PORT@{SERVER\_PORT}!blink\_cli.cpp@{blink\_cli.cpp}}
+\doxysubsubsection{\texorpdfstring{SERVER\_PORT}{SERVER\_PORT}}
+{\footnotesize\ttfamily \#define SERVER\+\_\+\+PORT~9001}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{blink__cli_8cpp_a3d07c9c8554b653b482975f4149bfa06}\label{blink__cli_8cpp_a3d07c9c8554b653b482975f4149bfa06}} 
+\index{blink\_cli.cpp@{blink\_cli.cpp}!command\_loop@{command\_loop}}
+\index{command\_loop@{command\_loop}!blink\_cli.cpp@{blink\_cli.cpp}}
+\doxysubsubsection{\texorpdfstring{command\_loop()}{command\_loop()}}
+{\footnotesize\ttfamily void command\+\_\+loop (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classClient}{Client}} \&}]{client }\end{DoxyParamCaption})}
+
+
+
+Reads user input, parses commands, and interacts with the \mbox{\hyperlink{classClient}{Client}} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em client} & A reference to the \mbox{\hyperlink{classClient}{Client}} object. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{13 \{}
+\DoxyCodeLine{14     std::cout << \textcolor{stringliteral}{"{}Server is connected at "{}} << client.\mbox{\hyperlink{classClient_a4374f45b8c4cc22dab397c9df0d7639e}{ip\_addr}} << \textcolor{stringliteral}{"{}:"{}} << client.\mbox{\hyperlink{classClient_aad8864d1362eae7c50e53c0d131b7442}{port}} << std::endl;}
+\DoxyCodeLine{15     std::cout << \textcolor{stringliteral}{"{}Enter command (SET key value, GET key, DEL key, or EXIT to quit):"{}} << std::endl;}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17     std::string input, command, key, value;}
+\DoxyCodeLine{18     \textcolor{keywordflow}{while} (\textcolor{keyword}{true})}
+\DoxyCodeLine{19     \{}
+\DoxyCodeLine{20         std::cout << \textcolor{stringliteral}{"{}> "{}};}
+\DoxyCodeLine{21         std::getline(std::cin, input);}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23         std::istringstream iss(input);}
+\DoxyCodeLine{24         iss >> command;}
+\DoxyCodeLine{25         \textcolor{keywordflow}{if} (command == \textcolor{stringliteral}{"{}SET"{}})}
+\DoxyCodeLine{26         \{}
+\DoxyCodeLine{27             iss >> key >> value;}
+\DoxyCodeLine{28             \textcolor{keywordflow}{if} (key.empty() || value.empty())}
+\DoxyCodeLine{29             \{}
+\DoxyCodeLine{30                 std::cout << \textcolor{stringliteral}{"{}Invalid SET command. Usage: SET <key> <value>"{}} << std::endl;}
+\DoxyCodeLine{31                 \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{32             \}}
+\DoxyCodeLine{33             std::cout << client.\mbox{\hyperlink{classClient_a3ad5ae59149ce241b7efea71fe065fec}{set}}(key, value) << std::endl;}
+\DoxyCodeLine{34         \}}
+\DoxyCodeLine{35         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (command == \textcolor{stringliteral}{"{}GET"{}})}
+\DoxyCodeLine{36         \{}
+\DoxyCodeLine{37             iss >> key;}
+\DoxyCodeLine{38             \textcolor{keywordflow}{if} (key.empty())}
+\DoxyCodeLine{39             \{}
+\DoxyCodeLine{40                 std::cout << \textcolor{stringliteral}{"{}Invalid GET command. Usage: GET <key>"{}} << std::endl;}
+\DoxyCodeLine{41                 \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{42             \}}
+\DoxyCodeLine{43             std::cout << client.\mbox{\hyperlink{classClient_af10514dc3fdc66ba070d82a2211d381e}{get}}(key) << std::endl;}
+\DoxyCodeLine{44         \}}
+\DoxyCodeLine{45         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (command == \textcolor{stringliteral}{"{}DEL"{}})}
+\DoxyCodeLine{46         \{}
+\DoxyCodeLine{47             iss >> key;}
+\DoxyCodeLine{48             \textcolor{keywordflow}{if} (key.empty())}
+\DoxyCodeLine{49             \{}
+\DoxyCodeLine{50                 std::cout << \textcolor{stringliteral}{"{}Invalid DEL command. Usage: DEL <key>"{}} << std::endl;}
+\DoxyCodeLine{51                 \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{52             \}}
+\DoxyCodeLine{53             std::cout << client.\mbox{\hyperlink{classClient_a115d5c86cf42098638aa4b262e5afae3}{del}}(key) << std::endl;}
+\DoxyCodeLine{54         \}}
+\DoxyCodeLine{55         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (command == \textcolor{stringliteral}{"{}EXIT"{}})}
+\DoxyCodeLine{56         \{}
+\DoxyCodeLine{57             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{58         \}}
+\DoxyCodeLine{59         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{60         \{}
+\DoxyCodeLine{61             std::cout << \textcolor{stringliteral}{"{}Unknown command. Use SET, GET, DEL, or EXIT."{}} << std::endl;}
+\DoxyCodeLine{62         \}}
+\DoxyCodeLine{63     \}}
+\DoxyCodeLine{64 \}}
+
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=275pt]{blink__cli_8cpp_a3d07c9c8554b653b482975f4149bfa06_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=249pt]{blink__cli_8cpp_a3d07c9c8554b653b482975f4149bfa06_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{blink__cli_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{blink__cli_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}} 
+\index{blink\_cli.cpp@{blink\_cli.cpp}!main@{main}}
+\index{main@{main}!blink\_cli.cpp@{blink\_cli.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{67 \{}
+\DoxyCodeLine{68     \mbox{\hyperlink{classClient}{Client}} client(\mbox{\hyperlink{blink__cli_8cpp_a28d06fc286f28044ed3380969700ff3f}{SERVER\_IP}}, \mbox{\hyperlink{blink__cli_8cpp_ac42367fe5c999ec6650de83e9d72fe8c}{SERVER\_PORT}}, \mbox{\hyperlink{blink__cli_8cpp_a6b20d41d6252e9871430c242cb1a56e7}{BUFFER\_SIZE}});}
+\DoxyCodeLine{69     }
+\DoxyCodeLine{70     \textcolor{keywordflow}{if} (client.server\_init() == -\/1)}
+\DoxyCodeLine{71     \{}
+\DoxyCodeLine{72         \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{73     \}}
+\DoxyCodeLine{74 }
+\DoxyCodeLine{75     \mbox{\hyperlink{blink__cli_8cpp_a3d07c9c8554b653b482975f4149bfa06}{command\_loop}}(client);}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{77     client.close\_server();}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{79     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{80 \}}
+
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{blink__cli_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4_cgraph}
+\end{center}
+\end{figure}

@@ -1,0 +1,9 @@
+<map id="set_nonblocking" name="set_nonblocking">
+<area shape="rect" id="node1" title=" " alt="" coords="695,65,823,92"/>
+<area shape="rect" id="node2" href="$create__non__locking__socket_8h.html#a05a7e9ad0559e723ab0bc57c15684854" title="Creates a non&#45;blocking socket." alt="" coords="499,58,647,99"/>
+<area shape="rect" id="node3" href="$classServer.html#a1016678b77eacc5aa97f2310f8b442b1" title="Initializes the server, sets up epoll, and starts listening for connections." alt="" coords="311,40,404,67"/>
+<area shape="rect" id="node7" href="$classLoadBalancer.html#a501ac1cc68e80422abcadd40446b1091" title="Initializes the server and starts handling client requests." alt="" coords="264,107,451,133"/>
+<area shape="rect" id="node4" href="$blink__server_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Main function to start the server." alt="" coords="135,5,189,32"/>
+<area shape="rect" id="node5" href="$blink__server__with__lb_8cpp.html#a92c506cc67dab3e3a4bfe3d097190d6f" title=" " alt="" coords="108,56,216,83"/>
+<area shape="rect" id="node6" href="$blink__server__with__lb_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,81,60,108"/>
+</map>

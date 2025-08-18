@@ -1,0 +1,374 @@
+\hypertarget{classDict}{}\doxysection{Dict Class Reference}
+\label{classDict}\index{Dict@{Dict}}
+
+
+A dictionary (hash table) implementation with dynamic resizing and rehashing.  
+
+
+
+
+{\ttfamily \#include $<$dict.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classDict_a8c272756ff370c95a520e16e6064b5a0}{Dict}} (std\+::function$<$ unsigned int(const void $\ast$)$>$ hash\+Func, std\+::function$<$ void $\ast$(const void $\ast$)$>$ key\+Dup\+Func, std\+::function$<$ void $\ast$(const void $\ast$)$>$ val\+Dup\+Func, std\+::function$<$ int(const void $\ast$, const void $\ast$)$>$ key\+Compare\+Func, std\+::function$<$ void(void $\ast$)$>$ key\+Destructor\+Func, std\+::function$<$ void(void $\ast$)$>$ val\+Destructor\+Func)
+\begin{DoxyCompactList}\small\item\em Constructor for the dictionary. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classDict_a46561fe694c0bba6e7ed3703c47bf43f}{$\sim$\+Dict}} ()
+\begin{DoxyCompactList}\small\item\em Destructor for the dictionary. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classDict_a5bdef41d123a21fd1201b3f5c6b5f544}{enable\+Resize}} (bool enable)
+\begin{DoxyCompactList}\small\item\em Enables or disables automatic resizing. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classDict_ad7273850719fc8c228cb3e1cb3968b66}{add}} (void $\ast$key, void $\ast$val)
+\begin{DoxyCompactList}\small\item\em Adds a key-\/value pair to the dictionary with automatic rehashing. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classDict_a1c593021f03229abb00ceaff4ef0d79f}{replace}} (void $\ast$key, void $\ast$val)
+\begin{DoxyCompactList}\small\item\em Replaces a key\textquotesingle{}s value in the dictionary. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classDict_ae58d28edd0f04172833805f26518351b}{remove}} (const void $\ast$key)
+\begin{DoxyCompactList}\small\item\em Removes a key from the dictionary with incremental rehashing. \end{DoxyCompactList}\item 
+void $\ast$ \mbox{\hyperlink{classDict_aee0c851f77099933a0925f453a1a7239}{find}} (const void $\ast$key)
+\begin{DoxyCompactList}\small\item\em Finds a key in the dictionary. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classDict_a4781431d1fd6a49840be7cb3fbe27fcc}{rehash}} (int n)
+\begin{DoxyCompactList}\small\item\em Performs a rehash operation. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classDict_abba811a5858a82e19c316edb6842a89f}{is\+Rehashing}} ()
+\begin{DoxyCompactList}\small\item\em Checks if rehashing is in progress. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classDict_a9ce4d8fa2039d2589d1ccc52bbe64c34}{get\+\_\+size\+\_\+of\+\_\+dict}} ()
+\begin{DoxyCompactList}\small\item\em Retrieves the total memory usage of the dictionary for keys, values. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classDict_a9cfce08a086df862a97afc0fff66459c}{size}} ()
+\begin{DoxyCompactList}\small\item\em Retrieves the total no of keys in the dictionary. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A dictionary (hash table) implementation with dynamic resizing and rehashing. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classDict_a8c272756ff370c95a520e16e6064b5a0}\label{classDict_a8c272756ff370c95a520e16e6064b5a0}} 
+\index{Dict@{Dict}!Dict@{Dict}}
+\index{Dict@{Dict}!Dict@{Dict}}
+\doxysubsubsection{\texorpdfstring{Dict()}{Dict()}}
+{\footnotesize\ttfamily Dict\+::\+Dict (\begin{DoxyParamCaption}\item[{std\+::function$<$ unsigned int(const void $\ast$)$>$}]{hash\+Func,  }\item[{std\+::function$<$ void $\ast$(const void $\ast$)$>$}]{key\+Dup\+Func,  }\item[{std\+::function$<$ void $\ast$(const void $\ast$)$>$}]{val\+Dup\+Func,  }\item[{std\+::function$<$ int(const void $\ast$, const void $\ast$)$>$}]{key\+Compare\+Func,  }\item[{std\+::function$<$ void(void $\ast$)$>$}]{key\+Destructor\+Func,  }\item[{std\+::function$<$ void(void $\ast$)$>$}]{val\+Destructor\+Func }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor for the dictionary. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash\+Func} & Hash function. \\
+\hline
+{\em key\+Dup\+Func} & Key duplication function. \\
+\hline
+{\em val\+Dup\+Func} & Value duplication function. \\
+\hline
+{\em key\+Compare\+Func} & Key comparison function. \\
+\hline
+{\em key\+Destructor\+Func} & Key destructor function. \\
+\hline
+{\em val\+Destructor\+Func} & Value destructor function. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{123         : hashFunction(hashFunc), keyDup(keyDupFunc), valDup(valDupFunc),}
+\DoxyCodeLine{124           keyCompare(keyCompareFunc), keyDestructor(keyDestructorFunc),}
+\DoxyCodeLine{125           valDestructor(valDestructorFunc)}
+\DoxyCodeLine{126     \{}
+\DoxyCodeLine{127         \_dictInit(\&d);}
+\DoxyCodeLine{128     \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classDict_a46561fe694c0bba6e7ed3703c47bf43f}\label{classDict_a46561fe694c0bba6e7ed3703c47bf43f}} 
+\index{Dict@{Dict}!````~Dict@{$\sim$Dict}}
+\index{````~Dict@{$\sim$Dict}!Dict@{Dict}}
+\doxysubsubsection{\texorpdfstring{$\sim$Dict()}{~Dict()}}
+{\footnotesize\ttfamily Dict\+::$\sim$\+Dict (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor for the dictionary. 
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{134     \{}
+\DoxyCodeLine{135         \_dictClear(\&d);}
+\DoxyCodeLine{136     \}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classDict_ad7273850719fc8c228cb3e1cb3968b66}\label{classDict_ad7273850719fc8c228cb3e1cb3968b66}} 
+\index{Dict@{Dict}!add@{add}}
+\index{add@{add}!Dict@{Dict}}
+\doxysubsubsection{\texorpdfstring{add()}{add()}}
+{\footnotesize\ttfamily int Dict\+::add (\begin{DoxyParamCaption}\item[{void $\ast$}]{key,  }\item[{void $\ast$}]{val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Adds a key-\/value pair to the dictionary with automatic rehashing. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & Key pointer. \\
+\hline
+{\em val} & Value pointer. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, 1 on failure. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{154     \{}
+\DoxyCodeLine{155         \textcolor{comment}{// Check if resize is needed before adding}}
+\DoxyCodeLine{156         \textcolor{keywordflow}{if} (\_dictShouldResize())}
+\DoxyCodeLine{157         \{}
+\DoxyCodeLine{158             \textcolor{comment}{// Calculate new size based on current usage}}
+\DoxyCodeLine{159             \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} newSize = d.ht[0].used * 2;}
+\DoxyCodeLine{160             \_dictExpand(\&d, newSize);}
+\DoxyCodeLine{161         \}}
+\DoxyCodeLine{162 }
+\DoxyCodeLine{163         \textcolor{comment}{// Perform a rehash step if rehashing is in progress}}
+\DoxyCodeLine{164         \textcolor{keywordflow}{if} (dictIsRehashing(\&d))}
+\DoxyCodeLine{165             \_dictRehashStep();}
+\DoxyCodeLine{166 }
+\DoxyCodeLine{167         \textcolor{keywordflow}{return} dictAdd(\&d, key, val);}
+\DoxyCodeLine{168     \}}
+
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=264pt]{classDict_ad7273850719fc8c228cb3e1cb3968b66_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classDict_a5bdef41d123a21fd1201b3f5c6b5f544}\label{classDict_a5bdef41d123a21fd1201b3f5c6b5f544}} 
+\index{Dict@{Dict}!enableResize@{enableResize}}
+\index{enableResize@{enableResize}!Dict@{Dict}}
+\doxysubsubsection{\texorpdfstring{enableResize()}{enableResize()}}
+{\footnotesize\ttfamily void Dict\+::enable\+Resize (\begin{DoxyParamCaption}\item[{bool}]{enable }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Enables or disables automatic resizing. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em enable} & True to enable resizing, false to disable. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{143     \{}
+\DoxyCodeLine{144         dict\_can\_resize = enable;}
+\DoxyCodeLine{145     \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classDict_aee0c851f77099933a0925f453a1a7239}\label{classDict_aee0c851f77099933a0925f453a1a7239}} 
+\index{Dict@{Dict}!find@{find}}
+\index{find@{find}!Dict@{Dict}}
+\doxysubsubsection{\texorpdfstring{find()}{find()}}
+{\footnotesize\ttfamily void$\ast$ Dict\+::find (\begin{DoxyParamCaption}\item[{const void $\ast$}]{key }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Finds a key in the dictionary. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & Key pointer. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointer to the value if found, nullptr otherwise. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{201     \{}
+\DoxyCodeLine{202         \textcolor{comment}{// Perform a rehash step if rehashing is in progress}}
+\DoxyCodeLine{203         \textcolor{keywordflow}{if} (dictIsRehashing(\&d))}
+\DoxyCodeLine{204             \_dictRehashStep();}
+\DoxyCodeLine{205 }
+\DoxyCodeLine{206         dictEntry *he = dictFind(\&d, key);}
+\DoxyCodeLine{207         \textcolor{keywordflow}{return} he ? he-\/>v.val : \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{208     \}}
+
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=264pt]{classDict_aee0c851f77099933a0925f453a1a7239_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classDict_a9ce4d8fa2039d2589d1ccc52bbe64c34}\label{classDict_a9ce4d8fa2039d2589d1ccc52bbe64c34}} 
+\index{Dict@{Dict}!get\_size\_of\_dict@{get\_size\_of\_dict}}
+\index{get\_size\_of\_dict@{get\_size\_of\_dict}!Dict@{Dict}}
+\doxysubsubsection{\texorpdfstring{get\_size\_of\_dict()}{get\_size\_of\_dict()}}
+{\footnotesize\ttfamily size\+\_\+t Dict\+::get\+\_\+size\+\_\+of\+\_\+dict (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Retrieves the total memory usage of the dictionary for keys, values. 
+
+\begin{DoxyReturn}{Returns}
+size\+\_\+t The total size of the dictionary in bytes. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{234     \{}
+\DoxyCodeLine{235         \textcolor{keywordflow}{return} total\_size\_of\_dict;}
+\DoxyCodeLine{236     \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classDict_abba811a5858a82e19c316edb6842a89f}\label{classDict_abba811a5858a82e19c316edb6842a89f}} 
+\index{Dict@{Dict}!isRehashing@{isRehashing}}
+\index{isRehashing@{isRehashing}!Dict@{Dict}}
+\doxysubsubsection{\texorpdfstring{isRehashing()}{isRehashing()}}
+{\footnotesize\ttfamily bool Dict\+::is\+Rehashing (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks if rehashing is in progress. 
+
+\begin{DoxyReturn}{Returns}
+True if rehashing, false otherwise. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{225     \{}
+\DoxyCodeLine{226         \textcolor{keywordflow}{return} dictIsRehashing(\&d);}
+\DoxyCodeLine{227     \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classDict_a4781431d1fd6a49840be7cb3fbe27fcc}\label{classDict_a4781431d1fd6a49840be7cb3fbe27fcc}} 
+\index{Dict@{Dict}!rehash@{rehash}}
+\index{rehash@{rehash}!Dict@{Dict}}
+\doxysubsubsection{\texorpdfstring{rehash()}{rehash()}}
+{\footnotesize\ttfamily int Dict\+::rehash (\begin{DoxyParamCaption}\item[{int}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Performs a rehash operation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & Number of steps to rehash. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on completion, 1 if rehashing is ongoing. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{216     \{}
+\DoxyCodeLine{217         \textcolor{keywordflow}{return} dictRehash(\&d, n);}
+\DoxyCodeLine{218     \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classDict_ae58d28edd0f04172833805f26518351b}\label{classDict_ae58d28edd0f04172833805f26518351b}} 
+\index{Dict@{Dict}!remove@{remove}}
+\index{remove@{remove}!Dict@{Dict}}
+\doxysubsubsection{\texorpdfstring{remove()}{remove()}}
+{\footnotesize\ttfamily int Dict\+::remove (\begin{DoxyParamCaption}\item[{const void $\ast$}]{key }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Removes a key from the dictionary with incremental rehashing. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & Key pointer. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, 1 if key not found. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{187     \{}
+\DoxyCodeLine{188         \textcolor{comment}{// Perform a rehash step if rehashing is in progress}}
+\DoxyCodeLine{189         \textcolor{keywordflow}{if} (dictIsRehashing(\&d))}
+\DoxyCodeLine{190             \_dictRehashStep();}
+\DoxyCodeLine{191 }
+\DoxyCodeLine{192         \textcolor{keywordflow}{return} dictDelete(\&d, key);}
+\DoxyCodeLine{193     \}}
+
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=283pt]{classDict_ae58d28edd0f04172833805f26518351b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classDict_a1c593021f03229abb00ceaff4ef0d79f}\label{classDict_a1c593021f03229abb00ceaff4ef0d79f}} 
+\index{Dict@{Dict}!replace@{replace}}
+\index{replace@{replace}!Dict@{Dict}}
+\doxysubsubsection{\texorpdfstring{replace()}{replace()}}
+{\footnotesize\ttfamily int Dict\+::replace (\begin{DoxyParamCaption}\item[{void $\ast$}]{key,  }\item[{void $\ast$}]{val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Replaces a key\textquotesingle{}s value in the dictionary. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & Key pointer. \\
+\hline
+{\em val} & Value pointer. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if key already exists and value is replaced, 1 if key is newly added. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{177     \{}
+\DoxyCodeLine{178         \textcolor{keywordflow}{return} dictReplace(\&d, key, val);}
+\DoxyCodeLine{179     \}}
+
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=281pt]{classDict_a1c593021f03229abb00ceaff4ef0d79f_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classDict_a9cfce08a086df862a97afc0fff66459c}\label{classDict_a9cfce08a086df862a97afc0fff66459c}} 
+\index{Dict@{Dict}!size@{size}}
+\index{size@{size}!Dict@{Dict}}
+\doxysubsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily int Dict\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Retrieves the total no of keys in the dictionary. 
+
+\begin{DoxyReturn}{Returns}
+int To total no of keys in the dict 
+\end{DoxyReturn}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{244     \{}
+\DoxyCodeLine{245         \textcolor{keywordflow}{return} d.ht[0].used + d.ht[1].used;}
+\DoxyCodeLine{246     \}}
+
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=270pt]{classDict_a9cfce08a086df862a97afc0fff66459c_icgraph}
+\end{center}
+\end{figure}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lib/\mbox{\hyperlink{dict_8h}{dict.\+h}}\end{DoxyCompactItemize}

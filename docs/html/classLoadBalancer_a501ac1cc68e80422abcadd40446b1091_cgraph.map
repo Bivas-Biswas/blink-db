@@ -1,0 +1,6 @@
+<map id="LoadBalancer::server_init" name="LoadBalancer::server_init">
+<area shape="rect" id="node1" title="Initializes the server and starts handling client requests." alt="" coords="5,71,192,98"/>
+<area shape="rect" id="node2" href="$create__non__locking__socket_8h.html#a05a7e9ad0559e723ab0bc57c15684854" title="Creates a non&#45;blocking socket." alt="" coords="240,5,388,47"/>
+<area shape="rect" id="node3" href="$set__nonblocking_8h.html#a6f5a4dea41e37713ff3bdb4975bfa592" title=" " alt="" coords="436,42,564,69"/>
+<area shape="rect" id="node4" href="$blink__server__with__lb_8cpp.html#ac65aea3c57d529ec8802efbffa9e5496" title=" " alt="" coords="270,122,358,149"/>
+</map>

@@ -1,0 +1,323 @@
+\hypertarget{classClient}{}\doxysection{Client Class Reference}
+\label{classClient}\index{Client@{Client}}
+
+
+A class to interact with a Blink server using RESP (Blink Serialization Protocol).  
+
+
+
+
+{\ttfamily \#include $<$client.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classClient_a466156b11ab38c497fb63fa08b3eeecd}{Client}} (std\+::string \+\_\+ip\+\_\+addr, int \+\_\+port, int \+\_\+buffer\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Constructor for \mbox{\hyperlink{classClient}{Client}} class. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classClient_a840e519ca781888cbd54181572ebe3a7}{$\sim$\+Client}} ()
+\begin{DoxyCompactList}\small\item\em Destructor to free allocated memory. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classClient_ae43c71dba98b9c53c0ce027fe709a26f}{server\+\_\+init}} ()
+\begin{DoxyCompactList}\small\item\em Initializes the connection to the Blink server. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classClient_a3ad5ae59149ce241b7efea71fe065fec}{set}} (const std\+::string \&\+\_\+key, const std\+::string \&\+\_\+value)
+\begin{DoxyCompactList}\small\item\em Sends a SET command to store a key-\/value pair. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classClient_af10514dc3fdc66ba070d82a2211d381e}{get}} (const std\+::string \&\+\_\+key)
+\begin{DoxyCompactList}\small\item\em Sends a GET command to retrieve the value of a key. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classClient_a115d5c86cf42098638aa4b262e5afae3}{del}} (const std\+::string \&\+\_\+key)
+\begin{DoxyCompactList}\small\item\em Sends a DEL command to delete a key. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classClient_a3bb5a5015b59f502e23a9b99ca8b41d1}{close\+\_\+server}} ()
+\begin{DoxyCompactList}\small\item\em Closes the connection to the Blink server. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{classClient_a05553187a7787130df34c40bbded06f4}{buffer\+\_\+size}}
+\begin{DoxyCompactList}\small\item\em Buffer size for reading responses. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classClient_a4374f45b8c4cc22dab397c9df0d7639e}{ip\+\_\+addr}}
+\begin{DoxyCompactList}\small\item\em IP address of the Blink server. \end{DoxyCompactList}\item 
+char $\ast$ \mbox{\hyperlink{classClient_a60305bce1344ddf1f28ad1cacc1472e6}{buffer}} = nullptr
+\begin{DoxyCompactList}\small\item\em Dynamic buffer for receiving data. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classClient_aad8864d1362eae7c50e53c0d131b7442}{port}}
+\begin{DoxyCompactList}\small\item\em Port number of the Blink server. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A class to interact with a Blink server using RESP (Blink Serialization Protocol). 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classClient_a466156b11ab38c497fb63fa08b3eeecd}\label{classClient_a466156b11ab38c497fb63fa08b3eeecd}} 
+\index{Client@{Client}!Client@{Client}}
+\index{Client@{Client}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{Client()}{Client()}}
+{\footnotesize\ttfamily Client\+::\+Client (\begin{DoxyParamCaption}\item[{std\+::string}]{\+\_\+ip\+\_\+addr,  }\item[{int}]{\+\_\+port,  }\item[{int}]{\+\_\+buffer\+\_\+size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor for \mbox{\hyperlink{classClient}{Client}} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+ip\+\_\+addr} & IP address of the Blink server. \\
+\hline
+{\em \+\_\+port} & Port number of the Blink server. \\
+\hline
+{\em \+\_\+buffer\+\_\+size} & Size of the buffer for reading responses. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{32         : \mbox{\hyperlink{classClient_a4374f45b8c4cc22dab397c9df0d7639e}{ip\_addr}}(\_ip\_addr)}
+\DoxyCodeLine{33     \{}
+\DoxyCodeLine{34         \mbox{\hyperlink{classClient_aad8864d1362eae7c50e53c0d131b7442}{port}}  = \_port;}
+\DoxyCodeLine{35         \mbox{\hyperlink{classClient_a05553187a7787130df34c40bbded06f4}{buffer\_size}} = \_buffer\_size;}
+\DoxyCodeLine{36         \mbox{\hyperlink{classClient_a60305bce1344ddf1f28ad1cacc1472e6}{buffer}} = \textcolor{keyword}{new} \textcolor{keywordtype}{char}[\mbox{\hyperlink{classClient_a05553187a7787130df34c40bbded06f4}{buffer\_size}}];}
+\DoxyCodeLine{37     \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classClient_a840e519ca781888cbd54181572ebe3a7}\label{classClient_a840e519ca781888cbd54181572ebe3a7}} 
+\index{Client@{Client}!````~Client@{$\sim$Client}}
+\index{````~Client@{$\sim$Client}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{$\sim$Client()}{~Client()}}
+{\footnotesize\ttfamily Client\+::$\sim$\+Client (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor to free allocated memory. 
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{43     \{}
+\DoxyCodeLine{44         \textcolor{keyword}{delete}[] \mbox{\hyperlink{classClient_a60305bce1344ddf1f28ad1cacc1472e6}{buffer}};}
+\DoxyCodeLine{45     \}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classClient_a3bb5a5015b59f502e23a9b99ca8b41d1}\label{classClient_a3bb5a5015b59f502e23a9b99ca8b41d1}} 
+\index{Client@{Client}!close\_server@{close\_server}}
+\index{close\_server@{close\_server}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{close\_server()}{close\_server()}}
+{\footnotesize\ttfamily void Client\+::close\+\_\+server (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Closes the connection to the Blink server. 
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{118     \{}
+\DoxyCodeLine{119         close(sock);}
+\DoxyCodeLine{120     \}}
+
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=270pt]{classClient_a3bb5a5015b59f502e23a9b99ca8b41d1_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classClient_a115d5c86cf42098638aa4b262e5afae3}\label{classClient_a115d5c86cf42098638aa4b262e5afae3}} 
+\index{Client@{Client}!del@{del}}
+\index{del@{del}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{del()}{del()}}
+{\footnotesize\ttfamily std\+::string Client\+::del (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{\+\_\+key }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sends a DEL command to delete a key. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+key} & The key. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Response from the Blink server. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{110     \{}
+\DoxyCodeLine{111         \textcolor{keywordflow}{return} decode\_resp(send\_req(encode\_command(\textcolor{stringliteral}{"{}DEL "{}} + \_key)));}
+\DoxyCodeLine{112     \}}
+
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classClient_a115d5c86cf42098638aa4b262e5afae3_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classClient_af10514dc3fdc66ba070d82a2211d381e}\label{classClient_af10514dc3fdc66ba070d82a2211d381e}} 
+\index{Client@{Client}!get@{get}}
+\index{get@{get}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{get()}{get()}}
+{\footnotesize\ttfamily std\+::string Client\+::get (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{\+\_\+key }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sends a GET command to retrieve the value of a key. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+key} & The key. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Response from the Blink server. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{100     \{}
+\DoxyCodeLine{101         \textcolor{keywordflow}{return} decode\_resp(send\_req(encode\_command(\textcolor{stringliteral}{"{}GET "{}} + \_key)));}
+\DoxyCodeLine{102     \}}
+
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classClient_af10514dc3fdc66ba070d82a2211d381e_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classClient_ae43c71dba98b9c53c0ce027fe709a26f}\label{classClient_ae43c71dba98b9c53c0ce027fe709a26f}} 
+\index{Client@{Client}!server\_init@{server\_init}}
+\index{server\_init@{server\_init}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{server\_init()}{server\_init()}}
+{\footnotesize\ttfamily int Client\+::server\+\_\+init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Initializes the connection to the Blink server. 
+
+\begin{DoxyReturn}{Returns}
+Socket descriptor or -\/1 on failure. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{52     \{}
+\DoxyCodeLine{53         sock = 0;}
+\DoxyCodeLine{54         \textcolor{keyword}{struct }sockaddr\_in serv\_addr;}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{56         \textcolor{comment}{// Create socket}}
+\DoxyCodeLine{57         \textcolor{keywordflow}{if} ((sock = socket(AF\_INET, SOCK\_STREAM, 0)) < 0)}
+\DoxyCodeLine{58         \{}
+\DoxyCodeLine{59             std::cerr << \textcolor{stringliteral}{"{}Socket creation error"{}} << std::endl;}
+\DoxyCodeLine{60             \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{61         \}}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{63         serv\_addr.sin\_family = AF\_INET;}
+\DoxyCodeLine{64         serv\_addr.sin\_port = htons(\mbox{\hyperlink{classClient_aad8864d1362eae7c50e53c0d131b7442}{port}});}
+\DoxyCodeLine{65 }
+\DoxyCodeLine{66         \textcolor{comment}{// Convert IPv4 address from text to binary}}
+\DoxyCodeLine{67         \textcolor{keywordflow}{if} (inet\_pton(AF\_INET, \mbox{\hyperlink{classClient_a4374f45b8c4cc22dab397c9df0d7639e}{ip\_addr}}.c\_str(), \&serv\_addr.sin\_addr) <= 0)}
+\DoxyCodeLine{68         \{}
+\DoxyCodeLine{69             std::cerr << \textcolor{stringliteral}{"{}Invalid address / Address not supported"{}} << std::endl;}
+\DoxyCodeLine{70             \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{71         \}}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{73         \textcolor{comment}{// Connect to server}}
+\DoxyCodeLine{74         \textcolor{keywordflow}{if} (connect(sock, (\textcolor{keyword}{struct} sockaddr *)\&serv\_addr, \textcolor{keyword}{sizeof}(serv\_addr)) < 0)}
+\DoxyCodeLine{75         \{}
+\DoxyCodeLine{76             std::cerr << \textcolor{stringliteral}{"{}Connection failed"{}} << std::endl;}
+\DoxyCodeLine{77             \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{78         \}}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{80         \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{81     \}}
+
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=260pt]{classClient_ae43c71dba98b9c53c0ce027fe709a26f_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classClient_a3ad5ae59149ce241b7efea71fe065fec}\label{classClient_a3ad5ae59149ce241b7efea71fe065fec}} 
+\index{Client@{Client}!set@{set}}
+\index{set@{set}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{set()}{set()}}
+{\footnotesize\ttfamily std\+::string Client\+::set (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{\+\_\+key,  }\item[{const std\+::string \&}]{\+\_\+value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sends a SET command to store a key-\/value pair. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+key} & The key. \\
+\hline
+{\em \+\_\+value} & The value. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Response from the Blink server. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{90     \{}
+\DoxyCodeLine{91         \textcolor{keywordflow}{return} decode\_resp(send\_req(encode\_command(\textcolor{stringliteral}{"{}SET "{}} + \_key + \textcolor{stringliteral}{"{} "{}} + \_value)));}
+\DoxyCodeLine{92     \}}
+
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classClient_a3ad5ae59149ce241b7efea71fe065fec_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classClient_a60305bce1344ddf1f28ad1cacc1472e6}\label{classClient_a60305bce1344ddf1f28ad1cacc1472e6}} 
+\index{Client@{Client}!buffer@{buffer}}
+\index{buffer@{buffer}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{buffer}{buffer}}
+{\footnotesize\ttfamily char$\ast$ Client\+::buffer = nullptr}
+
+
+
+Dynamic buffer for receiving data. 
+
+\mbox{\Hypertarget{classClient_a05553187a7787130df34c40bbded06f4}\label{classClient_a05553187a7787130df34c40bbded06f4}} 
+\index{Client@{Client}!buffer\_size@{buffer\_size}}
+\index{buffer\_size@{buffer\_size}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{buffer\_size}{buffer\_size}}
+{\footnotesize\ttfamily int Client\+::buffer\+\_\+size}
+
+
+
+Buffer size for reading responses. 
+
+\mbox{\Hypertarget{classClient_a4374f45b8c4cc22dab397c9df0d7639e}\label{classClient_a4374f45b8c4cc22dab397c9df0d7639e}} 
+\index{Client@{Client}!ip\_addr@{ip\_addr}}
+\index{ip\_addr@{ip\_addr}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{ip\_addr}{ip\_addr}}
+{\footnotesize\ttfamily std\+::string Client\+::ip\+\_\+addr}
+
+
+
+IP address of the Blink server. 
+
+\mbox{\Hypertarget{classClient_aad8864d1362eae7c50e53c0d131b7442}\label{classClient_aad8864d1362eae7c50e53c0d131b7442}} 
+\index{Client@{Client}!port@{port}}
+\index{port@{port}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{port}{port}}
+{\footnotesize\ttfamily int Client\+::port}
+
+
+
+Port number of the Blink server. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lib/\mbox{\hyperlink{client_8h}{client.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,123 @@
+\hypertarget{blink__server_8cpp}{}\doxysection{src/blink\+\_\+server.cpp File Reference}
+\label{blink__server_8cpp}\index{src/blink\_server.cpp@{src/blink\_server.cpp}}
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include \char`\"{}../lib/server.\+h\char`\"{}}\newline
+Include dependency graph for blink\+\_\+server.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{blink__server_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{blink__server_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\begin{DoxyCompactList}\small\item\em Main function to start the server. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const int \mbox{\hyperlink{blink__server_8cpp_a55853dfa4cf88a9ab477f598e9f85004}{MAX\+\_\+\+EVENTS}} = 4096
+\begin{DoxyCompactList}\small\item\em Maximum number of events for epoll. \end{DoxyCompactList}\item 
+const int \mbox{\hyperlink{blink__server_8cpp_a91f806c1bc7c1f4f402a627773840252}{BUFFER\+\_\+\+SIZE}} = 2048
+\begin{DoxyCompactList}\small\item\em Buffer size for reading data. \end{DoxyCompactList}\item 
+const int \mbox{\hyperlink{blink__server_8cpp_ab35eb3c36c30bc69081c8150faa6aa94}{SERVER\+\_\+\+PORT}} = 9001
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classServer}{Server}} port to bind to. \end{DoxyCompactList}\item 
+const int \mbox{\hyperlink{blink__server_8cpp_ad38f5707cd5cf10910ca49fe619d8066}{MAX\+\_\+\+MEMORY\+\_\+\+BYTES}} = 1024 $\ast$ 1024 $\ast$ 1024
+\begin{DoxyCompactList}\small\item\em Maximum memory allocation in bytes. \end{DoxyCompactList}\item 
+const std\+::string \mbox{\hyperlink{blink__server_8cpp_a8020ab8a401927e9dee707e5336e4d0c}{SERVER\+\_\+\+IP}} = \char`\"{}127.\+0.\+0.\+1\char`\"{}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classServer}{Server}} IP address. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{blink__server_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{blink__server_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}} 
+\index{blink\_server.cpp@{blink\_server.cpp}!main@{main}}
+\index{main@{main}!blink\_server.cpp@{blink\_server.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Main function to start the server. 
+
+The server initializes and starts listening for incoming client connections.
+
+\begin{DoxyReturn}{Returns}
+int Returns 0 on successful execution. 
+\end{DoxyReturn}
+Create a \mbox{\hyperlink{classServer}{Server}} instance with configuration parameters
+
+Initialize the server
+\begin{DoxyCode}{0}
+\DoxyCodeLine{23            \{}
+\DoxyCodeLine{25     \mbox{\hyperlink{classServer}{Server}} server(\mbox{\hyperlink{blink__server_8cpp_a8020ab8a401927e9dee707e5336e4d0c}{SERVER\_IP}}, \mbox{\hyperlink{blink__server_8cpp_ab35eb3c36c30bc69081c8150faa6aa94}{SERVER\_PORT}}, \mbox{\hyperlink{blink__server_8cpp_a91f806c1bc7c1f4f402a627773840252}{BUFFER\_SIZE}}, \mbox{\hyperlink{blink__server_8cpp_a55853dfa4cf88a9ab477f598e9f85004}{MAX\_EVENTS}}, \mbox{\hyperlink{blink__server_8cpp_ad38f5707cd5cf10910ca49fe619d8066}{MAX\_MEMORY\_BYTES}});}
+\DoxyCodeLine{26     }
+\DoxyCodeLine{28     server.init();}
+\DoxyCodeLine{29     }
+\DoxyCodeLine{30     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{31 \}}
+
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{blink__server_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{blink__server_8cpp_a91f806c1bc7c1f4f402a627773840252}\label{blink__server_8cpp_a91f806c1bc7c1f4f402a627773840252}} 
+\index{blink\_server.cpp@{blink\_server.cpp}!BUFFER\_SIZE@{BUFFER\_SIZE}}
+\index{BUFFER\_SIZE@{BUFFER\_SIZE}!blink\_server.cpp@{blink\_server.cpp}}
+\doxysubsubsection{\texorpdfstring{BUFFER\_SIZE}{BUFFER\_SIZE}}
+{\footnotesize\ttfamily const int BUFFER\+\_\+\+SIZE = 2048}
+
+
+
+Buffer size for reading data. 
+
+\mbox{\Hypertarget{blink__server_8cpp_a55853dfa4cf88a9ab477f598e9f85004}\label{blink__server_8cpp_a55853dfa4cf88a9ab477f598e9f85004}} 
+\index{blink\_server.cpp@{blink\_server.cpp}!MAX\_EVENTS@{MAX\_EVENTS}}
+\index{MAX\_EVENTS@{MAX\_EVENTS}!blink\_server.cpp@{blink\_server.cpp}}
+\doxysubsubsection{\texorpdfstring{MAX\_EVENTS}{MAX\_EVENTS}}
+{\footnotesize\ttfamily const int MAX\+\_\+\+EVENTS = 4096}
+
+
+
+Maximum number of events for epoll. 
+
+\mbox{\Hypertarget{blink__server_8cpp_ad38f5707cd5cf10910ca49fe619d8066}\label{blink__server_8cpp_ad38f5707cd5cf10910ca49fe619d8066}} 
+\index{blink\_server.cpp@{blink\_server.cpp}!MAX\_MEMORY\_BYTES@{MAX\_MEMORY\_BYTES}}
+\index{MAX\_MEMORY\_BYTES@{MAX\_MEMORY\_BYTES}!blink\_server.cpp@{blink\_server.cpp}}
+\doxysubsubsection{\texorpdfstring{MAX\_MEMORY\_BYTES}{MAX\_MEMORY\_BYTES}}
+{\footnotesize\ttfamily const int MAX\+\_\+\+MEMORY\+\_\+\+BYTES = 1024 $\ast$ 1024 $\ast$ 1024}
+
+
+
+Maximum memory allocation in bytes. 
+
+\mbox{\Hypertarget{blink__server_8cpp_a8020ab8a401927e9dee707e5336e4d0c}\label{blink__server_8cpp_a8020ab8a401927e9dee707e5336e4d0c}} 
+\index{blink\_server.cpp@{blink\_server.cpp}!SERVER\_IP@{SERVER\_IP}}
+\index{SERVER\_IP@{SERVER\_IP}!blink\_server.cpp@{blink\_server.cpp}}
+\doxysubsubsection{\texorpdfstring{SERVER\_IP}{SERVER\_IP}}
+{\footnotesize\ttfamily const std\+::string SERVER\+\_\+\+IP = \char`\"{}127.\+0.\+0.\+1\char`\"{}}
+
+
+
+\mbox{\hyperlink{classServer}{Server}} IP address. 
+
+\mbox{\Hypertarget{blink__server_8cpp_ab35eb3c36c30bc69081c8150faa6aa94}\label{blink__server_8cpp_ab35eb3c36c30bc69081c8150faa6aa94}} 
+\index{blink\_server.cpp@{blink\_server.cpp}!SERVER\_PORT@{SERVER\_PORT}}
+\index{SERVER\_PORT@{SERVER\_PORT}!blink\_server.cpp@{blink\_server.cpp}}
+\doxysubsubsection{\texorpdfstring{SERVER\_PORT}{SERVER\_PORT}}
+{\footnotesize\ttfamily const int SERVER\+\_\+\+PORT = 9001}
+
+
+
+\mbox{\hyperlink{classServer}{Server}} port to bind to. 
+

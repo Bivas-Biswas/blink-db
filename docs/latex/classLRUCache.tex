@@ -1,0 +1,614 @@
+\hypertarget{classLRUCache}{}\doxysection{LRUCache Class Reference}
+\label{classLRUCache}\index{LRUCache@{LRUCache}}
+
+
+Implements a Least Recently Used (LRU) cache with memory constraints.  
+
+
+
+
+{\ttfamily \#include $<$lru\+\_\+cache\+\_\+v0.\+h$>$}
+
+
+
+Collaboration diagram for LRUCache\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classLRUCache__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structLRUCache_1_1Node}{Node}}
+\begin{DoxyCompactList}\small\item\em Represents a node in the doubly linked list for the LRU cache. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classLRUCache_a2c89f2a33f7ddfaabab844533fa9ad00}{LRUCache}} (size\+\_\+t max\+\_\+mem)
+\item 
+void \mbox{\hyperlink{classLRUCache_a3d7e71c63a2a8ec8f76bcfe4eb2b2dd8}{set}} (const std\+::string \&key, const std\+::string \&\mbox{\hyperlink{classLRUCache_a78587edf7aae631e794a6b11b3229dfb}{value}})
+\item 
+bool \mbox{\hyperlink{classLRUCache_a6eeb3b1895171a5f6c5db63d393128c7}{get}} (const std\+::string \&key, std\+::string \&\mbox{\hyperlink{classLRUCache_a78587edf7aae631e794a6b11b3229dfb}{value}})
+\item 
+bool \mbox{\hyperlink{classLRUCache_aa60ce37d7cbf1d9314cc85f9548d0055}{del}} (const std\+::string \&key)
+\item 
+size\+\_\+t \mbox{\hyperlink{classLRUCache_ad9a9cbe3eb1ac93828a5ea0b85d2fd6e}{memory\+\_\+usage}} () const
+\item 
+size\+\_\+t \mbox{\hyperlink{classLRUCache_a6f32f17cc2477cbe581fa3c9c3740577}{max\+\_\+memory}} () const
+\item 
+size\+\_\+t \mbox{\hyperlink{classLRUCache_a4588bb411bfc59180e16e9dd0f4188b2}{size}} () const
+\item 
+\mbox{\hyperlink{classLRUCache_a2c89f2a33f7ddfaabab844533fa9ad00}{LRUCache}} (size\+\_\+t max\+\_\+mem)
+\begin{DoxyCompactList}\small\item\em Constructs a new LRU Cache with the specified memory limit. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classLRUCache_ac841ed5b67e603f2878c26ea7555385f}{$\sim$\+LRUCache}} ()
+\begin{DoxyCompactList}\small\item\em Destroys the LRU Cache and frees all allocated memory. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classLRUCache_afa9c3e5d273b81c21051a809794ea41d}{get}} (const void $\ast$key)
+\begin{DoxyCompactList}\small\item\em Retrieves the value for a given key. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classLRUCache_a9af1748666dca7a59fc3480e66f4f12e}{print\+List}} ()
+\begin{DoxyCompactList}\small\item\em Prints the current state of the cache for debugging. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classLRUCache_a94fd770e6518bc9bb2df581c36c57205}{set}} (void $\ast$key, void $\ast$\mbox{\hyperlink{classLRUCache_a78587edf7aae631e794a6b11b3229dfb}{value}})
+\begin{DoxyCompactList}\small\item\em Adds or updates a key-\/value pair in the cache. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classLRUCache_a8a577f475e65e6e16338e7441634f353}{del}} (const void $\ast$key)
+\begin{DoxyCompactList}\small\item\em Deletes a key-\/value pair from the cache. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classLRUCache_adde621c282c0341a837eb0f104221f8b}{memory\+\_\+usage}} ()
+\begin{DoxyCompactList}\small\item\em Gets the current memory usage of the cache. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classLRUCache_ad3a592727d00864187479cf40bb7bbcd}{max\+\_\+memory}} ()
+\begin{DoxyCompactList}\small\item\em Gets the maximum memory limit of the cache. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classLRUCache_a18f7a4ee1d05d840a8d0f01e883b7555}{size}} ()
+\begin{DoxyCompactList}\small\item\em Gets the number of items in the cache. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classDict}{Dict}} \mbox{\hyperlink{classLRUCache_a6c93033c61478f5392c35b6f1d6cd83b}{dict}}
+\item 
+\mbox{\hyperlink{structLRUCache_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classLRUCache_a52a4ef73dc27ade730aa121870d40a50}{head}}
+\item 
+\mbox{\hyperlink{structLRUCache_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classLRUCache_aa33cac6a0b065de0e3bf816e63c953f7}{tail}}
+\item 
+\mbox{\hyperlink{classPersistenceKVStore}{Persistence\+KVStore}} \mbox{\hyperlink{classLRUCache_a649de5d420fb7b1799df15fb79108ba1}{storage}}
+\item 
+std\+::string \mbox{\hyperlink{classLRUCache_a78587edf7aae631e794a6b11b3229dfb}{value}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Implements a Least Recently Used (LRU) cache with memory constraints. 
+
+This class provides a memory-\/constrained LRU cache implementation that evicts least recently used items when memory limits are exceeded. It uses a doubly linked list for tracking usage order and a dictionary for O(1) lookups. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classLRUCache_a2c89f2a33f7ddfaabab844533fa9ad00}\label{classLRUCache_a2c89f2a33f7ddfaabab844533fa9ad00}} 
+\index{LRUCache@{LRUCache}!LRUCache@{LRUCache}}
+\index{LRUCache@{LRUCache}!LRUCache@{LRUCache}}
+\doxysubsubsection{\texorpdfstring{LRUCache()}{LRUCache()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily LRUCache\+::\+LRUCache (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{max\+\_\+mem }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{37 : current\_memory\_usage(0), max\_memory\_bytes(max\_mem) \{\}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classLRUCache_a2c89f2a33f7ddfaabab844533fa9ad00}\label{classLRUCache_a2c89f2a33f7ddfaabab844533fa9ad00}} 
+\index{LRUCache@{LRUCache}!LRUCache@{LRUCache}}
+\index{LRUCache@{LRUCache}!LRUCache@{LRUCache}}
+\doxysubsubsection{\texorpdfstring{LRUCache()}{LRUCache()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily LRUCache\+::\+LRUCache (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{max\+\_\+mem }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs a new LRU Cache with the specified memory limit. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em max\+\_\+mem} & Maximum memory limit in bytes \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{61                              :\mbox{\hyperlink{classLRUCache_a6c93033c61478f5392c35b6f1d6cd83b}{dict}}(\mbox{\hyperlink{dict_8h_aa501d8459078506f4e594b6dcd08bba7}{stringHash}}, \textcolor{keyword}{nullptr}, \textcolor{keyword}{nullptr}, \mbox{\hyperlink{dict_8h_a17315bf7519654861352381302cd40c6}{stringCompare}}, freeKey, freeValue), current\_memory\_usage(0), \mbox{\hyperlink{classLRUCache_a649de5d420fb7b1799df15fb79108ba1}{storage}}(\textcolor{stringliteral}{"{}./blink"{}})}
+\DoxyCodeLine{62     \{}
+\DoxyCodeLine{63         max\_memory\_bytes = max\_mem;}
+\DoxyCodeLine{64         \mbox{\hyperlink{classLRUCache_a52a4ef73dc27ade730aa121870d40a50}{head}} = \textcolor{keyword}{new} Node(strdup(\textcolor{stringliteral}{"{}-\/1"{}}), strdup(\textcolor{stringliteral}{"{}-\/1"{}}));}
+\DoxyCodeLine{65         \mbox{\hyperlink{classLRUCache_aa33cac6a0b065de0e3bf816e63c953f7}{tail}} = \textcolor{keyword}{new} Node(strdup(\textcolor{stringliteral}{"{}-\/1"{}}), strdup(\textcolor{stringliteral}{"{}-\/1"{}}));}
+\DoxyCodeLine{66         \mbox{\hyperlink{classLRUCache_a52a4ef73dc27ade730aa121870d40a50}{head}}-\/>\mbox{\hyperlink{structLRUCache_1_1Node_af51c25bbd46f542237f5c0b61638f248}{next}} = \mbox{\hyperlink{classLRUCache_aa33cac6a0b065de0e3bf816e63c953f7}{tail}};}
+\DoxyCodeLine{67         \mbox{\hyperlink{classLRUCache_aa33cac6a0b065de0e3bf816e63c953f7}{tail}}-\/>\mbox{\hyperlink{structLRUCache_1_1Node_a7a0c9f61581b9b06cdbbc15b641f6967}{prev}} = \mbox{\hyperlink{classLRUCache_a52a4ef73dc27ade730aa121870d40a50}{head}};}
+\DoxyCodeLine{68     \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classLRUCache_ac841ed5b67e603f2878c26ea7555385f}\label{classLRUCache_ac841ed5b67e603f2878c26ea7555385f}} 
+\index{LRUCache@{LRUCache}!````~LRUCache@{$\sim$LRUCache}}
+\index{````~LRUCache@{$\sim$LRUCache}!LRUCache@{LRUCache}}
+\doxysubsubsection{\texorpdfstring{$\sim$LRUCache()}{~LRUCache()}}
+{\footnotesize\ttfamily LRUCache\+::$\sim$\+LRUCache (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destroys the LRU Cache and frees all allocated memory. 
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{74     \{}
+\DoxyCodeLine{75         freeNode(\mbox{\hyperlink{classLRUCache_a52a4ef73dc27ade730aa121870d40a50}{head}});}
+\DoxyCodeLine{76         freeNode(\mbox{\hyperlink{classLRUCache_aa33cac6a0b065de0e3bf816e63c953f7}{tail}});}
+\DoxyCodeLine{77     \}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classLRUCache_aa60ce37d7cbf1d9314cc85f9548d0055}\label{classLRUCache_aa60ce37d7cbf1d9314cc85f9548d0055}} 
+\index{LRUCache@{LRUCache}!del@{del}}
+\index{del@{del}!LRUCache@{LRUCache}}
+\doxysubsubsection{\texorpdfstring{del()}{del()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool LRUCache\+::del (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{98                                        \{}
+\DoxyCodeLine{99             \textcolor{keyword}{auto} it = cache\_map.find(key);}
+\DoxyCodeLine{100             \textcolor{keywordflow}{if} (it == cache\_map.end()) \{}
+\DoxyCodeLine{101                 \textcolor{keywordflow}{return} \textcolor{keyword}{false};  \textcolor{comment}{// Key not found}}
+\DoxyCodeLine{102             \}}
+\DoxyCodeLine{103             }
+\DoxyCodeLine{104             \textcolor{comment}{// Update memory usage}}
+\DoxyCodeLine{105             current\_memory\_usage -\/= it-\/>second-\/>key.size() + it-\/>second-\/>value.size();}
+\DoxyCodeLine{106             }
+\DoxyCodeLine{107             \textcolor{comment}{// Remove from list and map}}
+\DoxyCodeLine{108             cache\_list.erase(it-\/>second);}
+\DoxyCodeLine{109             cache\_map.erase(it);}
+\DoxyCodeLine{110             }
+\DoxyCodeLine{111             \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{112         \}}
+
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classLRUCache_aa60ce37d7cbf1d9314cc85f9548d0055_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classLRUCache_a8a577f475e65e6e16338e7441634f353}\label{classLRUCache_a8a577f475e65e6e16338e7441634f353}} 
+\index{LRUCache@{LRUCache}!del@{del}}
+\index{del@{del}!LRUCache@{LRUCache}}
+\doxysubsubsection{\texorpdfstring{del()}{del()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily int LRUCache\+::del (\begin{DoxyParamCaption}\item[{const void $\ast$}]{key }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Deletes a key-\/value pair from the cache. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key to delete \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 0 if successful, 1 if the key was not found 
+\end{DoxyReturn}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{174     \{}
+\DoxyCodeLine{175         Node *retrievedValue = \textcolor{keyword}{static\_cast<}Node *\textcolor{keyword}{>}(\mbox{\hyperlink{classLRUCache_a6c93033c61478f5392c35b6f1d6cd83b}{dict}}.\mbox{\hyperlink{classDict_aee0c851f77099933a0925f453a1a7239}{find}}(key));}
+\DoxyCodeLine{176 }
+\DoxyCodeLine{177         \textcolor{keywordflow}{if} (retrievedValue)}
+\DoxyCodeLine{178         \{}
+\DoxyCodeLine{179             remove(retrievedValue);}
+\DoxyCodeLine{180             current\_memory\_usage -\/= getSize((\textcolor{keywordtype}{char} *)retrievedValue-\/>key) + getNodeSize(retrievedValue);}
+\DoxyCodeLine{181             \mbox{\hyperlink{classLRUCache_a6c93033c61478f5392c35b6f1d6cd83b}{dict}}.\mbox{\hyperlink{classDict_ae58d28edd0f04172833805f26518351b}{remove}}(retrievedValue-\/>key);}
+\DoxyCodeLine{182             \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{183         \}}
+\DoxyCodeLine{184         \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{185     \}}
+
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=283pt]{classLRUCache_a8a577f475e65e6e16338e7441634f353_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classLRUCache_a6eeb3b1895171a5f6c5db63d393128c7}\label{classLRUCache_a6eeb3b1895171a5f6c5db63d393128c7}} 
+\index{LRUCache@{LRUCache}!get@{get}}
+\index{get@{get}!LRUCache@{LRUCache}}
+\doxysubsubsection{\texorpdfstring{get()}{get()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool LRUCache\+::get (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key,  }\item[{std\+::string \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{79                                                          \{}
+\DoxyCodeLine{80             \textcolor{keyword}{auto} it = cache\_map.find(key);}
+\DoxyCodeLine{81             \textcolor{keywordflow}{if} (it == cache\_map.end()) \{}
+\DoxyCodeLine{82                 \textcolor{keywordflow}{return} \textcolor{keyword}{false};  \textcolor{comment}{// Key not found}}
+\DoxyCodeLine{83             \}}
+\DoxyCodeLine{84             }
+\DoxyCodeLine{85             \textcolor{comment}{// Update access time and move to front of list}}
+\DoxyCodeLine{86             it-\/>second-\/>last\_accessed = std::chrono::steady\_clock::now();}
+\DoxyCodeLine{87             }
+\DoxyCodeLine{88             \textcolor{comment}{// Move to front (most recently used)}}
+\DoxyCodeLine{89             \textcolor{keywordflow}{if} (it-\/>second != cache\_list.begin()) \{}
+\DoxyCodeLine{90                 cache\_list.splice(cache\_list.begin(), cache\_list, it-\/>second);}
+\DoxyCodeLine{91             \}}
+\DoxyCodeLine{92             }
+\DoxyCodeLine{93             \mbox{\hyperlink{classLRUCache_a78587edf7aae631e794a6b11b3229dfb}{value}} = it-\/>second-\/>value;}
+\DoxyCodeLine{94             \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{95         \}}
+
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classLRUCache_a6eeb3b1895171a5f6c5db63d393128c7_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classLRUCache_afa9c3e5d273b81c21051a809794ea41d}\label{classLRUCache_afa9c3e5d273b81c21051a809794ea41d}} 
+\index{LRUCache@{LRUCache}!get@{get}}
+\index{get@{get}!LRUCache@{LRUCache}}
+\doxysubsubsection{\texorpdfstring{get()}{get()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily std\+::string LRUCache\+::get (\begin{DoxyParamCaption}\item[{const void $\ast$}]{key }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Retrieves the value for a given key. 
+
+If the key exists, it moves the corresponding node to the front of the list to mark it as most recently used.
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key to look up \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+std\+::string The value associated with the key, or \char`\"{}-\/1\char`\"{} if not found 
+\end{DoxyReturn}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{89     \{   }
+\DoxyCodeLine{90         Node *retrievedValue = \textcolor{keyword}{static\_cast<}Node *\textcolor{keyword}{>}(\mbox{\hyperlink{classLRUCache_a6c93033c61478f5392c35b6f1d6cd83b}{dict}}.\mbox{\hyperlink{classDict_aee0c851f77099933a0925f453a1a7239}{find}}(key));}
+\DoxyCodeLine{91         \textcolor{keywordflow}{if} (!retrievedValue)\{}
+\DoxyCodeLine{92             std::string \mbox{\hyperlink{classLRUCache_a78587edf7aae631e794a6b11b3229dfb}{value}};}
+\DoxyCodeLine{93             \textcolor{keywordflow}{if}(\mbox{\hyperlink{classLRUCache_a649de5d420fb7b1799df15fb79108ba1}{storage}}.\mbox{\hyperlink{classPersistenceKVStore_a718ce3a40a4a341b84694c6fa588c362}{get}}(std::string((\textcolor{keywordtype}{char} *)key), \mbox{\hyperlink{classLRUCache_a78587edf7aae631e794a6b11b3229dfb}{value}}))\{}
+\DoxyCodeLine{94                 \textcolor{keywordtype}{void} *key1 = (\textcolor{keywordtype}{void} *)key;}
+\DoxyCodeLine{95                 \textcolor{keywordtype}{void}* value1 = (\textcolor{keywordtype}{void} *) strdup(\mbox{\hyperlink{classLRUCache_a78587edf7aae631e794a6b11b3229dfb}{value}}.c\_str());}
+\DoxyCodeLine{96                 Node *node = \textcolor{keyword}{new} Node(key1, value1);}
+\DoxyCodeLine{97                 \mbox{\hyperlink{classLRUCache_a6c93033c61478f5392c35b6f1d6cd83b}{dict}}.\mbox{\hyperlink{classDict_ad7273850719fc8c228cb3e1cb3968b66}{add}}(key1, node);}
+\DoxyCodeLine{98                 add(node);}
+\DoxyCodeLine{99                 current\_memory\_usage += getSize((\textcolor{keywordtype}{char} *)key) + getNodeSize(node);}
+\DoxyCodeLine{100                 \textcolor{keywordflow}{return} \mbox{\hyperlink{classLRUCache_a78587edf7aae631e794a6b11b3229dfb}{value}};}
+\DoxyCodeLine{101             \};}
+\DoxyCodeLine{102             \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}-\/1"{}};}
+\DoxyCodeLine{103         \}}
+\DoxyCodeLine{104         }
+\DoxyCodeLine{105 }
+\DoxyCodeLine{106         remove(retrievedValue);}
+\DoxyCodeLine{107         add(retrievedValue);}
+\DoxyCodeLine{108         \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{char} *\textcolor{keyword}{>}(retrievedValue-\/>value);}
+\DoxyCodeLine{109     \}}
+
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classLRUCache_afa9c3e5d273b81c21051a809794ea41d_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classLRUCache_ad3a592727d00864187479cf40bb7bbcd}\label{classLRUCache_ad3a592727d00864187479cf40bb7bbcd}} 
+\index{LRUCache@{LRUCache}!max\_memory@{max\_memory}}
+\index{max\_memory@{max\_memory}!LRUCache@{LRUCache}}
+\doxysubsubsection{\texorpdfstring{max\_memory()}{max\_memory()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily size\+\_\+t LRUCache\+::max\+\_\+memory (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the maximum memory limit of the cache. 
+
+\begin{DoxyReturn}{Returns}
+size\+\_\+t Maximum memory limit in bytes 
+\end{DoxyReturn}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{203     \{}
+\DoxyCodeLine{204         \textcolor{keywordflow}{return} max\_memory\_bytes;}
+\DoxyCodeLine{205     \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classLRUCache_a6f32f17cc2477cbe581fa3c9c3740577}\label{classLRUCache_a6f32f17cc2477cbe581fa3c9c3740577}} 
+\index{LRUCache@{LRUCache}!max\_memory@{max\_memory}}
+\index{max\_memory@{max\_memory}!LRUCache@{LRUCache}}
+\doxysubsubsection{\texorpdfstring{max\_memory()}{max\_memory()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily size\+\_\+t LRUCache\+::max\+\_\+memory (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{120                                   \{}
+\DoxyCodeLine{121             \textcolor{keywordflow}{return} max\_memory\_bytes;}
+\DoxyCodeLine{122         \}}
+
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classLRUCache_a6f32f17cc2477cbe581fa3c9c3740577_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classLRUCache_adde621c282c0341a837eb0f104221f8b}\label{classLRUCache_adde621c282c0341a837eb0f104221f8b}} 
+\index{LRUCache@{LRUCache}!memory\_usage@{memory\_usage}}
+\index{memory\_usage@{memory\_usage}!LRUCache@{LRUCache}}
+\doxysubsubsection{\texorpdfstring{memory\_usage()}{memory\_usage()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily size\+\_\+t LRUCache\+::memory\+\_\+usage (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the current memory usage of the cache. 
+
+\begin{DoxyReturn}{Returns}
+size\+\_\+t Current memory usage in bytes 
+\end{DoxyReturn}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{193     \{}
+\DoxyCodeLine{194         \textcolor{keywordflow}{return} current\_memory\_usage;}
+\DoxyCodeLine{195     \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classLRUCache_ad9a9cbe3eb1ac93828a5ea0b85d2fd6e}\label{classLRUCache_ad9a9cbe3eb1ac93828a5ea0b85d2fd6e}} 
+\index{LRUCache@{LRUCache}!memory\_usage@{memory\_usage}}
+\index{memory\_usage@{memory\_usage}!LRUCache@{LRUCache}}
+\doxysubsubsection{\texorpdfstring{memory\_usage()}{memory\_usage()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily size\+\_\+t LRUCache\+::memory\+\_\+usage (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{115                                     \{}
+\DoxyCodeLine{116             \textcolor{keywordflow}{return} current\_memory\_usage;}
+\DoxyCodeLine{117         \}}
+
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classLRUCache_ad9a9cbe3eb1ac93828a5ea0b85d2fd6e_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classLRUCache_a9af1748666dca7a59fc3480e66f4f12e}\label{classLRUCache_a9af1748666dca7a59fc3480e66f4f12e}} 
+\index{LRUCache@{LRUCache}!printList@{printList}}
+\index{printList@{printList}!LRUCache@{LRUCache}}
+\doxysubsubsection{\texorpdfstring{printList()}{printList()}}
+{\footnotesize\ttfamily void LRUCache\+::print\+List (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Prints the current state of the cache for debugging. 
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{115     \{}
+\DoxyCodeLine{116         Node *curr = \mbox{\hyperlink{classLRUCache_a52a4ef73dc27ade730aa121870d40a50}{head}}-\/>\mbox{\hyperlink{structLRUCache_1_1Node_af51c25bbd46f542237f5c0b61638f248}{next}};}
+\DoxyCodeLine{117         std::cout << \textcolor{stringliteral}{"{}Cache state: "{}};}
+\DoxyCodeLine{118         \textcolor{keywordflow}{while} (curr != \mbox{\hyperlink{classLRUCache_aa33cac6a0b065de0e3bf816e63c953f7}{tail}})}
+\DoxyCodeLine{119         \{}
+\DoxyCodeLine{120             std::cout << \textcolor{stringliteral}{"{}["{}} << \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{char} *\textcolor{keyword}{>}(curr-\/>key) << \textcolor{stringliteral}{"{}:"{}} << \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{char} *\textcolor{keyword}{>}(curr-\/>value) << \textcolor{stringliteral}{"{}] "{}};}
+\DoxyCodeLine{121             curr = curr-\/>\mbox{\hyperlink{structLRUCache_1_1Node_af51c25bbd46f542237f5c0b61638f248}{next}};}
+\DoxyCodeLine{122         \}}
+\DoxyCodeLine{123         std::cout << std::endl;}
+\DoxyCodeLine{124     \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classLRUCache_a3d7e71c63a2a8ec8f76bcfe4eb2b2dd8}\label{classLRUCache_a3d7e71c63a2a8ec8f76bcfe4eb2b2dd8}} 
+\index{LRUCache@{LRUCache}!set@{set}}
+\index{set@{set}!LRUCache@{LRUCache}}
+\doxysubsubsection{\texorpdfstring{set()}{set()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void LRUCache\+::set (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key,  }\item[{const std\+::string \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{40                                                                \{}
+\DoxyCodeLine{41             \textcolor{comment}{// Calculate memory for this entry (key + value + overhead)}}
+\DoxyCodeLine{42             \textcolor{keywordtype}{size\_t} entry\_size = key.size() + \mbox{\hyperlink{classLRUCache_a78587edf7aae631e794a6b11b3229dfb}{value}}.size() + \textcolor{keyword}{sizeof}(CacheEntry);}
+\DoxyCodeLine{43             }
+\DoxyCodeLine{44             \textcolor{comment}{// Check if key already exists}}
+\DoxyCodeLine{45             \textcolor{keyword}{auto} it = cache\_map.find(key);}
+\DoxyCodeLine{46             \textcolor{keywordflow}{if} (it != cache\_map.end()) \{}
+\DoxyCodeLine{47                 \textcolor{comment}{// Update existing entry}}
+\DoxyCodeLine{48                 current\_memory\_usage -\/= it-\/>second-\/>key.size() + it-\/>second-\/>value.size();}
+\DoxyCodeLine{49                 cache\_list.erase(it-\/>second);}
+\DoxyCodeLine{50                 cache\_map.erase(it);}
+\DoxyCodeLine{51             \}}
+\DoxyCodeLine{52             }
+\DoxyCodeLine{53             \textcolor{comment}{// Check if we need to evict entries to make space}}
+\DoxyCodeLine{54             \textcolor{keywordflow}{while} (current\_memory\_usage + entry\_size > max\_memory\_bytes \&\& !cache\_list.empty()) \{}
+\DoxyCodeLine{55                 \textcolor{comment}{// Evict least recently used item}}
+\DoxyCodeLine{56                 \textcolor{keyword}{auto} last = cache\_list.back();}
+\DoxyCodeLine{57                 std::cout << \textcolor{stringliteral}{"{}LRU Eviction: Removing key '"{}} << last.key << \textcolor{stringliteral}{"{}'"{}} << std::endl;}
+\DoxyCodeLine{58                 current\_memory\_usage -\/= last.key.size() + last.value.size();}
+\DoxyCodeLine{59                 cache\_map.erase(last.key);}
+\DoxyCodeLine{60                 cache\_list.pop\_back();}
+\DoxyCodeLine{61             \}}
+\DoxyCodeLine{62             }
+\DoxyCodeLine{63             \textcolor{comment}{// If we still can't fit the new entry, don't add it}}
+\DoxyCodeLine{64             \textcolor{keywordflow}{if} (current\_memory\_usage + entry\_size > max\_memory\_bytes) \{}
+\DoxyCodeLine{65                 std::cerr << \textcolor{stringliteral}{"{}Warning: Entry too large to fit in cache"{}} << std::endl;}
+\DoxyCodeLine{66                 \textcolor{keywordflow}{return};}
+\DoxyCodeLine{67             \}}
+\DoxyCodeLine{68             }
+\DoxyCodeLine{69             \textcolor{comment}{// Add new entry to front of list (most recently used)}}
+\DoxyCodeLine{70             cache\_list.emplace\_front(key, \mbox{\hyperlink{classLRUCache_a78587edf7aae631e794a6b11b3229dfb}{value}});}
+\DoxyCodeLine{71             cache\_map[key] = cache\_list.begin();}
+\DoxyCodeLine{72             current\_memory\_usage += entry\_size;}
+\DoxyCodeLine{73             }
+\DoxyCodeLine{74             \textcolor{comment}{// std::cout << "{}Memory usage: "{} << current\_memory\_usage << "{}/"{} << max\_memory\_bytes }}
+\DoxyCodeLine{75             \textcolor{comment}{//           << "{} bytes ("{} << (current\_memory\_usage * 100.0 / max\_memory\_bytes) << "{}\%)"{} << std::endl;}}
+\DoxyCodeLine{76         \}}
+
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classLRUCache_a3d7e71c63a2a8ec8f76bcfe4eb2b2dd8_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classLRUCache_a94fd770e6518bc9bb2df581c36c57205}\label{classLRUCache_a94fd770e6518bc9bb2df581c36c57205}} 
+\index{LRUCache@{LRUCache}!set@{set}}
+\index{set@{set}!LRUCache@{LRUCache}}
+\doxysubsubsection{\texorpdfstring{set()}{set()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void LRUCache\+::set (\begin{DoxyParamCaption}\item[{void $\ast$}]{key,  }\item[{void $\ast$}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Adds or updates a key-\/value pair in the cache. 
+
+If adding the new item exceeds the memory capacity, the least recently used items will be evicted until the memory usage is within limits.
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & Pointer to the key \\
+\hline
+{\em value} & Pointer to the value \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{136     \{}
+\DoxyCodeLine{137         Node *retrievedValue = \textcolor{keyword}{static\_cast<}Node *\textcolor{keyword}{>}(\mbox{\hyperlink{classLRUCache_a6c93033c61478f5392c35b6f1d6cd83b}{dict}}.\mbox{\hyperlink{classDict_aee0c851f77099933a0925f453a1a7239}{find}}(key));}
+\DoxyCodeLine{138         Node *node = \textcolor{keyword}{new} Node(key, \mbox{\hyperlink{classLRUCache_a78587edf7aae631e794a6b11b3229dfb}{value}});}
+\DoxyCodeLine{139 }
+\DoxyCodeLine{140         \textcolor{keywordflow}{if} (retrievedValue)}
+\DoxyCodeLine{141         \{}
+\DoxyCodeLine{142             current\_memory\_usage += getNodeSize(node) -\/ getNodeSize(retrievedValue);}
+\DoxyCodeLine{143             remove(retrievedValue);}
+\DoxyCodeLine{144             \mbox{\hyperlink{classLRUCache_a6c93033c61478f5392c35b6f1d6cd83b}{dict}}.\mbox{\hyperlink{classDict_a1c593021f03229abb00ceaff4ef0d79f}{replace}}(key, node);}
+\DoxyCodeLine{145             add(node);}
+\DoxyCodeLine{146         \}}
+\DoxyCodeLine{147         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{148         \{}
+\DoxyCodeLine{149             \mbox{\hyperlink{classLRUCache_a6c93033c61478f5392c35b6f1d6cd83b}{dict}}.\mbox{\hyperlink{classDict_ad7273850719fc8c228cb3e1cb3968b66}{add}}(key, node);}
+\DoxyCodeLine{150             add(node);}
+\DoxyCodeLine{151             current\_memory\_usage += getSize((\textcolor{keywordtype}{char} *)key) + getNodeSize(node);}
+\DoxyCodeLine{152         \}}
+\DoxyCodeLine{153 }
+\DoxyCodeLine{154         \textcolor{keywordflow}{if} (current\_memory\_usage >= max\_memory\_bytes)}
+\DoxyCodeLine{155         \{}
+\DoxyCodeLine{156             Node *nodeToDelete = \mbox{\hyperlink{classLRUCache_aa33cac6a0b065de0e3bf816e63c953f7}{tail}}-\/>\mbox{\hyperlink{structLRUCache_1_1Node_a7a0c9f61581b9b06cdbbc15b641f6967}{prev}};}
+\DoxyCodeLine{157             \mbox{\hyperlink{classLRUCache_a649de5d420fb7b1799df15fb79108ba1}{storage}}.\mbox{\hyperlink{classPersistenceKVStore_a6accd3f2351682402ddd870ef6dd11b2}{insert}}(std::string(strdup((\textcolor{keywordtype}{char} *)nodeToDelete-\/>key)), std::string(strdup((\textcolor{keywordtype}{char} *)nodeToDelete-\/>value)));}
+\DoxyCodeLine{158             remove(nodeToDelete);}
+\DoxyCodeLine{159             std::cout << current\_memory\_usage << std::endl;}
+\DoxyCodeLine{160             current\_memory\_usage -\/= getSize((\textcolor{keywordtype}{char} *)nodeToDelete-\/>key) + getNodeSize(nodeToDelete);}
+\DoxyCodeLine{161             \mbox{\hyperlink{classLRUCache_a6c93033c61478f5392c35b6f1d6cd83b}{dict}}.\mbox{\hyperlink{classDict_ae58d28edd0f04172833805f26518351b}{remove}}(nodeToDelete-\/>key);}
+\DoxyCodeLine{162             std::cout << \textcolor{stringliteral}{"{}Eviction happen"{}} << std::endl;}
+\DoxyCodeLine{163             std::cout << current\_memory\_usage << std::endl;}
+\DoxyCodeLine{164         \}}
+\DoxyCodeLine{165     \}}
+
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classLRUCache_a94fd770e6518bc9bb2df581c36c57205_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classLRUCache_a18f7a4ee1d05d840a8d0f01e883b7555}\label{classLRUCache_a18f7a4ee1d05d840a8d0f01e883b7555}} 
+\index{LRUCache@{LRUCache}!size@{size}}
+\index{size@{size}!LRUCache@{LRUCache}}
+\doxysubsubsection{\texorpdfstring{size()}{size()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily size\+\_\+t LRUCache\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the number of items in the cache. 
+
+\begin{DoxyReturn}{Returns}
+size\+\_\+t Number of items in the cache 
+\end{DoxyReturn}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{213     \{}
+\DoxyCodeLine{214         \textcolor{keywordflow}{return} \mbox{\hyperlink{classLRUCache_a6c93033c61478f5392c35b6f1d6cd83b}{dict}}.\mbox{\hyperlink{classDict_a9cfce08a086df862a97afc0fff66459c}{size}}();}
+\DoxyCodeLine{215     \}}
+
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=270pt]{classLRUCache_a18f7a4ee1d05d840a8d0f01e883b7555_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classLRUCache_a4588bb411bfc59180e16e9dd0f4188b2}\label{classLRUCache_a4588bb411bfc59180e16e9dd0f4188b2}} 
+\index{LRUCache@{LRUCache}!size@{size}}
+\index{size@{size}!LRUCache@{LRUCache}}
+\doxysubsubsection{\texorpdfstring{size()}{size()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily size\+\_\+t LRUCache\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{125                             \{}
+\DoxyCodeLine{126             \textcolor{keywordflow}{return} cache\_map.size();}
+\DoxyCodeLine{127         \}}
+
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classLRUCache_a4588bb411bfc59180e16e9dd0f4188b2_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classLRUCache_a6c93033c61478f5392c35b6f1d6cd83b}\label{classLRUCache_a6c93033c61478f5392c35b6f1d6cd83b}} 
+\index{LRUCache@{LRUCache}!dict@{dict}}
+\index{dict@{dict}!LRUCache@{LRUCache}}
+\doxysubsubsection{\texorpdfstring{dict}{dict}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classDict}{Dict}} LRUCache\+::dict}
+
+Dictionary for O(1) lookups \mbox{\Hypertarget{classLRUCache_a52a4ef73dc27ade730aa121870d40a50}\label{classLRUCache_a52a4ef73dc27ade730aa121870d40a50}} 
+\index{LRUCache@{LRUCache}!head@{head}}
+\index{head@{head}!LRUCache@{LRUCache}}
+\doxysubsubsection{\texorpdfstring{head}{head}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structLRUCache_1_1Node}{Node}}$\ast$ LRUCache\+::head}
+
+Head of the doubly linked list \mbox{\Hypertarget{classLRUCache_a649de5d420fb7b1799df15fb79108ba1}\label{classLRUCache_a649de5d420fb7b1799df15fb79108ba1}} 
+\index{LRUCache@{LRUCache}!storage@{storage}}
+\index{storage@{storage}!LRUCache@{LRUCache}}
+\doxysubsubsection{\texorpdfstring{storage}{storage}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classPersistenceKVStore}{Persistence\+KVStore}} LRUCache\+::storage}
+
+\mbox{\Hypertarget{classLRUCache_aa33cac6a0b065de0e3bf816e63c953f7}\label{classLRUCache_aa33cac6a0b065de0e3bf816e63c953f7}} 
+\index{LRUCache@{LRUCache}!tail@{tail}}
+\index{tail@{tail}!LRUCache@{LRUCache}}
+\doxysubsubsection{\texorpdfstring{tail}{tail}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structLRUCache_1_1Node}{Node}}$\ast$ LRUCache\+::tail}
+
+Tail of the doubly linked list \mbox{\Hypertarget{classLRUCache_a78587edf7aae631e794a6b11b3229dfb}\label{classLRUCache_a78587edf7aae631e794a6b11b3229dfb}} 
+\index{LRUCache@{LRUCache}!value@{value}}
+\index{value@{value}!LRUCache@{LRUCache}}
+\doxysubsubsection{\texorpdfstring{value}{value}}
+{\footnotesize\ttfamily std\+::string LRUCache\+::value}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+lib/\mbox{\hyperlink{lru__cache__v0_8h}{lru\+\_\+cache\+\_\+v0.\+h}}\item 
+lib/\mbox{\hyperlink{lru__cache__v1_8h}{lru\+\_\+cache\+\_\+v1.\+h}}\end{DoxyCompactItemize}
