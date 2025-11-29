@@ -31,6 +31,8 @@ private:
     std::atomic<bool> stopRewrite; ///< Flag to stop background rewriting.
     int rewrite_interval_ms;       ///< Interval for rewrite scheduling.
     std::mutex mtx_index;
+    int total;
+    int used;
 
 public:
     /**
@@ -98,6 +100,8 @@ PersistenceKVStore::PersistenceKVStore(const std::string _dbname, int _bloom_fil
     stopRewrite.store(false);
     dataFile.open(filename, std::ios::in | std::ios::out | std::ios::binary);
     index = new Trie();
+    total = 0;
+    used = 0;
 
     if (!dataFile)
     {
@@ -137,6 +141,8 @@ void PersistenceKVStore::insert(const std::string &_key, const std::string &_val
     std::lock_guard<std::mutex> lock(mtx_index);
     index->insert(_key, offset);
     bloomFilter.insert(_key);
+    used++;
+    total++;
 }
 
 bool PersistenceKVStore::get(const std::string &_key, std::string &_value)
@@ -171,6 +177,7 @@ void PersistenceKVStore::remove(const std::string &_key)
     std::lock_guard<std::mutex> lock(mtx_index);
     index->remove(_key);
     bloomFilter.remove(_key);
+    used--;
 }
 
 void PersistenceKVStore::remove_db()
@@ -209,8 +216,12 @@ void PersistenceKVStore::startRewriteScheduler()
 {
     while (!stopRewrite.load())
     {
-        std::this_thread::sleep_for(std::chrono::milliseconds(rewrite_interval_ms));
-        triggerRewrite();
+        float loadFactor = used / total;
+        if (loadFactor < 1){
+            std::this_thread::sleep_for(std::chrono::milliseconds(rewrite_interval_ms));
+        }else {
+            triggerRewrite();
+        };
     }
 }
 
@@ -224,6 +235,7 @@ void PersistenceKVStore::triggerRewrite()
 
     std::string key, value;
 
+    std::lock_guard<std::mutex> lock(mtx_index);
     while (true)
     {
         long curr_pos = dataFile.tellg();
@@ -257,11 +269,10 @@ void PersistenceKVStore::triggerRewrite()
     newDataFile.close();
     std::remove(tempfilename.c_str());
 
-    std::lock_guard<std::mutex> lock(mtx_index);
-
     Trie *old_index = index;
     index = new_index;
     delete old_index;
+    total = used;
 
     dataFile.open(filename, std::ios::in | std::ios::out | std::ios::binary);
 }
