@@ -11,7 +11,7 @@
 class BloomFilter
 {
 private:
-    std::vector<bool> filter; ///< Dynamic bitset for the Bloom filter.
+    std::vector<int> filter; ///< Dynamic bitset for the Bloom filter.
     int filter_size;       ///< Size of the Bloom filter.
 
 public:
@@ -53,17 +53,18 @@ BloomFilter::BloomFilter(int _size) : filter(_size, false), filter_size(_size) {
 
 void BloomFilter::insert(const std::string &_key)
 {
-    filter[hashKey(_key)] = true;
+    filter[hashKey(_key)] += 1;
 }
 
 bool BloomFilter::contains(const std::string &_key)
 {
-    return filter[hashKey(_key)];
+    return filter[hashKey(_key)] > 0;
 }
 
 void BloomFilter::remove(const std::string &_key)
 {
-    filter[hashKey(_key)] = false;
+    if(filter[hashKey(_key)] == 0) return;
+    filter[hashKey(_key)] -= 1;
 }
 
 size_t BloomFilter::hashKey(const std::string &_key)
